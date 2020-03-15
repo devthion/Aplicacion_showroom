@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "514751896168",
+    "firebase_url": "https://app-showroom.firebaseio.com",
+    "project_id": "app-showroom",
+    "storage_bucket": "app-showroom.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514751896168:android:e224efb221a046da8b79dd",
+        "android_client_info": {
+          "package_name": "com.devthion.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "514751896168-qp8kd3niu3a8sndc93kuqk7ni03gc46e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdZOrV41seOFkoGaD4jexIAoHb9Rg9tiU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "514751896168-qp8kd3niu3a8sndc93kuqk7ni03gc46e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
