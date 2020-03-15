@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         databasePartidas = FirebaseDatabase.getInstance().getReference("usuarios");
-        databasePartidas.setValue("pepe");
+        ModeloUsuario unUsuario= new ModeloUsuario("pepe", "asd", 123);
+        databasePartidas.child("pepe").setValue(unUsuario);
 
 
     }
