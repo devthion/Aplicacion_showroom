@@ -1,4 +1,4 @@
-package com.diego_vivona.myapplication;
+package com.devthion.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 

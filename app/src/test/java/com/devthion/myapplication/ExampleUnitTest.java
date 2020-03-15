@@ -1,4 +1,4 @@
-package com.diego_vivona.myapplication;
+package com.devthion.myapplication;
 
 import org.junit.Test;
 
