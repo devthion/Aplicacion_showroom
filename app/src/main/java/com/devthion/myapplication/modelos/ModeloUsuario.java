@@ -2,15 +2,15 @@ package com.devthion.myapplication.modelos;
 
 public class ModeloUsuario {
 
-    String nombre;
-    String apellido;
-    int dni;
+    private String nombre;
+    private String email;
+    private String contraseña;
 
 
-    public ModeloUsuario(String nombre, String apellido, int dni){
-        this.apellido= apellido;
+    public ModeloUsuario(String nombre, String email, String contraseña) {
         this.nombre = nombre;
-        this.dni = dni;
+        this.email = email;
+        this.contraseña = contraseña;
     }
 
     public String getNombre() {
@@ -21,19 +21,19 @@ public class ModeloUsuario {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getEmail() {
+        return email;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public int getDni() {
-        return dni;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setDni(int dni) {
-        this.dni = dni;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 }
