@@ -1,4 +1,4 @@
-package com.devthion.myapplication;
+package com.devthion.myapplication.modelos;
 
 public class ModeloUsuario {
 
