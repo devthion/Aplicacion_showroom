@@ -25,6 +25,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".LocacionesEnMaps" />
+        <activity android:name=".MenuPrincipal" />
+        <activity android:name=".ingreso.InicioSesion" />
+        <activity android:name=".ingreso.Registrar" />
     </application>
 
 </manifest>
