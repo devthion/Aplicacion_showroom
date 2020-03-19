@@ -2,6 +2,7 @@ package com.devthion.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.firebase.database.DatabaseReference;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
         ModeloUsuario unUsuario= new ModeloUsuario("pepe", "asd", 123);
         databasePartidas.child("pepe").setValue(unUsuario);
 
+        Intent intent = new Intent(MainActivity.this, LocacionesEnMaps.class);
+        startActivity(intent);
 
     }
 
