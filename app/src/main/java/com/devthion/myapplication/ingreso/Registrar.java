@@ -50,7 +50,7 @@ public class Registrar extends AppCompatActivity {
         progressBarRegistro = (ProgressBar) findViewById(R.id.progressBarRegistro);
 
         if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
             finish();
         }
 
