@@ -42,7 +42,7 @@ public class Registrar extends AppCompatActivity {
 
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
         etNombreUsuario = (EditText) findViewById(R.id.etNombreUsuario);
-        etNuevaContraseña = (EditText) findViewById(R.id.etNuevaContraseña);
+        etNuevaContraseña = (EditText) findViewById(R.id.etContraseña);
         etNuevoEmail = (EditText) findViewById(R.id.etNuevoEmail);
         etContraseñaRep =(EditText) findViewById(R.id.etContraseñaRep);
         etIniciarSesion = (TextView) findViewById(R.id.etIniciarSesion);
