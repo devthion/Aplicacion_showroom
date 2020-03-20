@@ -20,9 +20,9 @@ public class DetalleLocal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_detalle_local);
 
-        textVTitle =findViewById(R.id.textVTitle);
+        //textVTitle =findViewById(R.id.textVTitle);
         String title = getIntent().getStringExtra("title");
-        textVTitle.setText(title);
+        //textVTitle.setText(title);
 
     }
 }
