@@ -28,6 +28,7 @@
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".ingreso.InicioSesion" />
         <activity android:name=".ingreso.Registrar" />
+        <activity android:name="DetalleLocal" />
     </application>
 
 </manifest>
