@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,12 +18,19 @@ import com.devthion.myapplication.MainActivity;
 import com.devthion.myapplication.MenuPrincipal;
 import com.devthion.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class Registrar extends AppCompatActivity {
 
@@ -31,7 +39,8 @@ public class Registrar extends AppCompatActivity {
     TextView etIniciarSesion;
     ProgressBar progressBarRegistro;
     FirebaseAuth fAuth;
-    FirebaseDatabase databaseUsers;
+    FirebaseFirestore databaseUsuarios;
+    String userID;
 
 
 
@@ -47,6 +56,7 @@ public class Registrar extends AppCompatActivity {
         etEmail = (EditText) findViewById(R.id.etNuevoEmail);
         etContraseñaRep =(EditText) findViewById(R.id.etContraseñaRep);
         etIniciarSesion = (TextView) findViewById(R.id.etIniciarSesion);
+        databaseUsuarios = FirebaseFirestore.getInstance();
 
         fAuth = FirebaseAuth.getInstance();
         progressBarRegistro = (ProgressBar) findViewById(R.id.progressBarRegistro);
@@ -59,11 +69,9 @@ public class Registrar extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = etEmail.getText().toString().trim();
-                String contraseña = etContraseña.getText().toString().trim();
-                String nombre = etNombreUsuario.getText().toString();
-
-
+                final String email = etEmail.getText().toString().trim();
+                final String contraseña = etContraseña.getText().toString().trim();
+                final String nombre = etNombreUsuario.getText().toString();
 
 
                 if(TextUtils.isEmpty(email)){
@@ -90,7 +98,24 @@ public class Registrar extends AppCompatActivity {
 
                         if(task.isSuccessful()){
                             Toast.makeText(Registrar.this, "Usuario Creado", Toast.LENGTH_SHORT).show();
+                            userID = fAuth.getCurrentUser().getUid();
+                            DocumentReference documentReference = databaseUsuarios.collection("Usuarios").document(userID);
+                            Map<String,Object> usuario =new HashMap<>();
+                            usuario.put("Nombre",nombre);
+                            usuario.put("Email",email);
+                            usuario.put("Contraseña",contraseña);
 
+                            documentReference.set(usuario).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Log.d("USUARIO AÑADIDO","Se ha creado un perfil para el usuario: "+ userID);
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Log.d("USUARIO NO AÑADIDO","onFailure: "+e.toString());
+                                }
+                            });
 
 
                             startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
