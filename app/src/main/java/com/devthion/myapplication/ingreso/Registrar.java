@@ -60,6 +60,7 @@ public class Registrar extends AppCompatActivity {
             public void onClick(View view) {
                 String email = etNuevoEmail.getText().toString().trim();
                 String contraseña = etNuevaContraseña.getText().toString().trim();
+                String contraseñaConfirmacion = etContraseñaRep.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)){
                     etNuevoEmail.setError("ESTE CAMPO ES NECESARIO");
@@ -67,6 +68,14 @@ public class Registrar extends AppCompatActivity {
                 }
                 if(TextUtils.isEmpty(contraseña)){
                     etNuevaContraseña.setError("ESTE CAMPO ES NECESARIO");
+                    return;
+                }
+                if(TextUtils.isEmpty(contraseña)){
+                    etContraseñaRep.setError("ESTE CAMPO ES NECESARIO");
+                    return;
+                }
+                if(!etNuevaContraseña.getText().toString().trim().equals(etContraseñaRep.getText().toString().trim())){
+                    etContraseñaRep.setError("LA CONTRASEÑA NO COINCIDE");
                     return;
                 }
 
