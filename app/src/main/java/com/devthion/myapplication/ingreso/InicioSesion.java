@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.devthion.myapplication.AdminPrincipal;
 import com.devthion.myapplication.MenuPrincipal;
 import com.devthion.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +51,10 @@ public class InicioSesion extends AppCompatActivity {
             public void onClick(final View view) {
                 String email = etEmail.getText().toString().trim();
                 String contraseña = etContraseña.getText().toString().trim();
+
+                if (email.equals("admin") && contraseña.equals("admin")){
+                    startActivity(new Intent(getApplicationContext(), AdminPrincipal.class));
+                }
 
                 if(TextUtils.isEmpty(email)){
                     etEmail.setError("ESTE CAMPO ES NECESARIO");

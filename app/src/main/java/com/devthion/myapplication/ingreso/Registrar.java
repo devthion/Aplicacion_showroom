@@ -27,10 +27,11 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Registrar extends AppCompatActivity {
 
     Button btnRegistrar;
-    EditText etNombreUsuario, etNuevaContraseña, etNuevoEmail, etContraseñaRep;
+    EditText etNombreUsuario, etContraseña, etEmail, etContraseñaRep;
     TextView etIniciarSesion;
     ProgressBar progressBarRegistro;
     FirebaseAuth fAuth;
+    FirebaseDatabase databaseUsers;
 
 
 
@@ -42,8 +43,8 @@ public class Registrar extends AppCompatActivity {
 
         btnRegistrar = (Button) findViewById(R.id.btnRegistrar);
         etNombreUsuario = (EditText) findViewById(R.id.etNombreUsuario);
-        etNuevaContraseña = (EditText) findViewById(R.id.etContraseña);
-        etNuevoEmail = (EditText) findViewById(R.id.etNuevoEmail);
+        etContraseña = (EditText) findViewById(R.id.etContraseña);
+        etEmail = (EditText) findViewById(R.id.etNuevoEmail);
         etContraseñaRep =(EditText) findViewById(R.id.etContraseñaRep);
         etIniciarSesion = (TextView) findViewById(R.id.etIniciarSesion);
 
@@ -58,23 +59,23 @@ public class Registrar extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = etNuevoEmail.getText().toString().trim();
-                String contraseña = etNuevaContraseña.getText().toString().trim();
-                String contraseñaConfirmacion = etContraseñaRep.getText().toString().trim();
+                String email = etEmail.getText().toString().trim();
+                String contraseña = etContraseña.getText().toString().trim();
+                String nombre = etNombreUsuario.getText().toString();
+
+
+
 
                 if(TextUtils.isEmpty(email)){
-                    etNuevoEmail.setError("ESTE CAMPO ES NECESARIO");
+                    etEmail.setError("ESTE CAMPO ES NECESARIO");
                     return;
                 }
                 if(TextUtils.isEmpty(contraseña)){
-                    etNuevaContraseña.setError("ESTE CAMPO ES NECESARIO");
+                    etContraseña.setError("ESTE CAMPO ES NECESARIO");
                     return;
                 }
-                if(TextUtils.isEmpty(contraseña)){
-                    etContraseñaRep.setError("ESTE CAMPO ES NECESARIO");
-                    return;
-                }
-                if(!etNuevaContraseña.getText().toString().trim().equals(etContraseñaRep.getText().toString().trim())){
+
+                if(!etContraseña.getText().toString().trim().equals(etContraseñaRep.getText().toString().trim())){
                     etContraseñaRep.setError("LA CONTRASEÑA NO COINCIDE");
                     return;
                 }
@@ -89,6 +90,9 @@ public class Registrar extends AppCompatActivity {
 
                         if(task.isSuccessful()){
                             Toast.makeText(Registrar.this, "Usuario Creado", Toast.LENGTH_SHORT).show();
+
+
+
                             startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
                         }else {
                             Toast.makeText(Registrar.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
