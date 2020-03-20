@@ -45,6 +45,7 @@ public class Registrar extends AppCompatActivity {
         etNuevaContraseña = (EditText) findViewById(R.id.etNuevaContraseña);
         etNuevoEmail = (EditText) findViewById(R.id.etNuevoEmail);
         etContraseñaRep =(EditText) findViewById(R.id.etContraseñaRep);
+        etIniciarSesion = (TextView) findViewById(R.id.etIniciarSesion);
 
         fAuth = FirebaseAuth.getInstance();
         progressBarRegistro = (ProgressBar) findViewById(R.id.progressBarRegistro);
@@ -61,10 +62,12 @@ public class Registrar extends AppCompatActivity {
                 String contraseña = etNuevaContraseña.getText().toString().trim();
 
                 if(TextUtils.isEmpty(email)){
-                    etNuevoEmail.setError("Es necesario que complete el campo Email");
+                    etNuevoEmail.setError("ESTE CAMPO ES NECESARIO");
+                    return;
                 }
                 if(TextUtils.isEmpty(contraseña)){
-                    etNuevaContraseña.setError("Es necesario que complete el campo Contraseña");
+                    etNuevaContraseña.setError("ESTE CAMPO ES NECESARIO");
+                    return;
                 }
 
                 progressBarRegistro.setVisibility(View.VISIBLE);
@@ -79,7 +82,8 @@ public class Registrar extends AppCompatActivity {
                             Toast.makeText(Registrar.this, "Usuario Creado", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
                         }else {
-                            Toast.makeText(Registrar.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Registrar.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressBarRegistro.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -87,6 +91,12 @@ public class Registrar extends AppCompatActivity {
             }
         });
 
+        etIniciarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),InicioSesion.class));
+            }
+        });
 
 
     }
