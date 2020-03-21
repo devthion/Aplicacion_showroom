@@ -9,8 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AdminPrincipal"></activity>
-
+        <activity android:name=".ingreso.VerificarEmail"></activity>
+        <activity android:name=".AdminPrincipal" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,19 +18,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".LocacionesEnMaps" />
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".ingreso.InicioSesion" />
         <activity android:name=".ingreso.Registrar" />
         <activity android:name=".DetalleLocal" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCtUaTs7knwYySniAhSLhP_NK3pUReZ8Q8" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

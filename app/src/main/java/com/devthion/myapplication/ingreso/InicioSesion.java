@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class InicioSesion extends AppCompatActivity {
 
@@ -41,9 +42,11 @@ public class InicioSesion extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         progressBarInicio = findViewById(R.id.progressBarInicio);
 
+        final FirebaseUser user = fAuth.getCurrentUser();
+
         if(fAuth.getCurrentUser() != null){
-            startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
-            finish();
+                startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
+                finish();
         }
 
         btnIngresar.setOnClickListener(new View.OnClickListener() {
@@ -75,7 +78,7 @@ public class InicioSesion extends AppCompatActivity {
 
                         if(task.isSuccessful()){
                             Toast.makeText(InicioSesion.this, "Ha ingresado correcatamente", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
+                            startActivity(new Intent(getApplicationContext(), VerificarEmail.class));
                         }else {
                             Toast.makeText(InicioSesion.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBarInicio.setVisibility(View.GONE);

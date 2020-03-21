@@ -24,6 +24,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -96,6 +97,21 @@ public class Registrar extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
+                        //ENVIAR LINK DE VERIFICACION
+
+                        FirebaseUser fuser = fAuth.getCurrentUser();
+                        fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                Toast.makeText(Registrar.this, "SE HA ENVIADO UN MAIL DE VERIFICACION", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.d("","Email no enviado : "+e.getMessage());
+                            }
+                        });
+
                         if(task.isSuccessful()){
                             Toast.makeText(Registrar.this, "Usuario Creado", Toast.LENGTH_SHORT).show();
                             userID = fAuth.getCurrentUser().getUid();
@@ -118,7 +134,7 @@ public class Registrar extends AppCompatActivity {
                             });
 
 
-                            startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
+                            startActivity(new Intent(getApplicationContext(), VerificarEmail.class));
                         }else {
                             Toast.makeText(Registrar.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             progressBarRegistro.setVisibility(View.GONE);
