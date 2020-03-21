@@ -54,7 +54,7 @@
         android:padding="10dp"
         android:text="Para iniciar sesion debe primero verificar su email"
         android:textColor="@android:color/background_light"
-        android:textSize="15sp"
+        android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

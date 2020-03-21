@@ -103,7 +103,7 @@ public class Registrar extends AppCompatActivity {
                         fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                Toast.makeText(Registrar.this, "SE HA ENVIADO UN MAIL DE VERIFICACION", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Registrar.this, "Se ha enviado un mail de verificación", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

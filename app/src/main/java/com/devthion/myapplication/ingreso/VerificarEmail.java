@@ -22,7 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class VerificarEmail extends AppCompatActivity {
 
     Button btnEnviarLink,btnYaVerifique;
-    TextView etVerificarMail, etYaVerifique;
+    TextView etVerificarMail;
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
     String userID;
