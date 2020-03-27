@@ -77,7 +77,6 @@ public class InicioSesion extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
-                            Toast.makeText(InicioSesion.this, "Ha ingresado correcatamente", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), VerificarEmail.class));
                         }else {
                             Toast.makeText(InicioSesion.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -88,9 +87,6 @@ public class InicioSesion extends AppCompatActivity {
                 });
             }
         });
-
-
-
 
         etRegistrarse = (TextView) findViewById(R.id.etRegistrarse);
         etRegistrarse.setOnClickListener(new View.OnClickListener() {
