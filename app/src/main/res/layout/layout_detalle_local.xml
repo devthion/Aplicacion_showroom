@@ -47,9 +47,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:lineSpacingExtra="8dp"
             android:text="@string/textoPrueba"
-            android:textSize="16dp"
-            android:lineSpacingExtra="8dp">
+            android:textSize="16dp">
 
         </TextView>
 

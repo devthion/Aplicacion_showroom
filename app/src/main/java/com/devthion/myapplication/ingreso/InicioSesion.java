@@ -68,7 +68,7 @@ public class InicioSesion extends AppCompatActivity {
                     return;
                 }
 
-                progressBarInicio.setVisibility(View.VISIBLE);
+                //progressBarInicio.setVisibility(View.VISIBLE);
 
                 //VERIFICAR USUARIO
 
@@ -81,7 +81,7 @@ public class InicioSesion extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(), VerificarEmail.class));
                         }else {
                             Toast.makeText(InicioSesion.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            progressBarInicio.setVisibility(View.GONE);
+                            //progressBarInicio.setVisibility(View.GONE);
                         }
 
                     }

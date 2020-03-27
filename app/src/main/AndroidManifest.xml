@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ingreso.VerificarEmail"></activity>
+        <activity android:name=".ingreso.VerificarEmail" />
         <activity android:name=".AdminPrincipal" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -19,10 +19,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".LocacionesEnMaps" />
-        <activity android:name=".MenuPrincipal" />
         <activity android:name=".ingreso.InicioSesion" />
         <activity android:name=".ingreso.Registrar" />
         <activity android:name=".DetalleLocal" />
+        <activity android:name=".MenuPrincipal" />
+        <activity android:name=".Perfil" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
