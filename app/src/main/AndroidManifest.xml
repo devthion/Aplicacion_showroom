@@ -25,6 +25,7 @@
         <activity android:name=".DetalleLocal" />
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".Perfil" />
+        <activity android:name=".Cupones" />
 
 
         <meta-data

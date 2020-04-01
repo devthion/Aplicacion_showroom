@@ -27,7 +27,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        //drawerLayout.openDrawer(GravityCompat.START); //con esto abro el drawe //todo implementar un boton q lo haga
+        //drawerLayout.openDrawer(GravityCompat.START); //con esto abro el drawer, lo dejo para saber como se usa
 
         init();
 
@@ -73,6 +73,14 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
 
                 if(isValidDestination(R.id.nav_perfil)) {
                     Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.perfilScreen);
+                }
+
+                break;
+            }
+            case R.id.nav_cupones:{
+
+                if(isValidDestination(R.id.nav_cupones)) {
+                    Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.cuponesScreen);
                 }
 
                 break;

@@ -20,4 +20,9 @@
         android:label="Perfil"
         tools:layout="@layout/layout_perfil"></activity>
 
+    <activity android:id="@+id/cuponesScreen"
+        android:name="com.devthion.myapplication.Cupones"
+        android:label="Cupones"
+        tools:layout="@layout/layout_cupones"></activity>
+
 </navigation>
