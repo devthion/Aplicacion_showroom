@@ -3,16 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
-    app:startDestination="@+id/mapsScreen">
+    app:startDestination="@+id/menuScreen">
 
     <activity android:id="@+id/mapsScreen"
         android:name="com.devthion.myapplication.LocacionesEnMaps"
         android:label="locacionesEnMaps"
         tools:layout="@layout/layout_locaciones_en_maps"></activity>
 
-    <activity android:id="@+id/menuScreen"
-        android:name="com.devthion.myapplication.MenuPrincipal"
-        android:label="locacionesEnMaps"
-        tools:layout="@layout/layout_menu_principal"></activity>
+    <fragment android:id="@+id/menuScreen"
+        android:name="com.devthion.myapplication.FragmentMenuPrincipal"
+        android:label="DEVTHION"
+        tools:layout="@layout/fragment_fragment_menu_principal"></fragment>
+
+    <activity android:id="@+id/perfilScreen"
+        android:name="com.devthion.myapplication.Perfil"
+        android:label="Perfil"
+        tools:layout="@layout/layout_perfil"></activity>
 
 </navigation>

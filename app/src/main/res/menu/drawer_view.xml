@@ -3,10 +3,30 @@
 
     <group android:checkableBehavior="single">
         <item android:id="@+id/nav_maps"
-            android:title="MAP"></item>
+            android:title="MAP"
+            android:icon="@drawable/icono_mapa"></item>
 
         <item android:id="@+id/nav_menu"
-            android:title="home"></item>
+            android:title="home"
+            android:icon="@drawable/icono_home"></item>
+
+        <item android:id="@+id/nav_perfil"
+            android:title="perfil"
+            android:icon="@drawable/icono_perfil"></item>
     </group>
+
+    <item android:title="SUBHEADER">
+
+        <menu>
+            <item
+                android:title="SETTINGS"
+                android:icon="@drawable/icono_settings"></item>
+
+            <item
+                android:title="PUNTUANOS"
+                android:icon="@drawable/icono_rate"></item>
+        </menu>
+
+    </item>
 
 </menu>

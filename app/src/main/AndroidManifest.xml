@@ -18,12 +18,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LocacionesEnMaps" />
+        <activity android:name=".LocacionesEnMaps"
+            android:parentActivityName=".MenuPrincipal"/>
         <activity android:name=".ingreso.InicioSesion" />
         <activity android:name=".ingreso.Registrar" />
         <activity android:name=".DetalleLocal" />
         <activity android:name=".MenuPrincipal" />
         <activity android:name=".Perfil" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

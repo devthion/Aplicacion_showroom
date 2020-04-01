@@ -27,7 +27,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        drawerLayout.openDrawer(GravityCompat.START); //con esto abro el drawe //todo implementar un boton q lo haga
+        //drawerLayout.openDrawer(GravityCompat.START); //con esto abro el drawe //todo implementar un boton q lo haga
 
         init();
 
@@ -63,24 +63,31 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
         switch (menuItem.getItemId()){
             case R.id.nav_maps:{
 
-                NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.main, true).build();
+                if(isValidDestination(R.id.nav_maps)) {
+                    Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.mapsScreen);
+                }
 
-                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.mapsScreen, null, navOptions);
+                break;
+            }
+            case R.id.nav_perfil:{
+
+                if(isValidDestination(R.id.nav_perfil)) {
+                    Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.perfilScreen);
+                }
 
                 break;
             }
             case R.id.nav_menu:{
-                if(isValidDestination(R.id.menuScreen)){
-                    Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.menuScreen);
-                }
+                NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.main, true).build();
+                Navigation.findNavController(this, R.id.nav_host_fragment).navigate(R.id.menuScreen, null, navOptions);
 
                 break;
             }
         }
 
-        menuItem.setChecked(true);
+        menuItem.setChecked(false);
         drawerLayout.closeDrawer(GravityCompat.START);
-        return true;
+        return false;
     }
 
     private boolean isValidDestination(int destination){
