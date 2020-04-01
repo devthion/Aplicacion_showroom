@@ -30,17 +30,27 @@ public class Perfil extends AppCompatActivity {
         setContentView(R.layout.layout_perfil);
         txtId =(TextView) findViewById(R.id.txtPerfilId);
         etPerfilNombre =(TextView) findViewById(R.id.etPerfilNombre);
+
+        //INSTANCIAMOS LA BD DE LOS USUARIOS
         databaseUsuarios = FirebaseFirestore.getInstance();
-
+        //INSTANCIAMOS LA BD DE AUTHENTICATION (ES LA BD DONDE ESTAN LOS DATOS DEL EMAIL)
         fAuth = FirebaseAuth.getInstance();
-        userID = fAuth.getCurrentUser().getUid();
 
+        //ACA OBTENEMOS EL ID DEL USUARIO DE LA BD AUTHENTICATION
+        userID = fAuth.getCurrentUser().getUid();
+        txtId.setText("ID "+userID);
+
+
+        //HACEMOS REFERENCIA A LA BD USUARIOS Y NOS COLOCAMOS EN LOS DATOS DEL ID QUE OBTUVIMOS ANTERIORMENTE
         DocumentReference documentReference = databaseUsuarios.collection("Usuarios").document(userID);
 
+
+        //OBTENEMOS LOS DATOS DEL DOCUMENT REFERENCE
         documentReference.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if (documentSnapshot.exists()){
+                    //USAMOS EL GET DATA PARA AGARRAR LOS DATOS
                     userNombre = (String) documentSnapshot.getData().get("Nombre");
                     etPerfilNombre.setText("NOMBRE DEL USUARIO " + userNombre);
                 }
@@ -48,9 +58,6 @@ public class Perfil extends AppCompatActivity {
         });
 
 
-
-
-        txtId.setText("ID "+userID);
 
 
     }
