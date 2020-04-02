@@ -45,9 +45,13 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
 
         btn_home =findViewById(R.id.btn_home);
 
+        //------------------------ ASIGNO AL "MAP FRAGMENT" LA VISUAL DEL MAPA
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        //---------------------------
+
         arrayListMarkers.add(LatLngCasa);
         arrayListMarkers.add(LatLngHuerguito);
         arrayListMarkers.add(LatLngUtnMedrano);

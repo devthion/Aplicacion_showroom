@@ -1,6 +1,6 @@
 package com.devthion.myapplication;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -13,7 +13,7 @@ import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
-import com.devthion.myapplication.ingreso.InicioSesion;
+
 import com.google.android.material.navigation.NavigationView;
 
 public class MenuPrincipal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -52,6 +52,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
     }
 
     private void init(){
+        //LE DA EL DISEÑO, DEFINE EL NAVCONTROLLER Y SUS PROPIEDADES
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
         NavigationUI.setupWithNavController(navigationView, navController);
@@ -60,6 +61,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        // SETEA LAS ACTIVITYS A LAS QUE IR CUANDO SE CLICKEA SOBRE UNA OPCION DEL MENU
         switch (menuItem.getItemId()){
             case R.id.nav_maps:{
 
@@ -99,11 +101,13 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
     }
 
     private boolean isValidDestination(int destination){
+        //CHEQUEA QUE LA ACTIVITY A LA QUE QUIERO IR EN EL MENU, NO SE EN LA QUE ESTOY
         return destination!=Navigation.findNavController(this, R.id.nav_host_fragment).getCurrentDestination().getId();
     }
 
     @Override
     public boolean onSupportNavigateUp() {
+        //CUANDO VUELVO PARA ATRAS, CIERRA EL FRAGMENT EN EL QUE ESTOY
         return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_host_fragment), drawerLayout);
     }
 }
