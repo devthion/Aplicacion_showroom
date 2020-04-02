@@ -2,6 +2,8 @@ package com.devthion.myapplication;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Perfil extends AppCompatActivity {
 
     FirebaseAuth fAuth;
+    ProgressBar progressBar;
     String userID,userNombre;
     TextView txtId,etPerfilNombre;
     //DECLARAMOS LA BASE DE DATOS DE LOS USUARIOS
@@ -28,8 +31,17 @@ public class Perfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_perfil);
+
+
         txtId =(TextView) findViewById(R.id.txtPerfilId);
         etPerfilNombre =(TextView) findViewById(R.id.etPerfilNombre);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+
+
+        txtId.setVisibility(View.GONE);//INICIALMENTE SETEO AMBOS EN GONE PARA DAR TIEMPO
+        etPerfilNombre.setVisibility(View.GONE); //A QUE SE CARGUEN DESDE FIREBASE
+
 
         //INSTANCIAMOS LA BD DE LOS USUARIOS
         databaseUsuarios = FirebaseFirestore.getInstance();
@@ -53,7 +65,19 @@ public class Perfil extends AppCompatActivity {
                     //USAMOS EL GET DATA PARA AGARRAR LOS DATOS
                     userNombre = (String) documentSnapshot.getData().get("Nombre");
                     etPerfilNombre.setText("NOMBRE DEL USUARIO " + userNombre);
+
+                    //----------------------------------
+                    //a la visibilidad del progressbar la pongo en GONE para que ya no se vea
+                    //y hago visibles los datos que ya cargaron
+                    progressBar.setVisibility(View.GONE);
+                    etPerfilNombre.setVisibility(View.VISIBLE);
+                    txtId.setVisibility(View.VISIBLE);
+                    //------------------------------------
+
                 }
+
+
+
             }
         });
 
