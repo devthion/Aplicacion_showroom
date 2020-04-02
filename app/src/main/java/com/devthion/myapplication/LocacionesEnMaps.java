@@ -57,7 +57,7 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
         arrayListMarkers.add(LatLngUtnMedrano);
         arrayListMarkers.add(LatLngUtnCampus);
         arrayListMarkers.add(LatLngGym);
-
+        //arrayListMarkers y arrayListTitulos, estan definidos en paralelo!!
         arrayListTitulosMarkers.add("Casa");
         arrayListTitulosMarkers.add("Huerguito");
         arrayListTitulosMarkers.add("Medrano");
@@ -80,26 +80,31 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        map =googleMap;
+        map =googleMap;//NO SE LA VENTAJA DE ESTO... EN EL VIDEO HACIA ESTA ASIGNACION, PERO
+                        //PUEDO USAR LA VARIABLE "GOOGLEMAP" DE LA MISMA FORMA
         for(int i =0; i<arrayListMarkers.size(); i++){
-
+            //A CADA LATLNG QUE SE ENCUENTRA EN EL ARRAY DE MARKERS, LAS AGREGO EN EL MAPA Y AL MISMO TIEMPO LE ASIGNO LOS
+            //RESPECTIVOS TITULOS CON UN ARRAY EN PARALELO.
             map.addMarker(new MarkerOptions().position(arrayListMarkers.get(i)).title(String.valueOf(arrayListTitulosMarkers.get(i)))
                 .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.icono_de_local_en_mapa)));
 
         }
 
+
+        //AL ABRIR EL ACTIVITY "ANIMATECAMERA" HACE QUE EL MAPA HAGA ZOOM A UNA LATLNG QUE ESTABLEZCO
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLngCentroCapitalFederal, 11));
 
 
        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
            @Override
            public boolean onMarkerClick(Marker marker) {
-               String markerTitle = marker.getTitle();
+               //PERMITE HACER CLICKEABLES LOS MARCADORES EN EL MAPA
+               String markerTitle = marker.getTitle();//TOMA EL TITULO DEL MARCADOR CLICKEADO
 
 
                Intent intentDetalleLocal = new Intent(LocacionesEnMaps.this, DetalleLocal.class);
                intentDetalleLocal.putExtra("title", markerTitle);
-               startActivity(intentDetalleLocal);
+               startActivity(intentDetalleLocal);//ABRE LA ACTIVITY CORRESPONDIENTE AL MARCADOR CLIKEADO Y LE PASA EL TITULO DEL MISMO
 
                return false;
            }
@@ -109,6 +114,7 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
     }
 
     private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId){
+        //ESTE METODO ES PARA CAMBIAR EL ASPECTO DEL MARCADOR
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
         vectorDrawable.setBounds(0,0,vectorDrawable.getIntrinsicWidth(), vectorDrawable.getIntrinsicHeight());
 
