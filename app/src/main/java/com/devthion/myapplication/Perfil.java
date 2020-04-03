@@ -147,7 +147,7 @@ public class Perfil extends AppCompatActivity {
                     if(unaFoto.getKey().equals(userID)){
                         UploadFotoPerfil uploadFotoPerfil = unaFoto.getValue(UploadFotoPerfil.class);
                         Picasso.get().load(uploadFotoPerfil.getImageUrl()).fit().into(imagenPerfil);
-                        
+
                     }
 
                 }
