@@ -3,12 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wallpeperadmin"
     tools:context=".AgregarLocalFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/etAgregarLocal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="AGREGAR" />
+        android:layout_height="wrap_content"
+        android:text="AGREGAR LOCAL"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Button" />
 
 </FrameLayout>

@@ -39,9 +39,6 @@ public class Registrar extends AppCompatActivity {
     FirebaseFirestore databaseUsuarios;
     String userID;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,13 +85,11 @@ public class Registrar extends AppCompatActivity {
                 progressBarRegistro.setVisibility(View.VISIBLE);
 
                 //REGISTRAR EL USUARIO EN FIREBASE
-
                 fAuth.createUserWithEmailAndPassword(email,contraseña).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         //ENVIAR LINK DE VERIFICACION
-
                         FirebaseUser fuser = fAuth.getCurrentUser();
                         fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -144,10 +139,14 @@ public class Registrar extends AppCompatActivity {
         etIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),InicioSesion.class));
+                mostrarInicioSesion();
             }
         });
 
 
+    }
+
+    public void mostrarInicioSesion(){
+        startActivity(new Intent(getApplicationContext(),InicioSesion.class));
     }
 }

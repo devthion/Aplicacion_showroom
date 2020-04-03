@@ -9,10 +9,6 @@ import android.view.View;
 import android.widget.ProgressBar;
 
 import com.devthion.myapplication.ingreso.InicioSesion;
-import com.devthion.myapplication.ingreso.Registrar;
-import com.devthion.myapplication.modelos.ModeloUsuario;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -35,13 +35,13 @@ public class VerificarEmail extends AppCompatActivity {
         btnEnviarLink = (Button) findViewById(R.id.btnVerificarMail);
         etVerificarMail =(TextView) findViewById(R.id.etVerificarMail);
         btnYaVerifique = (Button) findViewById(R.id.btnYaVerifique);
-
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
         userID = fAuth.getCurrentUser().getUid();
         final FirebaseUser user = fAuth.getCurrentUser();
 
+        //PREGUNTA SI EL EMAIL HA SIDO VERIFICADO
         if(!user.isEmailVerified()){
             btnEnviarLink.setVisibility(View.VISIBLE);
             etVerificarMail.setVisibility(View.VISIBLE);
@@ -49,7 +49,7 @@ public class VerificarEmail extends AppCompatActivity {
             btnEnviarLink.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    //MANDA EL MAIL NUEVAMENTE PARA QUE SE VERIFIQUE
                     user.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -67,6 +67,7 @@ public class VerificarEmail extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), MenuPrincipal.class));
         }
 
+        //TE MANDA AL INICIO DE SESION PARA QUE VERIFIQUES
         btnYaVerifique.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
