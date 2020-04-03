@@ -46,6 +46,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.navigation:navigation-fragment:2.2.1'
     implementation 'androidx.navigation:navigation-ui:2.2.1'
-
+    implementation 'com.google.firebase:firebase-storage:19.1.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }
