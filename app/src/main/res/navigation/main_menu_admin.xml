@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_menu_admin"
+    app:startDestination="@+id/adminHomeScreen">
+
+    <fragment android:id="@+id/adminHomeScreen"
+        android:name="com.devthion.myapplication.AdminHomeFragment"
+        android:label="Home Admin"
+        tools:layout="@layout/fragment_admin_home"></fragment>
+
+    <fragment android:id="@+id/quitarLocalScreen"
+        android:name="com.devthion.myapplication.QuitarLocalFragment"
+        android:label="Quitar local"
+        tools:layout="@layout/fragment_quitar_local"></fragment>
+
+    <fragment android:id="@+id/agregarLocalScreen"
+        android:name="com.devthion.myapplication.AgregarLocalFragment"
+        android:label="Agregar Local"
+        tools:layout="@layout/fragment_agregar_local"></fragment>
+
+    <fragment android:id="@+id/agregarCuponScreen"
+        android:name="com.devthion.myapplication.AgregarCuponFragment"
+        android:label="Agregar Cupón"
+        tools:layout="@layout/fragment_agregar_cupon"></fragment>
+
+
+
+</navigation>

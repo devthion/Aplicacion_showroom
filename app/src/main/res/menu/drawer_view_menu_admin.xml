@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/nav_home"
+            android:title="Home"
+            ></item>
+
+        <item android:id="@+id/nav_agregar_local"
+            android:title="Agregar Local"
+            ></item>
+
+        <item android:id="@+id/nav_quitar_local"
+            android:title="Quitar Local"
+            ></item>
+
+        <item android:id="@+id/nav_agregar_cupon"
+            android:title="Agregar cupon"
+            ></item>
+
+
+    </group>
+
+</menu>
