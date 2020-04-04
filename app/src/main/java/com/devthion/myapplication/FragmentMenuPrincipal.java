@@ -35,7 +35,7 @@ public class FragmentMenuPrincipal extends Fragment implements View.OnClickListe
 
 
 
-        return inflater.inflate(R.layout.fragment_fragment_menu_principal, container, false);
+        return view;
     }
 
 
@@ -43,11 +43,11 @@ public class FragmentMenuPrincipal extends Fragment implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnCerrarSesionn:
-                //fAuth.signOut();
-                txtPrueba.setText("asdasd");
+                fAuth.signOut();
+
                 Toast.makeText(getActivity(), "CERRAR SESION", Toast.LENGTH_SHORT).show();
-                //Intent in = new Intent(getActivity(), Perfil.class);
-                //startActivity(in);
+                Intent in = new Intent(getActivity(), InicioSesion.class);
+                startActivity(in);
                 break;
 
         }
