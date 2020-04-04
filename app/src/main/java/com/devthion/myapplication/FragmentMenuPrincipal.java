@@ -16,7 +16,7 @@ import com.devthion.myapplication.ingreso.VerificarEmail;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class FragmentMenuPrincipal extends Fragment implements View.OnClickListener {
+public class FragmentMenuPrincipal extends Fragment {
 
     TextView txtPrueba;
     FirebaseAuth fAuth;
@@ -31,25 +31,20 @@ public class FragmentMenuPrincipal extends Fragment implements View.OnClickListe
         fAuth = FirebaseAuth.getInstance();
         txtPrueba = (TextView) view.findViewById(R.id.txtPrueba);
 
-        btnCerrarSesion.setOnClickListener(this);
+        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fAuth.signOut();
+
+                Toast.makeText(getActivity(), "SE HA CERRADO SESION ", Toast.LENGTH_SHORT).show();
+                Intent in = new Intent(getActivity(), Perfil.class);
+                startActivity(in);
+
+            }
+        });
 
 
-
-        return inflater.inflate(R.layout.fragment_fragment_menu_principal, container, false);
+        return view;
     }
 
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btnCerrarSesionn:
-                //fAuth.signOut();
-                txtPrueba.setText("asdasd");
-                Toast.makeText(getActivity(), "CERRAR SESION", Toast.LENGTH_SHORT).show();
-                //Intent in = new Intent(getActivity(), Perfil.class);
-                //startActivity(in);
-                break;
-
-        }
-    }
 }
