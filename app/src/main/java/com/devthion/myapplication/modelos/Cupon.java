@@ -24,8 +24,7 @@ public class Cupon {
     protected int puntosNecesarios;
 
 
-    static DatabaseReference databaseCupones = FirebaseDatabase.getInstance().getReference().child("Cupones");
-    static long maxId;
+    static DatabaseReference databaseCupones;
 
     public Cupon(String idCupon, String idLocal, int descuento, int puntosNecesarios) {
         this.idCupon = idCupon;
@@ -35,27 +34,15 @@ public class Cupon {
     }
 
     public static void guardarCupon(String idCupon, String idLocal, int descuento, int puntosNecesarios){
-        databaseCupones.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    maxId= dataSnapshot.getChildrenCount();
-                    
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        databaseCupones = FirebaseDatabase.getInstance().getReference().child("Cupones");
+        String maxId = databaseCupones.push().getKey();
 
         Map<String,Object> cupon =new HashMap<>();
         cupon.put("Codigo",idCupon);
         cupon.put("Local",idLocal);
         cupon.put("Descuento",descuento);
         cupon.put("Puntos Necesarios",puntosNecesarios);
-        databaseCupones.child(String.valueOf(maxId+1)).setValue(cupon);
+        databaseCupones.child(String.valueOf(maxId)).setValue(cupon);
     }
 
     public String getIdCupon() {

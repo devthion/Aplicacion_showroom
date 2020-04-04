@@ -20,8 +20,7 @@ public class Local {
     String barrio;
     String tipo;
 
-    static DatabaseReference databaseCupones = FirebaseDatabase.getInstance().getReference().child("Locales");
-    static long maxId;
+    static DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
 
     public Local(String nombre, String calle, int numero, int codPostal, String barrio, String tipo) {
         this.nombre = nombre;
@@ -33,19 +32,7 @@ public class Local {
     }
 
     public static void guardarLocal(String nombre, String calle, int numero, int codPostal, String barrio, String tipo){
-        databaseCupones.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
-                    maxId= dataSnapshot.getChildrenCount();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+        String maxId = databaseLocales.push().getKey();
 
         Map<String,Object> local =new HashMap<>();
         local.put("Nombre",nombre);
@@ -54,7 +41,7 @@ public class Local {
         local.put("Codigo Postal",codPostal);
         local.put("Barrio",barrio);
         local.put("Tipo",tipo);
-        databaseCupones.child(String.valueOf(maxId+1)).setValue(local);
+        databaseLocales.child(String.valueOf(maxId)).setValue(local);
     }
 
 
