@@ -33,8 +33,6 @@ public class FragmentMenuPrincipal extends Fragment implements View.OnClickListe
 
         btnCerrarSesion.setOnClickListener(this);
 
-
-
         return view;
     }
 
