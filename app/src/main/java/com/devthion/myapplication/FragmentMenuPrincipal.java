@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 
 import com.devthion.myapplication.ingreso.InicioSesion;
-import com.devthion.myapplication.ingreso.VerificarEmail;
 import com.google.firebase.auth.FirebaseAuth;
 
 
@@ -29,7 +28,7 @@ public class FragmentMenuPrincipal extends Fragment implements View.OnClickListe
         View view = inflater.inflate(R.layout.fragment_fragment_menu_principal, container, false);
         btnCerrarSesion = (Button) view.findViewById(R.id.btnCerrarSesionn);
         fAuth = FirebaseAuth.getInstance();
-        txtPrueba = (TextView) view.findViewById(R.id.txtPrueba);
+        txtPrueba = (TextView) view.findViewById(R.id.txtTituloMenu);
 
         btnCerrarSesion.setOnClickListener(this);
 

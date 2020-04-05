@@ -2,9 +2,12 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/aclonica</item>
+        <item>@font/alef</item>
         <item>@font/assistant_extrabold</item>
         <item>@font/audiowide</item>
         <item>@font/capriola</item>
+        <item>@font/droid_sans</item>
+        <item>@font/fontdiner_swanky</item>
         <item>@font/open_sans_light</item>
     </array>
 </resources>
