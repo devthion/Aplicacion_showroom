@@ -1,14 +1,30 @@
+package com.devthion.myapplication.modelos;
 
-import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
-public class Cupon extends AppCompatActivity {
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import androidx.annotation.NonNull;
+
+public class Cupon {
 
     protected String idCupon;
     protected String idLocal;
     protected int descuento;
     protected int puntosNecesarios;
+
+
+    static DatabaseReference databaseCupones;
 
     public Cupon(String idCupon, String idLocal, int descuento, int puntosNecesarios) {
         this.idCupon = idCupon;
@@ -17,12 +33,16 @@ public class Cupon extends AppCompatActivity {
         this.puntosNecesarios = puntosNecesarios;
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public static void guardarCupon(String idCupon, String idLocal, int descuento, int puntosNecesarios){
+        databaseCupones = FirebaseDatabase.getInstance().getReference().child("Cupones");
+        String maxId = databaseCupones.push().getKey();
 
-
-
+        Map<String,Object> cupon =new HashMap<>();
+        cupon.put("Codigo",idCupon);
+        cupon.put("Local",idLocal);
+        cupon.put("Descuento",descuento);
+        cupon.put("Puntos Necesarios",puntosNecesarios);
+        databaseCupones.child(String.valueOf(maxId)).setValue(cupon);
     }
 
     public String getIdCupon() {
