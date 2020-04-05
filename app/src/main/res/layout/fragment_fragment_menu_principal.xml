@@ -4,34 +4,61 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentMenuPrincipal">
+    tools:context=".FragmentMenuPrincipal"
+    android:background="#dee4e4">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+
+        android:id="@+id/fondo_menu_principal"
+        android:layout_width="418dp"
+        android:layout_height="872dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/fondo_menu_principal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <LinearLayout
+        android:id="@+id/textV_menu_principal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="DEVTHION"
+            android:textColor="#FFF"
+            android:textSize="24sp" />
+    </LinearLayout>
+
     <TextView
         android:id="@+id/pantalla"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="MENU PRINCIPAL" />
+        android:text="MENU PRINCIPAL"
+        tools:layout_editor_absoluteX="69dp"
+        tools:layout_editor_absoluteY="-38dp" />
 
     <Button
         android:id="@+id/btnCerrarSesionn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="89dp"
+        android:layout_height="63dp"
         android:text="CERRAR SESION"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.943"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txtPrueba"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
