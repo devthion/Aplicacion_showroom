@@ -6,22 +6,22 @@
     app:startDestination="@+id/adminHomeScreen">
 
     <fragment android:id="@+id/adminHomeScreen"
-        android:name="com.devthion.myapplication.AdminHomeFragment"
+        android:name="com.devthion.myapplication.Administrador.AdminHomeFragment"
         android:label="Home Admin"
         tools:layout="@layout/fragment_admin_home"></fragment>
 
     <fragment android:id="@+id/quitarLocalScreen"
-        android:name="com.devthion.myapplication.QuitarLocalFragment"
+        android:name="com.devthion.myapplication.Administrador.QuitarLocalFragment"
         android:label="Quitar local"
         tools:layout="@layout/fragment_quitar_local"></fragment>
 
     <fragment android:id="@+id/agregarLocalScreen"
-        android:name="com.devthion.myapplication.AgregarLocalFragment"
+        android:name="com.devthion.myapplication.Administrador.AgregarLocalFragment"
         android:label="Agregar Local"
         tools:layout="@layout/fragment_agregar_local"></fragment>
 
     <fragment android:id="@+id/agregarCuponScreen"
-        android:name="com.devthion.myapplication.AgregarCuponFragment"
+        android:name="com.devthion.myapplication.Administrador.AgregarCuponFragment"
         android:label="Agregar Cupón"
         tools:layout="@layout/fragment_agregar_cupon"></fragment>
 

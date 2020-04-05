@@ -1,4 +1,4 @@
-package com.devthion.myapplication;
+package com.devthion.myapplication.Administrador;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
 
 import androidx.fragment.app.Fragment;

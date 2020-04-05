@@ -1,4 +1,4 @@
-package com.devthion.myapplication;
+package com.devthion.myapplication.Administrador;
 
 import android.content.Context;
 import android.net.Uri;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Cupon;
 
 

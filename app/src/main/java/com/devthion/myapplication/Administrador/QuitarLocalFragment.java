@@ -1,9 +1,11 @@
-package com.devthion.myapplication;
+package com.devthion.myapplication.Administrador;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.devthion.myapplication.R;
 
 import androidx.fragment.app.Fragment;
 

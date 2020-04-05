@@ -13,7 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devthion.myapplication.AdminPrincipal;
+import com.devthion.myapplication.Administrador.AdminPrincipal;
 import com.devthion.myapplication.MenuPrincipal;
 import com.devthion.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;

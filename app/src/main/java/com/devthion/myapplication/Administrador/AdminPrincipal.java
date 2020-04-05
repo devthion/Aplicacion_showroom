@@ -1,4 +1,4 @@
-package com.devthion.myapplication;
+package com.devthion.myapplication.Administrador;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.devthion.myapplication.R;
 import com.google.android.material.navigation.NavigationView;
 
 public class AdminPrincipal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
