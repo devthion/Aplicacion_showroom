@@ -5,11 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import androidx.fragment.app.Fragment;
 
@@ -19,6 +23,8 @@ public class AgregarLocalFragment extends Fragment {
 
     Button btnGuardarLocal;
     TextView etNombre, etCalle, etNumero, etCodPostal, etBarrio, etTipo;
+    CheckBox checkHombre, checkMujer,checkNiños;
+    List<String> tipos = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,11 +39,17 @@ public class AgregarLocalFragment extends Fragment {
         etCodPostal = (TextView) view.findViewById(R.id.etCodPostal);
         etBarrio = (TextView) view.findViewById(R.id.etBarrio);
         etTipo = (TextView) view.findViewById(R.id.etTipo);
+        checkHombre = (CheckBox) view.findViewById(R.id.checkRopaHombre);
+        checkMujer = (CheckBox) view.findViewById(R.id.checkRopaMujer);
+        checkNiños = (CheckBox) view.findViewById(R.id.checkRopaNiños);
+
+
 
         btnGuardarLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Local.guardarLocal(etNombre.getText().toString(),etCalle.getText().toString(),Integer.parseInt(etNumero.getText().toString()),Integer.parseInt(etCodPostal.getText().toString()),etBarrio.getText().toString(),etTipo.getText().toString());
+                validarLocales(tipos);
+                Local.guardarLocal(etNombre.getText().toString(),etCalle.getText().toString(),Integer.parseInt(etNumero.getText().toString()),Integer.parseInt(etCodPostal.getText().toString()),etBarrio.getText().toString(),tipos);
                 Toast.makeText(getContext(),"LOCAL CREADO CON EXITO",Toast.LENGTH_LONG).show();
 
                 etNombre.setText("");
@@ -53,6 +65,19 @@ public class AgregarLocalFragment extends Fragment {
 
         return view;
 
+    }
+
+    public void validarLocales(List pistas){
+        String resultado = null;
+        if(checkMujer.isChecked()){
+             resultado = "Ropa Mujer";
+        }
+        if(checkHombre.isChecked()){
+            resultado = "Ropa Hombre";
+        }
+        if(checkNiños.isChecked()){
+            resultado = "Ropa Niños";
+        }
     }
 
 }
