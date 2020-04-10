@@ -25,6 +25,7 @@ public class AgregarLocalFragment extends Fragment {
     TextView etNombre, etCalle, etNumero, etCodPostal, etBarrio, etTipo;
     CheckBox checkHombre, checkMujer,checkNiños;
     List<String> tipos = new ArrayList<>();
+    Local nuevoLocal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +50,13 @@ public class AgregarLocalFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 validarLocales(tipos);
-                Local.guardarLocal(etNombre.getText().toString(),etCalle.getText().toString(),Integer.parseInt(etNumero.getText().toString()),Integer.parseInt(etCodPostal.getText().toString()),etBarrio.getText().toString(),tipos);
+
+
+
+
+                nuevoLocal = generarLocal();
+
+                //Local.guardarLocal(etNombre.getText().toString(),etCalle.getText().toString(),Integer.parseInt(etNumero.getText().toString()),Integer.parseInt(etCodPostal.getText().toString()),etBarrio.getText().toString(),tipos);
                 Toast.makeText(getContext(),"LOCAL CREADO CON EXITO",Toast.LENGTH_LONG).show();
 
                 etNombre.setText("");
@@ -78,6 +85,13 @@ public class AgregarLocalFragment extends Fragment {
         if(checkNiños.isChecked()){
             resultado = "Ropa Niños";
         }
+    }
+
+    public Local generarLocal(){
+
+
+
+
     }
 
 }

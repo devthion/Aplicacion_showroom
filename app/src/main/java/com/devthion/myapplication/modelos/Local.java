@@ -15,29 +15,26 @@ import androidx.annotation.NonNull;
 
 public class Local {
 
-    String nombre;
-    String calle;
-    int numero;
-    int codPostal;
-    String barrio;
-    String tipo;
+    protected static String nombre;
+    protected static EstructuraLocal direccion;
+    protected static List<String> categorias;
+    protected static String Descripcion;
+    protected static int telefono;
+
 
     static DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
 
-    public Local(String nombre, String calle, int numero, int codPostal, String barrio, String tipo) {
+    public Local(String nombre, String calle, int numero, int codPostal, String barrio, List<String> tipos) {
         this.nombre = nombre;
-        this.calle = calle;
+        this.calle = ;
         this.numero = numero;
         this.codPostal = codPostal;
         this.barrio = barrio;
-        this.tipo = tipo;
+        this.tipos = tipos;
     }
 
-    public static void guardarLocal(String nombre, String calle, int numero, int codPostal, String barrio, List tipos){
+    public static void guardarLocal(){
         String maxId = databaseLocales.push().getKey();
-
-        tipos.add("ropa hombre");
-        tipos.add("ropa mujer");
 
         Map<String,Object> local =new HashMap<>();
         local.put("Nombre",nombre);
