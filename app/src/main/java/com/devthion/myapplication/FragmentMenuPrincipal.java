@@ -27,7 +27,7 @@ import static android.content.res.Resources.getSystem;
 
 public class FragmentMenuPrincipal extends Fragment  {
 
-    ImageView fondo_menu_principal;
+    ImageView flor3, flor2;
     LinearLayout textVMenu;
     ConstraintLayout constraintLayout_menu;
     FirebaseAuth fAuth;
@@ -40,7 +40,8 @@ public class FragmentMenuPrincipal extends Fragment  {
         View view = inflater.inflate(R.layout.fragment_fragment_menu_principal, container, false);
         btnCerrarSesion = (Button) view.findViewById(R.id.btnCerrarSesionn);
         fAuth = FirebaseAuth.getInstance();
-        fondo_menu_principal = view.findViewById(R.id.fondo_menu_principal);
+        flor3 = view.findViewById(R.id.flor3);
+        flor2 = view.findViewById(R.id.flor2);
         textVMenu =view.findViewById(R.id.linearMenu);
         constraintLayout_menu = view.findViewById(R.id.constraintLayout_menu);
 
@@ -53,9 +54,10 @@ public class FragmentMenuPrincipal extends Fragment  {
 
 
 
-        fondo_menu_principal.animate().translationY((float) (-h*0.65 )).setDuration(1000).setStartDelay(300);
-        textVMenu.animate().translationY(140).alpha(0).setDuration(1200).setStartDelay(320);
-        constraintLayout_menu.animate().alpha(1).setDuration(800).setStartDelay(300);
+        flor3.animate().translationX(-100).alpha(0).setDuration(600).setStartDelay(300);
+        flor2.animate().translationX(100).alpha(0).setDuration(600).setStartDelay(300);
+        textVMenu.animate().scaleX(2).scaleY(2).alpha(0).setDuration(500).setStartDelay(300);
+        constraintLayout_menu.animate().alpha(1).setDuration(800).setStartDelay(500);
 
         btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
