@@ -6,7 +6,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
@@ -31,8 +33,11 @@ public class Local {
         this.tipo = tipo;
     }
 
-    public static void guardarLocal(String nombre, String calle, int numero, int codPostal, String barrio, String tipo){
+    public static void guardarLocal(String nombre, String calle, int numero, int codPostal, String barrio, List tipos){
         String maxId = databaseLocales.push().getKey();
+
+        tipos.add("ropa hombre");
+        tipos.add("ropa mujer");
 
         Map<String,Object> local =new HashMap<>();
         local.put("Nombre",nombre);
@@ -40,7 +45,7 @@ public class Local {
         local.put("Numero",numero);
         local.put("Codigo Postal",codPostal);
         local.put("Barrio",barrio);
-        local.put("Tipo",tipo);
+        local.put("Tipo",tipos);
         databaseLocales.child(String.valueOf(maxId)).setValue(local);
     }
 

@@ -4,81 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/side_nav_bar"
+    android:background="@color/cardview_light_background"
     tools:context=".Administrador.AdminHomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <Button
-        android:id="@+id/btnAgregarLocal"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
-        android:background="@drawable/custom_button"
-        android:fontFamily="@font/audiowide"
-        android:text="NUEVO LOCAL"
-        android:textColor="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <Button
-        android:id="@+id/btnNuevoCupon"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button"
-        android:fontFamily="@font/audiowide"
-        android:text="NUEVO CUPON"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAgregarLocal" />
-
-    <Button
-        android:id="@+id/btnEliminarLocal"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button"
-        android:fontFamily="@font/audiowide"
-        android:text="ELIMINAR LOCAL"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnNuevoCupon" />
-
-    <Button
-        android:id="@+id/btnEliminarCupon"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/custom_button"
-        android:fontFamily="@font/audiowide"
-        android:text="ELIMINAR CUPON"
-        android:textColor="@android:color/background_light"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEliminarLocal" />
 
     <TextView
         android:id="@+id/textView3"

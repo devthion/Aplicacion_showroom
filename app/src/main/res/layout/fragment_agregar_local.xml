@@ -4,106 +4,135 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/wallpeper"
+    android:background="@drawable/wallpeperbordo"
     tools:context=".Administrador.AgregarLocalFragment">
 
-    <EditText
-        android:id="@+id/etNombreLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:hint="Nombre Local"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNuevoLocal" />
 
-    <EditText
-        android:id="@+id/etCalle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="Calle"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNombreLocal" />
-
-    <EditText
-        android:id="@+id/etNumero"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:hint="Numero"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCalle" />
-
-    <EditText
-        android:id="@+id/etCodPostal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Codigo Postal"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNumero" />
-
-    <EditText
-        android:id="@+id/etBarrio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:ems="10"
-        android:hint="Barrio"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etCodPostal" />
-
-    <TextView
-        android:id="@+id/etNuevoLocal"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/btnGuardarLocal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="76dp"
-        android:background="@android:color/background_dark"
-        android:fontFamily="@font/capriola"
-        android:text="NUEVO LOCAL"
-        android:textColor="@color/cardview_light_background"
-        android:textSize="40sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etTipo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:hint="Tipo"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etBarrio" />
-
-    <Button
-        android:id="@+id/btnGuardarLocal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="GUARDAR LOCAL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etTipo" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="357dp"
+        android:layout_height="508dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/etNombreLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:hint="Nombre Local"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff" />
+
+            <EditText
+                android:id="@+id/etCalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:hint="Calle"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"/>
+
+            <EditText
+                android:id="@+id/etNumero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:hint="Numero"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"/>
+
+            <EditText
+                android:id="@+id/etCodPostal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:hint="Codigo Postal"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"/>
+
+            <EditText
+                android:id="@+id/etBarrio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:hint="Barrio"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"/>
+
+            <EditText
+                android:id="@+id/etTipo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:hint="Tipo"
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="378dp">
+
+                <CheckBox
+                    android:id="@+id/checkRopaHombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ropa Hombre" />
+
+                <CheckBox
+                    android:id="@+id/checkRopaMujer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ropa Mujer" />
+
+                <CheckBox
+                    android:id="@+id/checkRopaNiños"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ropa niños" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/etNuevoLocal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="NUEVO LOCAL"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
