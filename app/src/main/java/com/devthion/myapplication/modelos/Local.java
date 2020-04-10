@@ -15,37 +15,36 @@ import androidx.annotation.NonNull;
 
 public class Local {
 
-    protected static String nombre;
-    protected static EstructuraLocal direccion;
-    protected static List<String> categorias;
-    protected static String Descripcion;
-    protected static int telefono;
-
+    protected String nombre;
+    protected EstructuraLocal direccion;
+    protected List<String> categorias;
+    protected String Descripcion;
+    protected int telefono;
 
     static DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
 
-    public Local(String nombre, String calle, int numero, int codPostal, String barrio, List<String> tipos) {
+    public Local(String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono) {
         this.nombre = nombre;
-        this.calle = ;
-        this.numero = numero;
-        this.codPostal = codPostal;
-        this.barrio = barrio;
-        this.tipos = tipos;
+        this.direccion = direccion;
+        this.categorias = categorias;
+        Descripcion = descripcion;
+        this.telefono = telefono;
     }
 
-    public static void guardarLocal(){
+    public void guardarLocal(){
         String maxId = databaseLocales.push().getKey();
 
         Map<String,Object> local =new HashMap<>();
         local.put("Nombre",nombre);
-        local.put("Calle",calle);
-        local.put("Numero",numero);
-        local.put("Codigo Postal",codPostal);
-        local.put("Barrio",barrio);
-        local.put("Tipo",tipos);
+        local.put("Calle",direccion.getCalle());
+        local.put("Numero",direccion.getNumero());
+        local.put("Codigo Postal",direccion.getCodigoPostal());
+        local.put("Barrio",direccion.getBarrio());
+        local.put("Categorias",categorias);
+        local.put("Descripcion",Descripcion);
+        local.put("telefono",telefono);
         databaseLocales.child(String.valueOf(maxId)).setValue(local);
     }
-
 
     public String getNombre() {
         return nombre;
@@ -55,43 +54,43 @@ public class Local {
         this.nombre = nombre;
     }
 
-    public String getCalle() {
-        return calle;
+    public EstructuraLocal getDireccion() {
+        return direccion;
     }
 
-    public void setCalle(String calle) {
-        this.calle = calle;
+    public void setDireccion(EstructuraLocal direccion) {
+        this.direccion = direccion;
     }
 
-    public int getNumero() {
-        return numero;
+    public List<String> getCategorias() {
+        return categorias;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setCategorias(List<String> categorias) {
+        this.categorias = categorias;
     }
 
-    public int getCodPostal() {
-        return codPostal;
+    public String getDescripcion() {
+        return Descripcion;
     }
 
-    public void setCodPostal(int codPostal) {
-        this.codPostal = codPostal;
+    public void setDescripcion(String descripcion) {
+        Descripcion = descripcion;
     }
 
-    public String getBarrio() {
-        return barrio;
+    public int getTelefono() {
+        return telefono;
     }
 
-    public void setBarrio(String barrio) {
-        this.barrio = barrio;
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
     }
 
-    public String getTipo() {
-        return tipo;
+    public static DatabaseReference getDatabaseLocales() {
+        return databaseLocales;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public static void setDatabaseLocales(DatabaseReference databaseLocales) {
+        Local.databaseLocales = databaseLocales;
     }
 }

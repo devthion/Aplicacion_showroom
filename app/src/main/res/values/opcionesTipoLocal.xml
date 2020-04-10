@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="opcionesLocal" >
+        <item>Departamento</item>
+        <item>Local A Calle</item>
+        <item>Showroom casa</item>
+
+    </string-array>
+
+</resources>
