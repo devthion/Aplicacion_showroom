@@ -12,10 +12,11 @@
         android:scaleType="centerCrop" />
 
     <ImageView
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/imagenPerfil"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
         android:scaleType="centerCrop"
         android:src="@drawable/icono_usuario" />
 
@@ -42,14 +43,15 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
         <TextView
+            android:id="@+id/textV_mail_usuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:layout_gravity="center"
+            android:layout_marginTop="3dp"
             android:gravity="center_vertical"
             android:text="mailDelUsuario@gmail.com"
-            android:textColor="#000000"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#000000" />
 
     </LinearLayout>
 

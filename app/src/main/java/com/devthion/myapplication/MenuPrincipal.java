@@ -3,9 +3,12 @@ package com.devthion.myapplication;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,12 +20,25 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
 
+import com.devthion.myapplication.modelos.UploadFotoPerfil;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
+
+import java.util.zip.Inflater;
 
 public class MenuPrincipal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
+    FirebaseAuth fAuth;
+    TextView textVNombreDeUsuario, textVMailDeUsuario;
+    ImageView imagenPerfil;
+    DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +49,53 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
         navigationView = findViewById(R.id.nav_view);
         //drawerLayout.openDrawer(GravityCompat.START); //con esto abro el drawer, lo dejo para saber como se usa
 
+        //INSTANCIAMOS LA BD DATA PARA LAS FOTOS DE PERFIL EN FIREBASE
+        databaseReference = FirebaseDatabase.getInstance().getReference("fotos_perfil");
 
+
+        //INSTANCIAMOS LA BD DE AUTHENTICATION (ES LA BD DONDE ESTAN LOS DATOS DEL EMAIL)
+        fAuth = FirebaseAuth.getInstance();
+
+        //ACA OBTENEMOS EL ID DEL USUARIO DE LA BD AUTHENTICATION
+        String userName = fAuth.getCurrentUser().getProviderId();
+        final String userID = fAuth.getCurrentUser().getUid();
+        String userMail = fAuth.getCurrentUser().getEmail();
+
+
+
+        //DE ESTA MANERA ACCEDO DESDE EL NAV_VIEW AL HEADER_VIEW DEL CUAL OBTENGO LOS OBJETOS QUE DESEO MODIFICAR
+        navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        textVNombreDeUsuario = headerView.findViewById(R.id.textV_nombre_usuario);
+        textVMailDeUsuario = headerView.findViewById(R.id.textV_mail_usuario);
+        imagenPerfil = headerView.findViewById(R.id.imagenPerfil);
+        textVMailDeUsuario.setText(userMail);
+        textVNombreDeUsuario.setText(userName);
+
+        //OBTENEMOS LA FOTO DE PERFIL
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot unaFoto : dataSnapshot.getChildren()){
+                    if(unaFoto.getKey().equals(userID)){
+                        UploadFotoPerfil uploadFotoPerfil = unaFoto.getValue(UploadFotoPerfil.class);
+                        Picasso.get().load(uploadFotoPerfil.getImageUrl()).fit().into(imagenPerfil);
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(MenuPrincipal.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         init();
+
+
 
 
     }

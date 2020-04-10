@@ -54,7 +54,7 @@ public class FragmentMenuPrincipal extends Fragment  {
 
 
         fondo_menu_principal.animate().translationY((float) (-h*0.65 )).setDuration(1000).setStartDelay(300);
-        textVMenu.animate().translationY(140).alpha(0).setDuration(1200).setStartDelay(280);
+        textVMenu.animate().translationY(140).alpha(0).setDuration(1200).setStartDelay(320);
         constraintLayout_menu.animate().alpha(1).setDuration(800).setStartDelay(300);
 
         btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
