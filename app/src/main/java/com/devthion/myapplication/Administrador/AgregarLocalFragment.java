@@ -49,17 +49,9 @@ public class AgregarLocalFragment extends Fragment {
         checkMujer = (CheckBox) view.findViewById(R.id.checkRopaMujer);
         checkNiños = (CheckBox) view.findViewById(R.id.checkRopaNiños);
         spinnerTipoLocal = (Spinner) view.findViewById(R.id.spTipoLocal);
-        /*ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(container.getContext(),
                 R.array.opcionesLocal,android.R.layout.simple_spinner_item);
-        */
-        List<String> tiposLocales = new ArrayList<>();
-        tiposLocales.add("Departamento");
-        tiposLocales.add("Local A Calle");
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,tiposLocales);
 
-        //ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item, tiposLocales);
-
-        /*
         spinnerTipoLocal.setAdapter(adapter);
         spinnerTipoLocal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,7 +61,6 @@ public class AgregarLocalFragment extends Fragment {
                 etNumero.setText(""+tipoLocal);
             }
         });
-*/
 
 
         btnGuardarLocal.setOnClickListener(new View.OnClickListener() {

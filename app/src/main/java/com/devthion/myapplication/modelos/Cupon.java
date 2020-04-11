@@ -24,8 +24,6 @@ public class Cupon {
     protected int puntosNecesarios;
 
 
-    static DatabaseReference databaseCupones;
-
     public Cupon(String idCupon, String idLocal, int descuento, int puntosNecesarios) {
         this.idCupon = idCupon;
         this.idLocal = idLocal;
@@ -34,6 +32,7 @@ public class Cupon {
     }
 
     public static void guardarCupon(String idCupon, String idLocal, int descuento, int puntosNecesarios){
+        DatabaseReference databaseCupones;
         databaseCupones = FirebaseDatabase.getInstance().getReference().child("Cupones");
         String maxId = databaseCupones.push().getKey();
 

@@ -21,17 +21,17 @@ public class Local {
     protected String Descripcion;
     protected int telefono;
 
-    static DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
 
     public Local(String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.categorias = categorias;
-        Descripcion = descripcion;
+        this.Descripcion = descripcion;
         this.telefono = telefono;
     }
 
     public void guardarLocal(){
+        DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
         String maxId = databaseLocales.push().getKey();
 
         Map<String,Object> local =new HashMap<>();
@@ -84,13 +84,5 @@ public class Local {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
-    }
-
-    public static DatabaseReference getDatabaseLocales() {
-        return databaseLocales;
-    }
-
-    public static void setDatabaseLocales(DatabaseReference databaseLocales) {
-        Local.databaseLocales = databaseLocales;
     }
 }

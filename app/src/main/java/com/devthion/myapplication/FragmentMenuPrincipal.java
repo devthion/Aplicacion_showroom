@@ -62,11 +62,11 @@ public class FragmentMenuPrincipal extends Fragment  {
         btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //fAuth.signOut();
+                fAuth.signOut();
 
                 Toast.makeText(getActivity(), "CERRAR SESION", Toast.LENGTH_SHORT).show();
-                //Intent in = new Intent(getActivity(), Perfil.class);
-                //startActivity(in);
+                Intent in = new Intent(getActivity(), Perfil.class);
+                startActivity(in);
             }
         });
 
