@@ -52,8 +52,12 @@ public class BuscarCupon extends AppCompatActivity {
                 if(dataSnapshot.exists()){
 
                     for(DataSnapshot unCupon: dataSnapshot.getChildren()){
-                        Cupon cupon = unCupon.getValue(Cupon.class);
-                        Toast.makeText(getApplication(),"CUPON CREADO CON EXITO"+ cupon.getIdCupon(),Toast.LENGTH_LONG).show();
+                        Cupon cupon = new Cupon(unCupon.child("Codigo").getValue().toString(),
+                                unCupon.child("Local").getValue().toString(),
+                                Integer.parseInt(String.valueOf(unCupon.child("Descuento").getValue())),
+                                Integer.parseInt(String.valueOf(unCupon.child("Puntos Necesarios").getValue())));
+
+                        Toast.makeText(getApplication(),"CUPON CREADO CON EXITO "+ unCupon.child("Codigo").getValue(),Toast.LENGTH_LONG).show();
                         listaCupones.add(cupon);
                     }
 
