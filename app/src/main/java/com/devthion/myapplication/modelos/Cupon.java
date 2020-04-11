@@ -23,6 +23,8 @@ public class Cupon {
     protected int descuento;
     protected int puntosNecesarios;
 
+    public Cupon() {
+    }
 
     public Cupon(String idCupon, String idLocal, int descuento, int puntosNecesarios) {
         this.idCupon = idCupon;

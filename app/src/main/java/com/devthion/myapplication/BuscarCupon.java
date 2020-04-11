@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
-import android.widget.SearchView;
+import android.widget.Toast;
 
-import com.devthion.myapplication.BusquedaShowroom.adapter.AdapterCupones;
+import androidx.appcompat.widget.SearchView;
+
 import com.devthion.myapplication.modelos.Cupon;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,9 +35,9 @@ public class BuscarCupon extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buscar_cupon);
 
-        databaseCupones = FirebaseDatabase.getInstance().getReference().child("Cupones");
+        databaseCupones = FirebaseDatabase.getInstance().getReference("Cupones");
         rvCupon = (RecyclerView) findViewById(R.id.rvCupon);
-        //searchCupon = findViewById(R.id.searchCupon);
+        searchCupon = findViewById(R.id.searchCupon);
         lmCupon = new LinearLayoutManager(this);
         rvCupon.setLayoutManager(lmCupon);
         listaCupones = new ArrayList<>();
@@ -48,11 +48,12 @@ public class BuscarCupon extends AppCompatActivity {
         //MOSTRAMOS TODOS LOS CUPONES DEL FIREBASE CUPONES
         databaseCupones.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+            public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
 
-                    for(DataSnapshot snapshot: dataSnapshot.getChildren()){
-                        Cupon cupon = snapshot.getValue(Cupon.class);
+                    for(DataSnapshot unCupon: dataSnapshot.getChildren()){
+                        Cupon cupon = unCupon.getValue(Cupon.class);
+                        Toast.makeText(getApplication(),"CUPON CREADO CON EXITO"+ cupon.getIdCupon(),Toast.LENGTH_LONG).show();
                         listaCupones.add(cupon);
                     }
 

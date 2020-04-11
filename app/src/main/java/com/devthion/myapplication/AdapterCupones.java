@@ -1,11 +1,10 @@
-package com.devthion.myapplication.BusquedaShowroom.adapter;
+package com.devthion.myapplication;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Cupon;
 
 import java.util.List;
@@ -33,11 +32,14 @@ public class AdapterCupones extends RecyclerView.Adapter<AdapterCupones.viewhold
 
     @Override
     public void onBindViewHolder(@NonNull viewholdercupones holder, int position) {
-        Cupon ms = cuponesList.get(position);
+        Cupon cup = cuponesList.get(position);
+        String descuento = String.valueOf(cup.getDescuento());
+        String puntos = String.valueOf(cup.getPuntosNecesarios());
 
-        holder.etLocal.setText(ms.getIdLocal());
-        holder.etDescuento.setText(ms.getDescuento());
-        holder.etCodigo.setText(ms.getIdCupon());
+        holder.etCodigo.setText(cup.getIdCupon());
+        holder.etLocal.setText(cup.getIdLocal());
+        holder.eteDescuento.setText(puntos);
+        holder.puntosNecesarios.setText(descuento);
     }
 
     @Override
@@ -47,15 +49,15 @@ public class AdapterCupones extends RecyclerView.Adapter<AdapterCupones.viewhold
 
     public class viewholdercupones extends RecyclerView.ViewHolder {
 
-        TextView etLocal,etCodigo, etDescuento;
+        TextView etLocal,etCodigo, eteDescuento,puntosNecesarios;
 
         public viewholdercupones(@NonNull View itemView) {
             super(itemView);
 
             etLocal = itemView.findViewById(R.id.etLocal);
             etCodigo = itemView.findViewById(R.id.etCodigo);
-            etDescuento = itemView.findViewById(R.id.etDescuento);
-
+            eteDescuento = itemView.findViewById(R.id.eteDescuento);
+            puntosNecesarios = itemView.findViewById(R.id.puntosNecesarios);
 
 
         }
