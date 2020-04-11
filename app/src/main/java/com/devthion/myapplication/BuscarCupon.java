@@ -71,6 +71,31 @@ public class BuscarCupon extends AppCompatActivity {
             }
         });
 
+        searchCupon.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String s) {
+                buscarCupon(s);
+                return true;
+            }
+        });
+
+
+    }
+
+    private void buscarCupon(String s) {
+        ArrayList<Cupon> miLista = new ArrayList<>();
+
+        for (Cupon obj: listaCupones){
+            if(obj.getIdLocal().toLowerCase().contains(s.toLowerCase())) {
+                miLista.add(obj);
+            }
+        }
+        AdapterCupones adapter = new AdapterCupones(miLista);
+        rvCupon.setAdapter(adapter);
     }
 }
