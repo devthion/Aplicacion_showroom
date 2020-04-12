@@ -29,12 +29,12 @@ public class LocalesSortedBy extends AppCompatActivity {
     }
     public List<Local> obtenerLocales(){
         List<Local> locals = new ArrayList<>();
-        locals.add(new Local("Nombre de local 1", null, null, "Descripcion del local 1", 1));
-        locals.add(new Local("Nombre de local 2", null, null, "Descripcion del local 2", 1));
-        locals.add(new Local("Nombre de local 3", null, null, "Descripcion del local 3", 1));
-        locals.add(new Local("Nombre de local 4", null, null, "Descripcion del local 4", 1));
-        locals.add(new Local("Nombre de local 5", null, null, "Descripcion del local 5", 1));
-        locals.add(new Local("Nombre de local 6", null, null, "Descripcion del local 6", 1));
+        locals.add(new Local("Nombre de local 1", null, null, "Descripcion del local 1", 1,null,null));
+        locals.add(new Local("Nombre de local 2", null, null, "Descripcion del local 2", 1,null,null));
+        locals.add(new Local("Nombre de local 3", null, null, "Descripcion del local 3", 1,null,null));
+        locals.add(new Local("Nombre de local 4", null, null, "Descripcion del local 4", 1,null,null));
+        locals.add(new Local("Nombre de local 5", null, null, "Descripcion del local 5", 1,null,null));
+        locals.add(new Local("Nombre de local 6", null, null, "Descripcion del local 6", 1,null,null));
         return locals;
     }
 }

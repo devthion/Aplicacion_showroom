@@ -1,49 +1,43 @@
 package com.devthion.myapplication.modelos;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import androidx.annotation.NonNull;
-
 public class Local {
 
-    protected String nombre;
-    protected EstructuraLocal direccion;
-    protected List<String> categorias;
-    protected String Descripcion;
-    protected int telefono;
+    private String idLocal;
+    private String nombre;
+    private EstructuraLocal direccion;
+    private List<String> categorias;
+    private String descripcion;
+    private int telefono;
+    private String linkInstagram;
+    private String linkPaginaWeb;
 
+    DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
 
-    public Local(String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono) {
+    public Local(String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.categorias = categorias;
-        this.Descripcion = descripcion;
+        this.descripcion = descripcion;
         this.telefono = telefono;
+        this.linkInstagram = linkInstagram;
+        this.linkPaginaWeb = linkPaginaWeb;
     }
 
-    public void guardarLocal(){
-        DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
-        String maxId = databaseLocales.push().getKey();
+    public void almacenarLocal(){
 
+        idLocal = databaseLocales.push().getKey();
         Map<String,Object> local =new HashMap<>();
-        local.put("Nombre",nombre);
-        local.put("Calle",direccion.getCalle());
-        local.put("Numero",direccion.getNumero());
-        local.put("Codigo Postal",direccion.getCodigoPostal());
-        local.put("Barrio",direccion.getBarrio());
-        local.put("Categorias",categorias);
-        local.put("Descripcion",Descripcion);
-        local.put("telefono",telefono);
-        databaseLocales.child(String.valueOf(maxId)).setValue(local);
+        local = direccion.almacenarLocal(idLocal,nombre,categorias,descripcion,telefono,linkInstagram,linkPaginaWeb);
+
+        databaseLocales.child(String.valueOf(idLocal)).setValue(local);
     }
 
     public String getNombre() {
@@ -71,11 +65,11 @@ public class Local {
     }
 
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
 
     public int getTelefono() {
@@ -84,5 +78,21 @@ public class Local {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public String getLinkInstagram() {
+        return linkInstagram;
+    }
+
+    public void setLinkInstagram(String linkInstagram) {
+        this.linkInstagram = linkInstagram;
+    }
+
+    public String getLinkPaginaWeb() {
+        return linkPaginaWeb;
+    }
+
+    public void setLinkPaginaWeb(String linkPaginaWeb) {
+        this.linkPaginaWeb = linkPaginaWeb;
     }
 }
