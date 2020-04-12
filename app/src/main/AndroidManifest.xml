@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".BuscarCupon"></activity>
+        <activity android:name=".BuscarCupon.BuscarCupon"></activity>
         <activity android:name=".ingreso.VerificarEmail" />
         <activity android:name=".Administrador.AdminPrincipal" />
         <activity android:name=".MainActivity">

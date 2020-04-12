@@ -6,8 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.devthion.myapplication.BuscarCupon;
-import com.devthion.myapplication.Perfil;
+import com.devthion.myapplication.BuscarCupon.BuscarCupon;
 import com.devthion.myapplication.R;
 
 import androidx.fragment.app.Fragment;

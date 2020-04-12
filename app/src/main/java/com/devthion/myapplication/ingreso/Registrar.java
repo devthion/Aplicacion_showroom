@@ -14,7 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devthion.myapplication.BuscarCupon;
 import com.devthion.myapplication.MenuPrincipal;
 import com.devthion.myapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,9 +39,6 @@ public class Registrar extends AppCompatActivity {
     FirebaseFirestore databaseUsuarios;
     String userID;
 
-    //PARA ELIMINAR
-    Button button;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,18 +51,6 @@ public class Registrar extends AppCompatActivity {
         etContraseñaRep =(EditText) findViewById(R.id.etContraseñaRep);
         etIniciarSesion = (TextView) findViewById(R.id.etIniciarSesion);
         databaseUsuarios = FirebaseFirestore.getInstance();
-
-        //PARA ELIMINAR
-        button = (Button) findViewById(R.id.button);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent in = new Intent(Registrar.this, BuscarCupon.class);
-                startActivity(in);
-            }
-        });
-
 
         fAuth = FirebaseAuth.getInstance();
         progressBarRegistro = (ProgressBar) findViewById(R.id.progressBarRegistro);

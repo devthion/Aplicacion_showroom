@@ -1,10 +1,12 @@
-package com.devthion.myapplication;
+package com.devthion.myapplication.BuscarCupon;
 
+import android.app.UiAutomation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Cupon;
 
 import java.util.List;
@@ -12,10 +14,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class AdapterCupones extends RecyclerView.Adapter<AdapterCupones.viewholdercupones> {
+public class AdapterCupones extends RecyclerView.Adapter<AdapterCupones.viewholdercupones> implements View.OnClickListener {
 
     List<Cupon> cuponesList ;
+    private View.OnClickListener listener;
 
+    //SE CREA EL ADAPTER CON UNA LISTA DE CUPONES
     public AdapterCupones(List<Cupon> cuponesList) {
         this.cuponesList = cuponesList;
     }
@@ -26,6 +30,9 @@ public class AdapterCupones extends RecyclerView.Adapter<AdapterCupones.viewhold
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_moldear_cupon,parent,false);
         viewholdercupones holder = new viewholdercupones(v);
+
+        v.setOnClickListener(this);
+
 
         return holder;
     }
@@ -45,6 +52,19 @@ public class AdapterCupones extends RecyclerView.Adapter<AdapterCupones.viewhold
     @Override
     public int getItemCount() {
         return cuponesList.size();
+    }
+
+    //PARA PODER REALIZAR UN EVENTO CUANDO SE HACE CLICK
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener = listener;
+    }
+
+    //PARA PODER REALIZAR UN EVENTO CUANDO SE HACE CLICK
+    @Override
+    public void onClick(View view) {
+        if(listener!=null){
+            listener.onClick(view);
+        }
     }
 
     public class viewholdercupones extends RecyclerView.ViewHolder {

@@ -55,36 +55,35 @@ public class InicioSesion extends AppCompatActivity {
                 String email = etEmail.getText().toString().trim();
                 String contraseña = etContraseña.getText().toString().trim();
 
-                if (email.equals("admin") && contraseña.equals("admin")){
+                if (email.equals("admin") && contraseña.equals("admin")) {
                     startActivity(new Intent(getApplicationContext(), AdminPrincipal.class));
-                }
+                } else {
 
-                if(TextUtils.isEmpty(email)){
-                    etEmail.setError("ESTE CAMPO ES NECESARIO");
-                    return;
-                }
-                if(TextUtils.isEmpty(contraseña)){
-                    etContraseña.setError("ESTE CAMPO ES NECESARIO");
-                    return;
-                }
-
-                progressBarInicio.setVisibility(View.VISIBLE);
-
-                //VERIFICAR USUARIO
-
-                fAuth.signInWithEmailAndPassword(email, contraseña).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(task.isSuccessful()){
-                            startActivity(new Intent(getApplicationContext(), VerificarEmail.class));
-                        }else {
-                            Toast.makeText(InicioSesion.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            progressBarInicio.setVisibility(View.GONE);
-                        }
-
+                    if (TextUtils.isEmpty(email)) {
+                        etEmail.setError("ESTE CAMPO ES NECESARIO");
+                        return;
                     }
-                });
+                    if (TextUtils.isEmpty(contraseña)) {
+                        etContraseña.setError("ESTE CAMPO ES NECESARIO");
+                        return;
+                    }
+                    progressBarInicio.setVisibility(View.VISIBLE);
+
+                    //VERIFICAR USUARIO
+                    fAuth.signInWithEmailAndPassword(email, contraseña).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+
+                            if (task.isSuccessful()) {
+                                startActivity(new Intent(getApplicationContext(), VerificarEmail.class));
+                            } else {
+                                Toast.makeText(InicioSesion.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                progressBarInicio.setVisibility(View.GONE);
+                            }
+
+                        }
+                    });
+                }
             }
         });
 
