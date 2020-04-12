@@ -9,10 +9,16 @@ public class Departamento extends EstructuraLocal {
     protected int piso;
     protected int departamento;
 
-    public Departamento(int piso, int departamento) {
+    public Departamento(String calle,int numeroCalle,int piso, int departamento,String barrio,int codigoPostal) {
+        this.tipoLocal = "Departamento";
+        this.calle = calle;
+        this.numeroCalle = numeroCalle;
         this.piso = piso;
         this.departamento = departamento;
+        this.barrio = barrio;
+        this.codigoPostal = codigoPostal;
     }
+
 
     public int getPiso() {
         return piso;
@@ -47,6 +53,8 @@ public class Departamento extends EstructuraLocal {
         local.put("Categorias",categorias);
         local.put("Descripcion",descripcion);
         local.put("telefono",telefono);
+        local.put("Instagram",linkInstagram);
+        local.put("Sitio Web",linkPaginaWeb);
 
         return local;
     }

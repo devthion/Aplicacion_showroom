@@ -52,10 +52,10 @@
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText2" />
+                app:layout_constraintTop_toBottomOf="@+id/etDescripcion" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/etDescripcion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -205,6 +205,24 @@
                     android:layout_height="wrap_content"
                     android:text="Ropa niños" />
 
+                <CheckBox
+                    android:id="@+id/checkUnisex"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ropa Unisex" />
+
+                <CheckBox
+                    android:id="@+id/checkAccesorios"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Accesorios" />
+
+                <CheckBox
+                    android:id="@+id/checkCalzado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Calzado" />
+
             </LinearLayout>
 
             <Spinner
@@ -232,6 +250,38 @@
                 android:textSize="25dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etBarrio" />
+
+            <EditText
+                android:id="@+id/etLinkInstagram"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Link Instagram"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etTelefono" />
+
+            <EditText
+                android:id="@+id/etLinkSitioWeb"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:ems="10"
+                android:hint="Link Sitio web"
+                android:inputType="textPersonName"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etLinkInstagram" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

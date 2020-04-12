@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
+import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
+import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +27,7 @@ import androidx.fragment.app.Fragment;
 public class AgregarLocalFragment extends Fragment {
 
     Button btnGuardarLocal;
-    TextView etNombre, etCalle, etNumero, etCodPostal, etBarrio;
+    TextView etNombre, etCalle, etNumero, etCodPostal, etBarrio, etPiso, etDepartamento,etTelefono,etDescripcion, etLinkInsta, etLinkWeb;
     CheckBox checkHombre, checkMujer,checkNiños,checkUnisex,checkAccesorios,checkCalzado;
     List<String> tipos = new ArrayList<>();
     Local nuevoLocal;
@@ -40,14 +42,26 @@ public class AgregarLocalFragment extends Fragment {
 
 
         btnGuardarLocal = (Button) view.findViewById(R.id.btnGuardarLocal);
+
         etNombre = (TextView) view.findViewById(R.id.etNombreLocal);
         etCalle = (TextView) view.findViewById(R.id.etCalle);
         etNumero = (TextView) view.findViewById(R.id.etNumero);
         etCodPostal = (TextView) view.findViewById(R.id.etCodPostal);
         etBarrio = (TextView) view.findViewById(R.id.etBarrio);
+        etPiso = (TextView) view.findViewById(R.id.etPiso);
+        etDepartamento = (TextView) view.findViewById(R.id.etDepto);
+        etTelefono = (TextView) view.findViewById(R.id.etTelefono);
+        etDescripcion = (TextView) view.findViewById(R.id.etDescripcion);
+        etLinkInsta = (TextView) view.findViewById(R.id.etLinkInstagram);
+        etLinkWeb = (TextView) view.findViewById(R.id.etLinkSitioWeb);
+
         checkHombre = (CheckBox) view.findViewById(R.id.checkRopaHombre);
         checkMujer = (CheckBox) view.findViewById(R.id.checkRopaMujer);
         checkNiños = (CheckBox) view.findViewById(R.id.checkRopaNiños);
+        checkUnisex = (CheckBox) view.findViewById(R.id.checkUnisex);
+        checkAccesorios = (CheckBox) view.findViewById(R.id.checkAccesorios);
+        checkCalzado = (CheckBox) view.findViewById(R.id.checkCalzado);
+
         spinnerTipoLocal = (Spinner) view.findViewById(R.id.spTipoLocal);
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(container.getContext(),
@@ -69,15 +83,10 @@ public class AgregarLocalFragment extends Fragment {
             public void onClick(View view) {
 
                 validarLocales(tipos);
-                //nuevoLocal = generarLocal();
-
-
-
-                //Local.guardarLocal(etNombre.getText().toString(),etCalle.getText().toString(),Integer.parseInt(etNumero.getText().toString()),Integer.parseInt(etCodPostal.getText().toString()),etBarrio.getText().toString(),tipos);
+                nuevoLocal = generarLocal(tipos);
+                nuevoLocal.almacenarLocal();
                 Toast.makeText(getContext(),"LOCAL CREADO CON EXITO",Toast.LENGTH_LONG).show();
                 limpiarFragment();
-
-
 
             }
         });
@@ -86,14 +95,27 @@ public class AgregarLocalFragment extends Fragment {
 
     }
 
-    /*private Local generarLocal() {
+    private Local generarLocal(List<String> categorias) {
         Local nuevoLocal;
+        EstructuraLocal nuevaEstructura;
 
-        if ()
+        String nombreLocal = etNombre.getText().toString();
+        String calleLocal = etCalle.getText().toString();
+        int numeroCalle = Integer.parseInt(etNumero.getText().toString());
+        int pisoDepto = Integer.parseInt(etPiso.getText().toString());
+        int departamento = Integer.parseInt(etDepartamento.getText().toString());
+        int codigoPostal = Integer.parseInt(etCodPostal.getText().toString());
+        String barrioLocal = etBarrio.getText().toString();
+        String descripcionLocal = etDescripcion.getText().toString();
+        int telefono = Integer.parseInt(etTelefono.getText().toString());
+        String instagram = etLinkInsta.getText().toString();
+        String sitioWeb = etLinkWeb.getText().toString();
 
+        nuevaEstructura = new Departamento(calleLocal,numeroCalle,pisoDepto,departamento,barrioLocal,codigoPostal);
+        nuevoLocal = new Local(nombreLocal,nuevaEstructura,categorias,descripcionLocal,telefono,instagram,sitioWeb);
 
         return nuevoLocal;
-    }*/
+    }
 
     public void limpiarFragment(){
         etNombre.setText("");
@@ -101,7 +123,7 @@ public class AgregarLocalFragment extends Fragment {
         etNumero.setText("");
         etBarrio.setText("");
         etCalle.setText("");
-        
+
     }
 
     public void validarLocales(List tipos){
@@ -114,7 +136,7 @@ public class AgregarLocalFragment extends Fragment {
         if(checkNiños.isChecked()){
             tipos.add("Ropa Niños");
         }
-/*        if(checkUnisex.isChecked()){
+        if(checkUnisex.isChecked()){
             tipos.add("Ropa Unisex");
         }
         if(checkAccesorios.isChecked()){
@@ -123,8 +145,6 @@ public class AgregarLocalFragment extends Fragment {
         if(checkCalzado.isChecked()){
             tipos.add("Calzado");
         }
-
- */
     }
 
 
