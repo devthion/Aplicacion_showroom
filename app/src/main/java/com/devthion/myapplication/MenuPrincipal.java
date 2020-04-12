@@ -47,7 +47,8 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
 
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        //drawerLayout.openDrawer(GravityCompat.START); //con esto abro el drawer, lo dejo para saber como se usa
+
+        //drawerLayout.openDrawer(GravityCompat.START);
 
         //INSTANCIAMOS LA BD DATA PARA LAS FOTOS DE PERFIL EN FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("fotos_perfil");
@@ -100,6 +101,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
 
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -117,7 +119,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
 
     }
 
-    private void init(){
+    public void init(){
         //LE DA EL DISEÑO, DEFINE EL NAVCONTROLLER Y SUS PROPIEDADES
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         //NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);

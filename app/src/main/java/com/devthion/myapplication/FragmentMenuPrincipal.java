@@ -9,6 +9,7 @@ import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Display;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
@@ -18,15 +19,31 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.devthion.myapplication.ingreso.InicioSesion;
 import com.devthion.myapplication.ingreso.VerificarEmail;
 import com.devthion.myapplication.modelos.SliderMenuPrincipal;
+import com.devthion.myapplication.modelos.UploadFotoPerfil;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +51,7 @@ import java.util.List;
 import static android.content.res.Resources.getSystem;
 
 
-public class FragmentMenuPrincipal extends Fragment  {
+public class FragmentMenuPrincipal extends Fragment implements NavigationView.OnNavigationItemSelectedListener  {
 
     ImageView flor3, flor2;
     LinearLayout textVMenu;
@@ -42,11 +59,21 @@ public class FragmentMenuPrincipal extends Fragment  {
     FirebaseAuth fAuth;
     Button btnCerrarSesion;
 
+    MenuPrincipal menuPrincipal = new MenuPrincipal();
     ViewPager viewPager;
     Adapter adapter;
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     List<SliderMenuPrincipal> sliderMenuPrincipals;
+    BottomNavigationView bottomNavigationView;
+
+
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
+    TextView textVNombreDeUsuario, textVMailDeUsuario;
+    ImageView imagenPerfil;
+    DatabaseReference databaseReference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +87,96 @@ public class FragmentMenuPrincipal extends Fragment  {
         textVMenu =view.findViewById(R.id.linearMenu);
         constraintLayout_menu = view.findViewById(R.id.constraintLayout_menu);
         constraintLayout=view.findViewById(R.id.constraintLayout);
+
+        //SETTING MENU LATERAL
+
+        drawerLayout = view.findViewById(R.id.drawer_layout);
+        navigationView = view.findViewById(R.id.nav_view);
+
+
+        //INSTANCIAMOS LA BD DATA PARA LAS FOTOS DE PERFIL EN FIREBASE
+        databaseReference = FirebaseDatabase.getInstance().getReference("fotos_perfil");
+
+
+        //INSTANCIAMOS LA BD DE AUTHENTICATION (ES LA BD DONDE ESTAN LOS DATOS DEL EMAIL)
+        fAuth = FirebaseAuth.getInstance();
+
+        //ACA OBTENEMOS EL ID DEL USUARIO DE LA BD AUTHENTICATION
+        String userName = fAuth.getCurrentUser().getProviderId();
+        final String userID = fAuth.getCurrentUser().getUid();
+        String userMail = fAuth.getCurrentUser().getEmail();
+
+
+
+        //DE ESTA MANERA ACCEDO DESDE EL NAV_VIEW AL HEADER_VIEW DEL CUAL OBTENGO LOS OBJETOS QUE DESEO MODIFICAR
+        navigationView = view.findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        textVNombreDeUsuario = headerView.findViewById(R.id.textV_nombre_usuario);
+        textVMailDeUsuario = headerView.findViewById(R.id.textV_mail_usuario);
+        imagenPerfil = headerView.findViewById(R.id.imagenPerfil);
+        textVMailDeUsuario.setText(userMail);
+        textVNombreDeUsuario.setText(userName);
+
+        //OBTENEMOS LA FOTO DE PERFIL
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot unaFoto : dataSnapshot.getChildren()){
+                    if(unaFoto.getKey().equals(userID)){
+                        UploadFotoPerfil uploadFotoPerfil = unaFoto.getValue(UploadFotoPerfil.class);
+                        Picasso.get().load(uploadFotoPerfil.getImageUrl()).fit().into(imagenPerfil);
+
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+        init();
+
+        //---------------
+
+
+        //SETTING BOTTOM NAV VIEW
+
+        bottomNavigationView = view.findViewById(R.id.bottom_nav_view);
+
+        bottomNavigationView.setSelectedItemId(R.id.Home);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                switch (item.getItemId()){
+
+                    case R.id.Menu:
+                        drawerLayout.openDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.Home:
+                        intent = new Intent(getActivity(), MenuPrincipal.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.Mapa:
+                        intent = new Intent(getActivity(), LocacionesEnMaps.class);
+                        startActivity(intent);
+                        return true;
+                    case R.id.Buscador:
+                        //TODO
+                        //intent = new Intent(getActivity(), mFragmentFavorite.class);
+                        //startActivity(intent);
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        //----------------------------------------------
 
         //obtengo el alto de la pantalla del dispositivo, para setear bien cuanto se tiene que mover la animacion
         int h = Resources.getSystem().getDisplayMetrics().heightPixels;
@@ -139,6 +256,84 @@ public class FragmentMenuPrincipal extends Fragment  {
 
 
         return view;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:{
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)){
+                    drawerLayout.closeDrawer(GravityCompat.START);
+                    return true;
+                }else {
+                    return false;
+                }
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    public void init(){
+        //LE DA EL DISEÑO, DEFINE EL NAVCONTROLLER Y SUS PROPIEDADES
+        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment);
+        //NavigationUI.setupActionBarWithNavController(this, navController, drawerLayout);
+        NavigationUI.setupWithNavController(navigationView, navController);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        // SETEA LAS ACTIVITYS A LAS QUE IR CUANDO SE CLICKEA SOBRE UNA OPCION DEL MENU
+        switch (menuItem.getItemId()){
+            case R.id.nav_maps:{
+
+                if(isValidDestination(R.id.nav_maps)) {
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.mapsScreen);
+                }
+
+                break;
+            }
+            case R.id.nav_perfil:{
+
+                if(isValidDestination(R.id.nav_perfil)) {
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.perfilScreen);
+                }
+
+                break;
+            }
+            case R.id.nav_cupones:{
+
+                if(isValidDestination(R.id.nav_cupones)) {
+                    Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.cuponesScreen);
+                }
+
+                break;
+            }
+            case R.id.nav_menu:{
+                NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.main, true).build();
+                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.menuScreen, null, navOptions);
+
+                break;
+            }
+        }
+
+        menuItem.setChecked(false);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
+    }
+
+    private boolean isValidDestination(int destination){
+        //CHEQUEA QUE LA ACTIVITY A LA QUE QUIERO IR EN EL MENU, NO SE EN LA QUE ESTOY
+        return destination!=Navigation.findNavController(getActivity(), R.id.nav_host_fragment).getCurrentDestination().getId();
+    }
+
+
+    public boolean onSupportNavigateUp() {
+        //CUANDO VUELVO PARA ATRAS, CIERRA EL FRAGMENT EN EL QUE ESTOY
+        return NavigationUI.navigateUp(Navigation.findNavController(getActivity(), R.id.nav_host_fragment), drawerLayout);
     }
 
 }
