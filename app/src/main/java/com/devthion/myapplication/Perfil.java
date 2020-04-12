@@ -78,6 +78,7 @@ public class Perfil extends AppCompatActivity {
         etPerfilNombre =(TextView) findViewById(R.id.etPerfilNombre);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBarImagenPerfil = findViewById(R.id.progressBarImagenPerfil);
+        progressBarImagenPerfil.setVisibility(View.GONE);
         imagenPerfil = findViewById(R.id.imagenPerfil);
         btnCambiarFotoPerfil = findViewById(R.id.btnCambiarFotoPerfil);
         btnGuardarFoto = findViewById(R.id.btnGuardarFoto);
@@ -98,7 +99,7 @@ public class Perfil extends AppCompatActivity {
 
         //ACA OBTENEMOS EL ID DEL USUARIO DE LA BD AUTHENTICATION
         userID = fAuth.getCurrentUser().getUid();
-        txtId.setText("ID "+userID);
+        txtId.setText(userID);
 
 
         //PIDO PERMISOS PARA QUE ME DEJE LEER Y SACAR FOTOS DEL DISPOSITIVO
@@ -124,7 +125,7 @@ public class Perfil extends AppCompatActivity {
                 if (documentSnapshot.exists()){
                     //USAMOS EL GET DATA PARA AGARRAR LOS DATOS
                     userNombre = (String) documentSnapshot.getData().get("Nombre");
-                    etPerfilNombre.setText("NOMBRE DEL USUARIO " + userNombre);
+                    etPerfilNombre.setText(userNombre.toUpperCase());
 
                     //----------------------------------
                     //a la visibilidad del progressbar la pongo en GONE para que ya no se vea
@@ -171,6 +172,7 @@ public class Perfil extends AppCompatActivity {
         btnGuardarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBarImagenPerfil.setVisibility(View.VISIBLE);
                 //con storageTask voy a verificar si no se esta ejecutando una subida a la base de datos por parte del usuario, para que no suba la misma imagen varias veces
                 if(storageTask!=null &&storageTask.isInProgress()){
                     Toast.makeText(Perfil.this, "Imagen de perfil Subiendose", Toast.LENGTH_LONG).show();
@@ -209,6 +211,7 @@ public class Perfil extends AppCompatActivity {
                             fileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
+
                                     //con el handler le doy un delay de 1 seg a la app, para que cuando la imagen se cargue y la barra se cargue al 100%, no se ponga en 0% tan rapido
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
@@ -216,13 +219,14 @@ public class Perfil extends AppCompatActivity {
                                         public void run() {
                                             progressBarImagenPerfil.setProgress(0);
                                         }
-                                    },1000);
+                                    },2000);
 
                                     Toast.makeText(Perfil.this, "Imagen de perfil actualizada", Toast.LENGTH_LONG).show();
                                     //creamos un objeto "foto" para subirlo a la base de datos para asi poder usarlo
                                     UploadFotoPerfil uploadFotoPerfil = new UploadFotoPerfil("foto_"+userID, uri.toString() );
                                     //el objeto foto va a ser child del userId, y es uno solo, por lo que si un usuario desea subir otra foto, sobreescribira esta.
                                     databaseReference.child(userID).setValue(uploadFotoPerfil);
+                                    progressBarImagenPerfil.setVisibility(View.GONE);
                                 }
                             });
 

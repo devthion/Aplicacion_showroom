@@ -92,7 +92,7 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
 
 
         //AL ABRIR EL ACTIVITY "ANIMATECAMERA" HACE QUE EL MAPA HAGA ZOOM A UNA LATLNG QUE ESTABLEZCO
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLngCentroCapitalFederal, 11));
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(centroPromedio(), 12));
 
 
        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -122,5 +122,19 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
         Canvas canvas = new Canvas(bitmap);
         vectorDrawable.draw(canvas);
         return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    public LatLng centroPromedio(){
+        LatLng latlngpromedio = null;
+
+        double latTemp=0;
+        double longTemp=0;
+        for (int i =0; i<arrayListMarkers.size(); i++){
+            latTemp += arrayListMarkers.get(i).latitude;
+            longTemp += arrayListMarkers.get(i).longitude;
+        }
+
+        latlngpromedio=new LatLng(latTemp/arrayListMarkers.size(),longTemp/arrayListMarkers.size());
+        return latlngpromedio;
     }
 }
