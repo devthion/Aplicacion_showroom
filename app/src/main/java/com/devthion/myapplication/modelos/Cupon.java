@@ -33,17 +33,23 @@ public class Cupon {
         this.puntosNecesarios = puntosNecesarios;
     }
 
+    public void eliminarCupon(){
+        DatabaseReference databaseCupones;
+        databaseCupones = FirebaseDatabase.getInstance().getReference().child("Cupones").child(idCupon);
+        databaseCupones.removeValue();
+
+    }
+
     public static void guardarCupon(String idCupon, String idLocal, int descuento, int puntosNecesarios){
         DatabaseReference databaseCupones;
         databaseCupones = FirebaseDatabase.getInstance().getReference().child("Cupones");
-        String maxId = databaseCupones.push().getKey();
+        idCupon = databaseCupones.push().getKey();
 
         Map<String,Object> cupon =new HashMap<>();
-        cupon.put("Codigo",idCupon);
         cupon.put("Local",idLocal);
         cupon.put("Descuento",descuento);
         cupon.put("Puntos Necesarios",puntosNecesarios);
-        databaseCupones.child(String.valueOf(maxId)).setValue(cupon);
+        databaseCupones.child(String.valueOf(idCupon)).setValue(cupon);
     }
 
     public String getIdCupon() {

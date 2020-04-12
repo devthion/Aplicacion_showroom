@@ -1,15 +1,22 @@
-package com.devthion.myapplication;
+package com.devthion.myapplication.BuscarCupon;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.SearchView;
 
+import com.devthion.myapplication.Administrador.AdminPrincipal;
+import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Cupon;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,14 +57,12 @@ public class BuscarCupon extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
-
+                    //RECORRE TODOS LOS OBJETOS DE CUPONES PARA OBTENER SUS ATRIBUTOS
                     for(DataSnapshot unCupon: dataSnapshot.getChildren()){
-                        Cupon cupon = new Cupon(unCupon.child("Codigo").getValue().toString(),
+                        Cupon cupon = new Cupon(unCupon.getKey(),
                                 unCupon.child("Local").getValue().toString(),
                                 Integer.parseInt(String.valueOf(unCupon.child("Descuento").getValue())),
                                 Integer.parseInt(String.valueOf(unCupon.child("Puntos Necesarios").getValue())));
-
-                        Toast.makeText(getApplication(),"CUPON CREADO CON EXITO "+ unCupon.child("Codigo").getValue(),Toast.LENGTH_LONG).show();
                         listaCupones.add(cupon);
                     }
 
@@ -85,8 +90,44 @@ public class BuscarCupon extends AppCompatActivity {
         });
 
 
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(getApplicationContext(),
+                        "Selecciono el cupon del local "+listaCupones.get(rvCupon.getChildAdapterPosition(view)).getIdCupon(),Toast.LENGTH_SHORT).show();
+
+                alertaEliminar(view);
+            }
+        });
+
     }
 
+    public void alertaEliminar(final View view){
+        new AlertDialog.Builder(BuscarCupon.this)
+                .setTitle("ELIMINAR CUPON")
+                .setMessage("¿ESTA SEGURO QUE QUIERE ELIMINAR ESTE CUPON?")
+                .setPositiveButton("YES",
+                        new DialogInterface.OnClickListener() {
+                            @TargetApi(11)
+                            public void onClick(DialogInterface dialog, int id) {
+                                Cupon cupon = listaCupones.get(rvCupon.getChildAdapterPosition(view));
+                                cupon.eliminarCupon();
+                                Intent in = new Intent(view.getContext(), AdminPrincipal.class);
+                                startActivity(in);
+                                dialog.cancel();
+                            }
+                        })
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @TargetApi(11)
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        dialog.cancel();
+                    }
+                }).show();
+    }
+
+    //ACA EL SEARCHVIEW REALIZA LA BUSQUEDA EN REALTIME POR CADA CARACTER QUE SE ESCRIBE
     private void buscarCupon(String s) {
         ArrayList<Cupon> miLista = new ArrayList<>();
 
