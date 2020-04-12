@@ -95,8 +95,8 @@ public class AdapterSliderMenuPrincipal extends PagerAdapter implements Adapter 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(context, DetalleLocal.class);
-                v.getContext().startActivity(intent);*/
+                Intent intent = new Intent(context, LocalesSortedBy.class);
+                v.getContext().startActivity(intent);
 
                 Toast.makeText(context,""+position, Toast.LENGTH_LONG).show();
             }
