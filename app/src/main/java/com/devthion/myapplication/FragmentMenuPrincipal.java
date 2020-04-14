@@ -54,12 +54,12 @@ import static android.content.res.Resources.getSystem;
 public class FragmentMenuPrincipal extends Fragment implements NavigationView.OnNavigationItemSelectedListener  {
 
     ImageView flor3, flor2;
-    LinearLayout textVMenu;
+    LinearLayout textVMenu, layout_header_menuprincipal;
     ConstraintLayout constraintLayout_menu, constraintLayout;
     FirebaseAuth fAuth;
-    Button btnCerrarSesion;
 
-    MenuPrincipal menuPrincipal = new MenuPrincipal();
+
+
     ViewPager viewPager;
     Adapter adapter;
     Integer[] colors = null;
@@ -80,13 +80,15 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_fragment_menu_principal, container, false);
-        btnCerrarSesion = (Button) view.findViewById(R.id.btnCerrarSesionn);
+        /*btnCerrarSesion = (Button) view.findViewById(R.id.btnCerrarSesionn);*/
         fAuth = FirebaseAuth.getInstance();
         flor3 = view.findViewById(R.id.flor3);
         flor2 = view.findViewById(R.id.flor2);
         textVMenu =view.findViewById(R.id.linearMenu);
         constraintLayout_menu = view.findViewById(R.id.constraintLayout_menu);
         constraintLayout=view.findViewById(R.id.constraintLayout);
+        layout_header_menuprincipal = view.findViewById(R.id.layout_header_menuprincipal);
+
 
         //SETTING MENU LATERAL
 
@@ -178,19 +180,18 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
 
         //----------------------------------------------
 
-        //obtengo el alto de la pantalla del dispositivo, para setear bien cuanto se tiene que mover la animacion
-        int h = Resources.getSystem().getDisplayMetrics().heightPixels;
-
-        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
 
 
 
-
+        //ANIMACIONES
+        layout_header_menuprincipal.animate().alpha(1).setDuration(600).setStartDelay(300);
         flor3.animate().translationX(-100).alpha(0).setDuration(600).setStartDelay(300);
         flor2.animate().translationX(100).alpha(0).setDuration(600).setStartDelay(300);
         textVMenu.animate().scaleX(2).scaleY(2).alpha(0).setDuration(500).setStartDelay(300);
         constraintLayout_menu.animate().alpha(1).setDuration(800).setStartDelay(500);
+        //---------------------------------------------------
 
+        /* TODO
         btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,7 +201,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
                 Intent in = new Intent(getActivity(), Perfil.class);
                 startActivity(in);
             }
-        });
+        });*/
 
 
 
@@ -335,5 +336,6 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         //CUANDO VUELVO PARA ATRAS, CIERRA EL FRAGMENT EN EL QUE ESTOY
         return NavigationUI.navigateUp(Navigation.findNavController(getActivity(), R.id.nav_host_fragment), drawerLayout);
     }
+
 
 }

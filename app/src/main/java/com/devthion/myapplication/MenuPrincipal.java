@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
@@ -32,6 +33,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.zip.Inflater;
 
+
 public class MenuPrincipal extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -48,7 +50,6 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
         drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
 
-        //drawerLayout.openDrawer(GravityCompat.START);
 
         //INSTANCIAMOS LA BD DATA PARA LAS FOTOS DE PERFIL EN FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("fotos_perfil");
@@ -90,7 +91,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(MenuPrincipal.this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, databaseError.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
 
@@ -127,7 +128,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
         navigationView.setNavigationItemSelectedListener(this);
     }
 
-    @Override
+
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         // SETEA LAS ACTIVITYS A LAS QUE IR CUANDO SE CLICKEA SOBRE UNA OPCION DEL MENU
         switch (menuItem.getItemId()){
@@ -173,7 +174,7 @@ public class MenuPrincipal extends AppCompatActivity implements NavigationView.O
         return destination!=Navigation.findNavController(this, R.id.nav_host_fragment).getCurrentDestination().getId();
     }
 
-    @Override
+
     public boolean onSupportNavigateUp() {
         //CUANDO VUELVO PARA ATRAS, CIERRA EL FRAGMENT EN EL QUE ESTOY
         return NavigationUI.navigateUp(Navigation.findNavController(this, R.id.nav_host_fragment), drawerLayout);

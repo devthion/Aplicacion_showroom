@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".LocacionesEnMaps"
-            android:parentActivityName=".MenuPrincipal" />
+             />
         <activity android:name=".ingreso.InicioSesion" />
         <activity android:name=".ingreso.Registrar" />
         <activity android:name=".DetalleLocal" />
