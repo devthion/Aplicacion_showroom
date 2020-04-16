@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.devthion.myapplication.modelos.Local;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdaptadorRecyclerViewLocalesSortedBy extends RecyclerView.Adapter<AdaptadorRecyclerViewLocalesSortedBy.ViewHolder> {

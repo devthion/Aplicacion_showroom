@@ -2,6 +2,8 @@ package com.devthion.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.SliderMenuPrincipal;
+import com.google.gson.Gson;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterSliderMenuPrincipal extends PagerAdapter implements Adapter {
@@ -24,6 +30,8 @@ public class AdapterSliderMenuPrincipal extends PagerAdapter implements Adapter 
     private List<SliderMenuPrincipal> sliderMenuPrincipal;
     private LayoutInflater layoutInflater;
     private Context context;
+    public BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
+    List<Local> locales = new ArrayList<>();
 
     public AdapterSliderMenuPrincipal(List<SliderMenuPrincipal> sliderMenuPrincipal, Context context) {
         this.sliderMenuPrincipal = sliderMenuPrincipal;
@@ -94,11 +102,39 @@ public class AdapterSliderMenuPrincipal extends PagerAdapter implements Adapter 
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, LocalesSortedBy.class);
-                v.getContext().startActivity(intent);
+            public void onClick(final View v) {
 
-                Toast.makeText(context,""+position, Toast.LENGTH_LONG).show();
+
+
+                if(position==0){
+                    busquedaDeLocalesFirebase.busquedaPorCategoria("Ropa Hombre", new InterfaceRetrieveDataFirebase() {
+                        @Override
+                        public void onCallBack(ArrayList<Local> locales) {
+                             if(locales.isEmpty()){
+                        Toast.makeText(context,"No se encontraron locales que cumplan con tu criterio", Toast.LENGTH_LONG).show();
+                    }else {
+                                 Intent intent=new Intent(context, LocalesSortedBy.class);
+                                 intent.putExtra("variable", "Ropa Hombre");
+                                 intent.putExtra("condicion", "categoria");
+                                 v.getContext().startActivity(intent);
+                    }
+                        }
+                    });
+
+
+                }
+                if (position==1){
+
+                }
+                if (position==2){
+
+                }
+                if (position == 3){
+
+                }
+                //v.getContext().startActivity(intent);
+
+                //Toast.makeText(context,""+position, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -110,6 +146,9 @@ public class AdapterSliderMenuPrincipal extends PagerAdapter implements Adapter 
     public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View)object);
     }
+
+
+
 
 
 

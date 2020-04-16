@@ -1,6 +1,7 @@
 package com.devthion.myapplication.modelos;
 
 import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -21,6 +22,7 @@ public class Local {
 
     DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
 
+
     public Local(String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {
         this.nombre = nombre;
         this.direccion = direccion;
@@ -30,6 +32,10 @@ public class Local {
         this.linkInstagram = linkInstagram;
         this.linkPaginaWeb = linkPaginaWeb;
     }
+
+
+
+
 
     public void almacenarLocal(){
 

@@ -74,6 +74,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
     TextView textVNombreDeUsuario, textVMailDeUsuario;
     ImageView imagenPerfil;
     DatabaseReference databaseReference;
+    public BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -209,10 +210,12 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         //SLIDER------------------------
 
         sliderMenuPrincipals = new ArrayList<>();
-        sliderMenuPrincipals.add(new SliderMenuPrincipal(R.drawable.brochure, "Titulo 1", "Descripcion 1"));
-        sliderMenuPrincipals.add(new SliderMenuPrincipal(R.drawable.sticker, "Titulo 2", "Descripcion 2"));
-        sliderMenuPrincipals.add(new SliderMenuPrincipal(R.drawable.poster, "Titulo 3", "Descripcion 3"));
+        sliderMenuPrincipals.add(new SliderMenuPrincipal(R.drawable.brochure, "Ropa De Hombre", "Descubri todos los locales para ropa de hombre"));
+        sliderMenuPrincipals.add(new SliderMenuPrincipal(R.drawable.sticker, "Ropa De Niños", "Encontra todo lo necesario para tu niño"));
+        sliderMenuPrincipals.add(new SliderMenuPrincipal(R.drawable.poster, "Ropa UNISEX", "Ropa para todos"));
         sliderMenuPrincipals.add(new SliderMenuPrincipal(R.drawable.namecard, "Titulo 4", "Descripcion 4"));
+
+
 
         adapter = new AdapterSliderMenuPrincipal(sliderMenuPrincipals, getActivity());
 
@@ -228,6 +231,8 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         };
 
         colors = colors_temp;
+
+
 
         viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

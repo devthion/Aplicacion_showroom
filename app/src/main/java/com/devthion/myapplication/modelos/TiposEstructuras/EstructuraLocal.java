@@ -5,11 +5,14 @@ import java.util.Map;
 
 public abstract class EstructuraLocal {
 
+
     protected String tipoLocal;
     protected String calle;
     protected int numeroCalle;
     protected String barrio;
     protected int codigoPostal;
+
+
 
     public String getTipoLocal() {
         return tipoLocal;
