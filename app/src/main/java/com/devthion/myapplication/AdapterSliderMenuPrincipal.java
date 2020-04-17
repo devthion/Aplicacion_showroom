@@ -124,10 +124,35 @@ public class AdapterSliderMenuPrincipal extends PagerAdapter implements Adapter 
 
                 }
                 if (position==1){
+                    busquedaDeLocalesFirebase.busquedaPorCategoria("Ropa Niños", new InterfaceRetrieveDataFirebase() {
+                        @Override
+                        public void onCallBack(ArrayList<Local> locales) {
+                            if(locales.isEmpty()){
+                                Toast.makeText(context,"No se encontraron locales que cumplan con tu criterio", Toast.LENGTH_LONG).show();
+                            }else {
+                                Intent intent=new Intent(context, LocalesSortedBy.class);
+                                intent.putExtra("variable", "Ropa Niños");
+                                intent.putExtra("condicion", "categoria");
+                                v.getContext().startActivity(intent);
+                            }
+                        }
+                    });
 
                 }
                 if (position==2){
-
+                    busquedaDeLocalesFirebase.busquedaPorCategoria("Ropa Unisex", new InterfaceRetrieveDataFirebase() {
+                        @Override
+                        public void onCallBack(ArrayList<Local> locales) {
+                            if(locales.isEmpty()){
+                                Toast.makeText(context,"No se encontraron locales que cumplan con tu criterio", Toast.LENGTH_LONG).show();
+                            }else {
+                                Intent intent=new Intent(context, LocalesSortedBy.class);
+                                intent.putExtra("variable", "Ropa Unisex");
+                                intent.putExtra("condicion", "categoria");
+                                v.getContext().startActivity(intent);
+                            }
+                        }
+                    });
                 }
                 if (position == 3){
 

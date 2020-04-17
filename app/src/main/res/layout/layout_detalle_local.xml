@@ -16,27 +16,48 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:toolbarId="@+id/toolbar"
+            app:contentScrim="#fc9885"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
-            app:title="Showroom"
-            app:contentScrim="#a21544">
+            app:toolbarId="@+id/toolbar">
 
 
             <ImageView
                 android:id="@+id/app_bar_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_collapseMode="parallax"
+                android:scaleType="centerCrop"
 
                 android:src="@drawable/showroom1"
-                android:scaleType="centerCrop" />
+                app:layout_collapseMode="parallax" />
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_width="match_parent"></androidx.appcompat.widget.Toolbar>
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"></androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/background_nombre_local"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:paddingLeft="15dp">
+
+                <TextView
+                    android:id="@+id/textV_nombreLocal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NOMBRE LOCAL"
+                    android:textColor="#121B22"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
         </com.google.android.material.appbar.CollapsingToolbarLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -44,16 +65,21 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="8dp"
-            android:text="@string/textoPrueba"
-            android:textSize="16dp">
+            android:orientation="vertical">
 
-        </TextView>
+            <TextView
+                android:id="@+id/textV_descripcionLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="8dp"
+                android:textSize="16dp">
 
-
+            </TextView>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
 
