@@ -23,7 +23,8 @@ public class Local {
     DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
 
 
-    public Local(String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {
+    public Local(String idLocal,String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {
+        this.idLocal = idLocal;
         this.nombre = nombre;
         this.direccion = direccion;
         this.categorias = categorias;
@@ -39,11 +40,18 @@ public class Local {
 
     public void almacenarLocal(){
 
-        idLocal = databaseLocales.push().getKey();
         Map<String,Object> local =new HashMap<>();
         local = direccion.almacenarLocal(idLocal,nombre,categorias,descripcion,telefono,linkInstagram,linkPaginaWeb);
 
         databaseLocales.child(String.valueOf(idLocal)).setValue(local);
+    }
+
+    public String getIdLocal() {
+        return idLocal;
+    }
+
+    public void setIdLocal(String idLocal) {
+        this.idLocal = idLocal;
     }
 
     public String getNombre() {

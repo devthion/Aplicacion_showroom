@@ -57,11 +57,8 @@ public class LocalesSortedBy extends AppCompatActivity {
         adaptadorRecyclerViewLocalesSortedBy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),
-                        ""+locales.get(recyclerView.getChildAdapterPosition(v)).getNombre()
-                        , Toast.LENGTH_SHORT).show();
 
-                String idLocal=locales.get(recyclerView.getChildAdapterPosition(v)).toString();
+                String idLocal=locales.get(recyclerView.getChildAdapterPosition(v)).getIdLocal();
                 String nombreLocal= locales.get(recyclerView.getChildAdapterPosition(v)).getNombre();
                 String descripcionLocal= locales.get(recyclerView.getChildAdapterPosition(v)).getDescripcion();
                 String sitioWebLocal= locales.get(recyclerView.getChildAdapterPosition(v)).getLinkPaginaWeb();

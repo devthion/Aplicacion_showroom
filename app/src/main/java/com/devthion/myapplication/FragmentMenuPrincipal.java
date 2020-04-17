@@ -57,7 +57,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
     LinearLayout textVMenu, layout_header_menuprincipal;
     ConstraintLayout constraintLayout_menu, constraintLayout;
     FirebaseAuth fAuth;
-
+    Button btnCerrarSesion;
 
 
     ViewPager viewPager;
@@ -119,6 +119,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         imagenPerfil = headerView.findViewById(R.id.imagenPerfil);
         textVMailDeUsuario.setText(userMail);
         textVNombreDeUsuario.setText(userName);
+        btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
 
         //OBTENEMOS LA FOTO DE PERFIL
 
@@ -192,7 +193,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         constraintLayout_menu.animate().alpha(1).setDuration(800).setStartDelay(500);
         //---------------------------------------------------
 
-        /* TODO
+
         btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +203,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
                 Intent in = new Intent(getActivity(), Perfil.class);
                 startActivity(in);
             }
-        });*/
+        });
 
 
 

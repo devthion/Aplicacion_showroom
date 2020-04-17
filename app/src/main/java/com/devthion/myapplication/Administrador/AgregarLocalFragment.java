@@ -16,6 +16,8 @@ import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
 import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,8 @@ public class AgregarLocalFragment extends Fragment {
     List<String> tipos = new ArrayList<>();
     Local nuevoLocal;
     Spinner spinnerTipoLocal;
+    String idLocal;
+    DatabaseReference databaseLocales;
 
 
     @Override
@@ -40,7 +44,7 @@ public class AgregarLocalFragment extends Fragment {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_agregar_local, container, false);
 
-
+        databaseLocales= FirebaseDatabase.getInstance().getReference("Locales");
         btnGuardarLocal = (Button) view.findViewById(R.id.btnGuardarLocal);
 
         etNombre = (TextView) view.findViewById(R.id.etNombreLocal);
@@ -111,8 +115,10 @@ public class AgregarLocalFragment extends Fragment {
         String instagram = etLinkInsta.getText().toString();
         String sitioWeb = etLinkWeb.getText().toString();
 
+        idLocal = databaseLocales.push().getKey();
+
         nuevaEstructura = new Departamento(calleLocal,numeroCalle,pisoDepto,departamento,barrioLocal,codigoPostal);
-        nuevoLocal = new Local(nombreLocal,nuevaEstructura,categorias,descripcionLocal,telefono,instagram,sitioWeb);
+        nuevoLocal = new Local(idLocal,nombreLocal,nuevaEstructura,categorias,descripcionLocal,telefono,instagram,sitioWeb);
 
         return nuevoLocal;
     }

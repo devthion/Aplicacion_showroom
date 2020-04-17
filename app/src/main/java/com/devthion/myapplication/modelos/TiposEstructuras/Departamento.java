@@ -42,6 +42,7 @@ public class Departamento extends EstructuraLocal {
 
         Map<String,Object> local =new HashMap<>();
 
+        local.put("idLocal", idLocal);
         local.put("Nombre",nombre);
         local.put("Tipo Local",tipoLocal);
         local.put("Calle",calle);

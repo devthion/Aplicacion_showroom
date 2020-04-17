@@ -31,6 +31,7 @@ public class LocalACalle extends EstructuraLocal {
     public Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {
         Map<String,Object> local =new HashMap<>();
 
+        local.put("idLocal", idLocal);
         local.put("Nombre",nombre);
         local.put("Tipo Local",tipoLocal);
         local.put("Calle",calle);
