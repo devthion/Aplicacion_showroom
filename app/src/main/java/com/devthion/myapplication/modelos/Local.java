@@ -32,11 +32,7 @@ public class Local {
         this.linkInstagram = linkInstagram;
         this.linkPaginaWeb = linkPaginaWeb;
     }
-
-
-
-
-
+    
     public void almacenarLocal(){
 
         idLocal = databaseLocales.push().getKey();
