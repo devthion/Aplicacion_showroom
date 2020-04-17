@@ -33,11 +33,7 @@ public class Local {
         this.linkInstagram = linkInstagram;
         this.linkPaginaWeb = linkPaginaWeb;
     }
-
-
-
-
-
+    
     public void almacenarLocal(){
 
         Map<String,Object> local =new HashMap<>();
