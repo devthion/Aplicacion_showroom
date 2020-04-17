@@ -6,10 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.devthion.myapplication.BuscarCupon.BuscarCupon;
 import com.devthion.myapplication.BuscarLocal.AutoCompleteLocalAdapter;
 import com.devthion.myapplication.BuscarLocal.LocalItem;
+import com.devthion.myapplication.BusquedaDeLocalesFirebase;
+import com.devthion.myapplication.InterfaceRetrieveDataFirebase;
 import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
 
@@ -20,36 +24,31 @@ import androidx.fragment.app.Fragment;
 
 
 public class QuitarLocalFragment extends Fragment {
-    private List<LocalItem> localList;
-
+    private ArrayList<Local> localList;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_quitar_local, container, false);
+        final View view = inflater.inflate(R.layout.fragment_quitar_local, container, false);
         //Intent in = new Intent(getActivity(), BuscarCupon.class);
         //startActivity(in);
 
-        fillLocalList();
+        BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
+        busquedaDeLocalesFirebase.busquedaLocales(new InterfaceRetrieveDataFirebase() {
+            @Override
+            public void onCallBack(ArrayList<Local> locales) {
+                if (locales==null || locales.isEmpty()){
+                    Toast.makeText(getActivity(),"LISTA VACIA",Toast.LENGTH_LONG).show();
 
-        AutoCompleteTextView editText = view.findViewById(R.id.autoCompBusquedaGral);
-        AutoCompleteLocalAdapter adapter = new AutoCompleteLocalAdapter(container.getContext(),localList);
+                }else {
+                    AutoCompleteTextView editText = view.findViewById(R.id.autoCompBusquedaGral);
+                    AutoCompleteLocalAdapter adapter = new AutoCompleteLocalAdapter(getActivity(),locales);
 
-        editText.setAdapter(adapter);
-
+                    editText.setAdapter(adapter);
+                }
+            }
+        });
         return view;
     }
-
-    private void fillLocalList(){
-        localList = new ArrayList<>();
-        localList.add(new LocalItem("Showroom1"));
-        localList.add(new LocalItem("Local2"));
-        localList.add(new LocalItem("lala"));
-        localList.add(new LocalItem("Prueba"));
-        localList.add(new LocalItem("Otro mas"));
-        localList.add(new LocalItem("YAYO"));
-    }
-
-
 }

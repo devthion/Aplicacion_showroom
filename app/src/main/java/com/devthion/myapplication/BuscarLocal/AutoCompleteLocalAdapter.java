@@ -9,6 +9,7 @@ import android.widget.Filter;
 import android.widget.TextView;
 
 import com.devthion.myapplication.R;
+import com.devthion.myapplication.modelos.Local;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class AutoCompleteLocalAdapter extends ArrayAdapter<LocalItem> {
-    private List<LocalItem> localListFull;
+public class AutoCompleteLocalAdapter extends ArrayAdapter<Local> {
+    private List<Local> localListFull;
 
-    public AutoCompleteLocalAdapter(@NonNull Context context, @NonNull List<LocalItem> localList) {
+    public AutoCompleteLocalAdapter(@NonNull Context context, @NonNull ArrayList<Local> localList) {
         super(context,0, localList);
         localListFull = new ArrayList<>(localList);
     }
@@ -39,10 +40,10 @@ public class AutoCompleteLocalAdapter extends ArrayAdapter<LocalItem> {
 
         TextView etNombreLocal = convertView.findViewById(R.id.etNombreBusquedaLocal);
 
-        LocalItem localItem = getItem(position);
+        Local localItem = getItem(position);
 
         if(localItem!=null){
-            etNombreLocal.setText(localItem.getNombreLocal());
+            etNombreLocal.setText(localItem.getNombre());
         }
 
         return convertView;
@@ -52,15 +53,15 @@ public class AutoCompleteLocalAdapter extends ArrayAdapter<LocalItem> {
         @Override
         protected FilterResults performFiltering(CharSequence contrains) {
             FilterResults result = new FilterResults();
-            List<LocalItem> suggestion = new ArrayList<>();
+            ArrayList<Local> suggestion = new ArrayList<>();
 
             if(contrains == null || contrains.length() == 0){
                 suggestion.addAll(localListFull);
             }else {
                 String filterPattern = contrains.toString().toLowerCase().trim();
 
-                for(LocalItem item : localListFull){
-                    if(item.getNombreLocal().toLowerCase().contains(filterPattern)){
+                for(Local item : localListFull){
+                    if(item.getNombre().toLowerCase().contains(filterPattern)){
                         suggestion.add(item);
                     }
                 }
@@ -77,13 +78,13 @@ public class AutoCompleteLocalAdapter extends ArrayAdapter<LocalItem> {
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
             clear();
-            addAll((List) filterResults.values);
+            addAll((ArrayList) filterResults.values);
             notifyDataSetChanged();
         }
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return ((LocalItem) resultValue).getNombreLocal();
+            return ((Local) resultValue).getNombre();
         }
     };
 }
