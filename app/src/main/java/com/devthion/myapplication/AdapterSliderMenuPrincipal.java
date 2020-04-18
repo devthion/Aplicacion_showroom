@@ -2,8 +2,6 @@ package com.devthion.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +11,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
+import com.devthion.myapplication.Interfaces.InterfaceRetrieveDataFirebase;
 import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.SliderMenuPrincipal;
-import com.google.gson.Gson;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 

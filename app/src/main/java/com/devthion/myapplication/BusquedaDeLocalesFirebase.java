@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.devthion.myapplication.BuscarLocal.CadenaPorLocal;
+import com.devthion.myapplication.Interfaces.InterfaceBusquedaLocal;
+import com.devthion.myapplication.Interfaces.InterfaceRetrieveDataFirebase;
 import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
 import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
@@ -28,6 +31,39 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
 
 
         databaseLocales= FirebaseDatabase.getInstance().getReference("Locales");
+
+    }
+
+    public void busquedaPorCadena(final InterfaceBusquedaLocal interfaceBusquedaLocal){
+
+        databaseLocales.addValueEventListener(new ValueEventListener() {
+            CadenaPorLocal localCadena;
+            final ArrayList<CadenaPorLocal> localesCadenas = new ArrayList<>();
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot unLocal : dataSnapshot.getChildren()){
+
+                    EstructuraLocal estructuraLocal = null;
+
+                    if (unLocal.child("Tipo Local").equals("Departamento")) {
+                        estructuraLocal = new Departamento(unLocal.child("Calle").getValue().toString(), Integer.parseInt(unLocal.child("Numero").getValue().toString()), Integer.parseInt(unLocal.child("Piso").getValue().toString()), Integer.parseInt(unLocal.child("Departamento").getValue().toString()), unLocal.child("Barrio").getValue().toString(), Integer.parseInt(unLocal.child("Codigo Postal").getValue().toString()));
+                    } else {
+                        //----
+                    }
+
+                    localCadena = new CadenaPorLocal(unLocal.child("idLocal").getValue().toString(),unLocal.child("Nombre").getValue().toString(),estructuraLocal,unLocal.child("Cadena de Busqueda").getValue().toString());
+
+                    localesCadenas.add(localCadena);
+                    interfaceBusquedaLocal.onCallBack(localesCadenas);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
     }
 
@@ -90,6 +126,7 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
                             }else{
                                 //----
                             }
+
                             local= new Local(unLocal.child("idLocal").getValue().toString(),unLocal.child("Nombre").getValue().toString(), estructuraLocal, categorias, unLocal.child("Descripcion").getValue().toString(), Integer.parseInt(unLocal.child("telefono").getValue().toString()), unLocal.child("Instagram").getValue().toString(), unLocal.child("Sitio Web").getValue().toString());
                             locals.add(local);
                             interfaceRetrieveDataFirebase.onCallBack(locals);

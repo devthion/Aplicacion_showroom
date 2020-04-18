@@ -17,10 +17,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class AutoCompleteLocalAdapter extends ArrayAdapter<Local> {
-    private List<Local> localListFull;
+public class AutoCompleteLocalAdapter extends ArrayAdapter<CadenaPorLocal> {
+    private List<CadenaPorLocal> localListFull;
 
-    public AutoCompleteLocalAdapter(@NonNull Context context, @NonNull ArrayList<Local> localList) {
+    public AutoCompleteLocalAdapter(@NonNull Context context, @NonNull ArrayList<CadenaPorLocal> localList) {
         super(context,0, localList);
         localListFull = new ArrayList<>(localList);
     }
@@ -40,10 +40,10 @@ public class AutoCompleteLocalAdapter extends ArrayAdapter<Local> {
 
         TextView etNombreLocal = convertView.findViewById(R.id.etNombreBusquedaLocal);
 
-        Local localItem = getItem(position);
+        CadenaPorLocal localItem = getItem(position);
 
         if(localItem!=null){
-            etNombreLocal.setText(localItem.getNombre());
+            etNombreLocal.setText(localItem.getNombreLocal());
         }
 
         return convertView;
@@ -53,15 +53,15 @@ public class AutoCompleteLocalAdapter extends ArrayAdapter<Local> {
         @Override
         protected FilterResults performFiltering(CharSequence contrains) {
             FilterResults result = new FilterResults();
-            ArrayList<Local> suggestion = new ArrayList<>();
+            ArrayList<CadenaPorLocal> suggestion = new ArrayList<>();
 
             if(contrains == null || contrains.length() == 0){
                 suggestion.addAll(localListFull);
             }else {
                 String filterPattern = contrains.toString().toLowerCase().trim();
 
-                for(Local item : localListFull){
-                    if(item.getNombre().toLowerCase().contains(filterPattern)){
+                for(CadenaPorLocal item : localListFull){
+                    if(item.getCadenaBusqueda().toLowerCase().contains(filterPattern)){
                         suggestion.add(item);
                     }
                 }
@@ -84,7 +84,7 @@ public class AutoCompleteLocalAdapter extends ArrayAdapter<Local> {
 
         @Override
         public CharSequence convertResultToString(Object resultValue) {
-            return ((Local) resultValue).getNombre();
+            return ((CadenaPorLocal) resultValue).getNombreLocal();
         }
     };
 }

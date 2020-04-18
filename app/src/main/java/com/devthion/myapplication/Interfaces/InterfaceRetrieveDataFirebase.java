@@ -1,4 +1,4 @@
-package com.devthion.myapplication;
+package com.devthion.myapplication.Interfaces;
 
 import com.devthion.myapplication.modelos.Local;
 
@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface InterfaceRetrieveDataFirebase extends Serializable {
     void onCallBack(ArrayList<Local> locales);
+
 }

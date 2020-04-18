@@ -38,9 +38,24 @@ public class Local {
 
         Map<String,Object> local =new HashMap<>();
         local = direccion.almacenarLocal(idLocal,nombre,categorias,descripcion,telefono,linkInstagram,linkPaginaWeb);
+        String cadenaBusqueda = obtenerCadena(nombre,direccion,categorias);
 
         databaseLocales.child(String.valueOf(idLocal)).setValue(local);
+        databaseLocales.child(String.valueOf(idLocal)).child("Cadena de Busqueda").setValue(cadenaBusqueda);
     }
+
+    private String obtenerCadena(String nombre, EstructuraLocal direccion, List<String> categorias) {
+        String cadena = null;
+
+        cadena = nombre;
+        for(String categoria : categorias){
+            cadena += " "+categoria;
+        }
+        cadena += direccion.getCalle() + " " + direccion.getNumero() +" " + direccion.getBarrio();
+
+        return cadena;
+    }
+
 
     public String getIdLocal() {
         return idLocal;
