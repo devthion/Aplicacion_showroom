@@ -6,8 +6,10 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCallback {
 
     GoogleMap map;
+    LinearLayout layoutTop;
     Button btn_home;
     ArrayList<LatLng> arrayListMarkers = new ArrayList<LatLng>();
     LatLng LatLngCasa = new LatLng(-34.6142496,-58.4843552);
@@ -44,6 +47,12 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
         setContentView(R.layout.layout_locaciones_en_maps);
 
         btn_home =findViewById(R.id.btn_home);
+        layoutTop = findViewById(R.id.layout_top);
+
+        //----ANIMACION DE LAYOUT
+        layoutTop.animate().alpha(1).translationY(75).setDuration(1100).setStartDelay(250);
+
+        //--------------------
 
         //------------------------ ASIGNO AL "MAP FRAGMENT" LA VISUAL DEL MAPA
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

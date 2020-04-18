@@ -76,29 +76,17 @@
             <AutoCompleteTextView
                 android:id="@+id/autoCompBusquedaGral"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/background_searchview"
+                android:completionThreshold="1"
+                android:hint="Super Buscador"
+                android:paddingLeft="10dp"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:completionThreshold="1"
-                android:hint="Buscar"
                 app:layout_constraintTop_toBottomOf="@+id/layout_header_menuprincipal" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:text="super buscador"
-                android:textColor="#d1d1d1"
-                app:layout_constraintBottom_toBottomOf="@+id/searchView"
-                app:layout_constraintEnd_toEndOf="@+id/searchView"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/searchView"
-                app:layout_constraintTop_toTopOf="@+id/searchView" />
 
             <LinearLayout
                 android:id="@+id/layout_header_menuprincipal"
