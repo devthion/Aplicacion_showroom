@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +32,9 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.devthion.myapplication.BuscarLocal.AutoCompleteLocalAdapter;
+import com.devthion.myapplication.BuscarLocal.CadenaPorLocal;
+import com.devthion.myapplication.Interfaces.InterfaceBusquedaLocal;
 import com.devthion.myapplication.ingreso.InicioSesion;
 import com.devthion.myapplication.ingreso.VerificarEmail;
 import com.devthion.myapplication.modelos.SliderMenuPrincipal;
@@ -70,6 +74,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
 
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    private ArrayList<CadenaPorLocal> localList;
 
     TextView textVNombreDeUsuario, textVMailDeUsuario;
     ImageView imagenPerfil;
@@ -80,7 +85,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_fragment_menu_principal, container, false);
+        final View view = inflater.inflate(R.layout.fragment_fragment_menu_principal, container, false);
         /*btnCerrarSesion = (Button) view.findViewById(R.id.btnCerrarSesionn);*/
         fAuth = FirebaseAuth.getInstance();
         flor3 = view.findViewById(R.id.flor3);
@@ -109,6 +114,24 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         final String userID = fAuth.getCurrentUser().getUid();
         String userMail = fAuth.getCurrentUser().getEmail();
 
+        //BUSCADOR GENERAL
+        //------------------------
+        BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
+        busquedaDeLocalesFirebase.busquedaPorCadena(new InterfaceBusquedaLocal() {
+            @Override
+            public void onCallBack(ArrayList<CadenaPorLocal> locales) {
+                if (locales==null || locales.isEmpty()){
+                    Toast.makeText(getActivity(),"LISTA VACIA",Toast.LENGTH_LONG).show();
+
+                }else {
+                    AutoCompleteTextView editText = view.findViewById(R.id.autoCompBusquedaGral);
+                    AutoCompleteLocalAdapter adapter = new AutoCompleteLocalAdapter(getActivity(),locales);
+
+                    editText.setAdapter(adapter);
+                }
+            }
+        });
+        //------------------------
 
 
         //DE ESTA MANERA ACCEDO DESDE EL NAV_VIEW AL HEADER_VIEW DEL CUAL OBTENGO LOS OBJETOS QUE DESEO MODIFICAR

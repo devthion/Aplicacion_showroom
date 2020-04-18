@@ -73,8 +73,8 @@
         app:layout_constraintVertical_bias="1.0">
 
 
-            <SearchView
-                android:id="@+id/searchView"
+            <AutoCompleteTextView
+                android:id="@+id/autoCompBusquedaGral"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -83,6 +83,8 @@
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:completionThreshold="1"
+                android:hint="Buscar"
                 app:layout_constraintTop_toBottomOf="@+id/layout_header_menuprincipal" />
 
             <TextView
