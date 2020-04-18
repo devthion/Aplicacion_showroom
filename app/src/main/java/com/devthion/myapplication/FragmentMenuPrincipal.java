@@ -1,6 +1,7 @@
 package com.devthion.myapplication;
 
 import android.animation.ArgbEvaluator;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.database.DataSetObserver;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -61,7 +63,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
     LinearLayout textVMenu, layout_header_menuprincipal;
     ConstraintLayout constraintLayout_menu, constraintLayout;
     FirebaseAuth fAuth;
-    Button btnCerrarSesion;
+
 
 
     ViewPager viewPager;
@@ -142,7 +144,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         imagenPerfil = headerView.findViewById(R.id.imagenPerfil);
         textVMailDeUsuario.setText(userMail);
         textVNombreDeUsuario.setText(userName);
-        btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
+
 
         //OBTENEMOS LA FOTO DE PERFIL
 
@@ -217,16 +219,6 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         //---------------------------------------------------
 
 
-        btnCerrarSesion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fAuth.signOut();
-
-                Toast.makeText(getActivity(), "CERRAR SESION", Toast.LENGTH_SHORT).show();
-                Intent in = new Intent(getActivity(), Perfil.class);
-                startActivity(in);
-            }
-        });
 
 
 
@@ -345,6 +337,31 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
             case R.id.nav_menu:{
                 NavOptions navOptions = new NavOptions.Builder().setPopUpTo(R.id.main, true).build();
                 Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(R.id.menuScreen, null, navOptions);
+
+                break;
+            }
+
+            case R.id.nav_cerrar_sesion:{
+                new AlertDialog.Builder(getActivity())
+                        .setTitle("Cerrar Sesion")
+                        .setMessage("Deseas cerrar sesion?")
+
+                        // Specifying a listener allows you to take an action before dismissing the dialog.
+                        // The dialog is automatically dismissed when a dialog button is clicked.
+                        .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                fAuth.signOut();
+                                Intent intent = new Intent(getActivity(), MainActivity.class);
+                                startActivity(intent);
+                            }
+                        })
+
+                        // A null listener allows the button to dismiss the dialog and take no further action.
+                        .setNegativeButton("No", null)
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+
+
 
                 break;
             }

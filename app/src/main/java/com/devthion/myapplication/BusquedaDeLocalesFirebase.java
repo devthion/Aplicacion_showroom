@@ -117,6 +117,7 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
                 for (DataSnapshot unLocal : dataSnapshot.getChildren()) {
 
                     for(DataSnapshot unaCategoria: unLocal.child("Categorias").getChildren() ){
+
                         if(unaCategoria.getValue().equals(categoria)){
                             EstructuraLocal estructuraLocal = null;
                             List<String> categorias = new ArrayList<String>();

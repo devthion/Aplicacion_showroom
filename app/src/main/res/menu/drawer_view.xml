@@ -29,6 +29,11 @@
             <item
                 android:title="PUNTUANOS"
                 android:icon="@drawable/icono_rate"></item>
+
+            <item
+                android:id="@+id/nav_cerrar_sesion"
+                android:title="Cerrar Sesiòn"
+                android:icon="@drawable/icono_rate"></item>
         </menu>
 
     </item>
