@@ -10,10 +10,17 @@ import android.text.Layout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.devthion.myapplication.BuscarLocal.CadenaPorLocal;
+import com.devthion.myapplication.Interfaces.InterfaceObtencionListaMarkersYTitulos;
+import com.devthion.myapplication.modelos.Local;
+import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
+import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -23,15 +30,26 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCallback {
 
+    DatabaseReference databaseLocales;
     GoogleMap map;
     LinearLayout layoutTop;
     Button btn_home;
-    ArrayList<LatLng> arrayListMarkers = new ArrayList<LatLng>();
+    List<LatLng> arrayListMarkers = new ArrayList<>();
+    List<String> arrayListTitulosMarkers=new ArrayList<>();
+
+    BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
+
     LatLng LatLngCasa = new LatLng(-34.6142496,-58.4843552);
     LatLng LatLngHuerguito = new LatLng(-34.6099674,-58.4565617);
     LatLng LatLngUtnMedrano = new LatLng(-34.6040109,-58.4647395);
@@ -39,7 +57,7 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
     LatLng LatLngGym = new LatLng(-34.6118624,-58.4950982);
     LatLng LatLngCentroCapitalFederal= new LatLng(-34.6170083,-58.4450927);
 
-    ArrayList<String> arrayListTitulosMarkers = new ArrayList<String>();
+
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -51,8 +69,11 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
 
         //----ANIMACION DE LAYOUT
         layoutTop.animate().alpha(1).translationY(75).setDuration(1100).setStartDelay(250);
-
         //--------------------
+
+        //
+        databaseLocales= FirebaseDatabase.getInstance().getReference("Locales");
+        //
 
         //------------------------ ASIGNO AL "MAP FRAGMENT" LA VISUAL DEL MAPA
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -61,6 +82,9 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
 
         //---------------------------
 
+
+
+        /*
         arrayListMarkers.add(LatLngCasa);
         arrayListMarkers.add(LatLngHuerguito);
         arrayListMarkers.add(LatLngUtnMedrano);
@@ -71,7 +95,7 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
         arrayListTitulosMarkers.add("Huerguito");
         arrayListTitulosMarkers.add("Medrano");
         arrayListTitulosMarkers.add("Campus");
-        arrayListTitulosMarkers.add("Gym");
+        arrayListTitulosMarkers.add("Gym");*/
 
         btn_home.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,36 +112,54 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
 
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        map =googleMap;//NO SE LA VENTAJA DE ESTO... EN EL VIDEO HACIA ESTA ASIGNACION, PERO
-                        //PUEDO USAR LA VARIABLE "GOOGLEMAP" DE LA MISMA FORMA
-        for(int i =0; i<arrayListMarkers.size(); i++){
-            //A CADA LATLNG QUE SE ENCUENTRA EN EL ARRAY DE MARKERS, LAS AGREGO EN EL MAPA Y AL MISMO TIEMPO LE ASIGNO LOS
-            //RESPECTIVOS TITULOS CON UN ARRAY EN PARALELO.
-            map.addMarker(new MarkerOptions().position(arrayListMarkers.get(i)).title(String.valueOf(arrayListTitulosMarkers.get(i)))
-                .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.icono_de_local_en_mapa)));
+    public void onMapReady(final GoogleMap googleMap) {
+        //tengo que poner el codigo dentro de la funcion de devolucion de la interface para que me tome las dos listas que se llenan
+        //en la clase "busquedadelocalesfirebase"
+        busquedaDeLocalesFirebase.busquedaMarkersYTitulosDeLocales(arrayListMarkers, arrayListTitulosMarkers, new InterfaceObtencionListaMarkersYTitulos() {
+            @Override
+            public void onCallBack(List<LatLng> listMarkers, List<String> listTitulosMarkers, final List<String> listId) {
 
-        }
+                map =googleMap;//NO SE LA VENTAJA DE ESTO... EN EL VIDEO HACIA ESTA ASIGNACION, PERO
+                //PUEDO USAR LA VARIABLE "GOOGLEMAP" DE LA MISMA FORMA
+                for(int i =0; i<listMarkers.size(); i++){
+                    //A CADA LATLNG QUE SE ENCUENTRA EN EL ARRAY DE MARKERS, LAS AGREGO EN EL MAPA Y AL MISMO TIEMPO LE ASIGNO LOS
+                    //RESPECTIVOS TITULOS CON UN ARRAY EN PARALELO.
+
+                    Marker marker = map.addMarker(new MarkerOptions().position(listMarkers.get(i)).title(String.valueOf(listTitulosMarkers.get(i)))
+                            .snippet("Información extra...")
+                            .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.icono_de_local_en_mapa)));
+                    marker.setTag(listId.get(i));
+                    marker.showInfoWindow();
+
+                    /*map.addMarker(marker).showInfoWindow();*/
 
 
-        //AL ABRIR EL ACTIVITY "ANIMATECAMERA" HACE QUE EL MAPA HAGA ZOOM A UNA LATLNG QUE ESTABLEZCO
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(centroPromedio(), 12));
+                }
 
 
-       map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-           @Override
-           public boolean onMarkerClick(Marker marker) {
-               //PERMITE HACER CLICKEABLES LOS MARCADORES EN EL MAPA
-               String markerTitle = marker.getTitle();//TOMA EL TITULO DEL MARCADOR CLICKEADO
+                //AL ABRIR EL ACTIVITY "ANIMATECAMERA" HACE QUE EL MAPA HAGA ZOOM A UNA LATLNG QUE ESTABLEZCO
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(centroPromedio(listMarkers), 12));
 
 
-               Intent intentDetalleLocal = new Intent(LocacionesEnMaps.this, DetalleLocal.class);
-               intentDetalleLocal.putExtra("title", markerTitle);
-               startActivity(intentDetalleLocal);//ABRE LA ACTIVITY CORRESPONDIENTE AL MARCADOR CLIKEADO Y LE PASA EL TITULO DEL MISMO
+                map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(Marker marker) {
+                        //PERMITE HACER CLICKEABLES LOS MARCADORES EN EL MAPA
+                        String markerTitle = marker.getTitle();//TOMA EL TITULO DEL MARCADOR CLICKEADO
+                        String id = String.valueOf(marker.getTag());
 
-               return false;
-           }
-       });
+
+                        Intent intentDetalleLocal = new Intent(LocacionesEnMaps.this, DetalleLocal.class);
+                        intentDetalleLocal.putExtra("nombreLocal", markerTitle);
+                        intentDetalleLocal.putExtra("idLocal", id);
+                        startActivity(intentDetalleLocal);//ABRE LA ACTIVITY CORRESPONDIENTE AL MARCADOR CLIKEADO Y LE PASA EL TITULO DEL MISMO
+
+                        return false;
+                    }
+                });
+
+            }
+        });
 
 
     }
@@ -133,17 +175,17 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
-    public LatLng centroPromedio(){
+    public LatLng centroPromedio(List<LatLng> listMarkers){
         LatLng latlngpromedio = null;
 
         double latTemp=0;
         double longTemp=0;
-        for (int i =0; i<arrayListMarkers.size(); i++){
-            latTemp += arrayListMarkers.get(i).latitude;
-            longTemp += arrayListMarkers.get(i).longitude;
+        for (int i =0; i<listMarkers.size(); i++){
+            latTemp += listMarkers.get(i).latitude;
+            longTemp += listMarkers.get(i).longitude;
         }
 
-        latlngpromedio=new LatLng(latTemp/arrayListMarkers.size(),longTemp/arrayListMarkers.size());
+        latlngpromedio=new LatLng(latTemp/listMarkers.size(),longTemp/listMarkers.size());
         return latlngpromedio;
     }
 }
