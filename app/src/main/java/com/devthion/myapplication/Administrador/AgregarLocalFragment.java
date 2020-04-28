@@ -1,5 +1,6 @@
 package com.devthion.myapplication.Administrador;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -120,6 +121,7 @@ public class AgregarLocalFragment extends Fragment {
         nuevaEstructura = new Departamento(calleLocal,numeroCalle,pisoDepto,departamento,barrioLocal,codigoPostal);
         nuevoLocal = new Local(idLocal,nombreLocal,nuevaEstructura,categorias,descripcionLocal,telefono,instagram,sitioWeb);
 
+        nuevoLocal.setContext(getContext()); // PASO EL CONTEXT PARA QUE LO USE GEOCODER
         return nuevoLocal;
     }
 
