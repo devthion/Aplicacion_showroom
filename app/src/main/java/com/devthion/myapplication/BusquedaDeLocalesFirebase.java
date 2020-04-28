@@ -147,7 +147,7 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
 
     }
 
-    public void busquedaMarkersYTitulosDeLocales(final List<LatLng> arrayListMarkers , final List<String> arrayListTitulosMarkers, final InterfaceObtencionListaMarkersYTitulos interfaceObtencionListaMarkersYTitulos){
+    public void busquedaMarkersYTitulosDeLocales(final InterfaceObtencionListaMarkersYTitulos interfaceObtencionListaMarkersYTitulos){
 
         databaseLocales.addValueEventListener(new ValueEventListener() {
             List<LatLng> listMarkers = new ArrayList<>();
