@@ -11,11 +11,10 @@ import com.devthion.myapplication.BuscarLocal.AutoCompleteLocalAdapter;
 import com.devthion.myapplication.BuscarLocal.CadenaPorLocal;
 import com.devthion.myapplication.BusquedaDeLocalesFirebase;
 import com.devthion.myapplication.Interfaces.InterfaceBusquedaLocal;
-import com.devthion.myapplication.Interfaces.InterfaceRetrieveDataFirebase;
 import com.devthion.myapplication.R;
-import com.devthion.myapplication.modelos.Local;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.fragment.app.Fragment;
 
@@ -34,13 +33,13 @@ public class QuitarLocalFragment extends Fragment {
         BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
         busquedaDeLocalesFirebase.busquedaPorCadena(new InterfaceBusquedaLocal() {
             @Override
-            public void onCallBack(ArrayList<CadenaPorLocal> locales) {
+            public void onCallBack(List<CadenaPorLocal> locales) {
                 if (locales==null || locales.isEmpty()){
                     Toast.makeText(getActivity(),"LISTA VACIA",Toast.LENGTH_LONG).show();
 
                 }else {
                     AutoCompleteTextView editText = view.findViewById(R.id.autoCompBusquedaGral);
-                    AutoCompleteLocalAdapter adapter = new AutoCompleteLocalAdapter(getActivity(),locales);
+                    AutoCompleteLocalAdapter adapter = new AutoCompleteLocalAdapter(getContext(),locales);
 
                     editText.setAdapter(adapter);
                 }

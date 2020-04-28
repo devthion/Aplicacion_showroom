@@ -41,20 +41,24 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
 
         databaseLocales.addValueEventListener(new ValueEventListener() {
             CadenaPorLocal localCadena;
-            final ArrayList<CadenaPorLocal> localesCadenas = new ArrayList<>();
+            List<CadenaPorLocal> localesCadenas = new ArrayList<>();
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot unLocal : dataSnapshot.getChildren()){
 
-                    EstructuraLocal estructuraLocal = null;
+                    EstructuraLocal estructuraLocal;
 
-                    if (unLocal.child("Tipo Local").equals("Departamento")) {
-                        estructuraLocal = new Departamento(unLocal.child("Calle").getValue().toString(), Integer.parseInt(unLocal.child("Numero").getValue().toString()), Integer.parseInt(unLocal.child("Piso").getValue().toString()), Integer.parseInt(unLocal.child("Departamento").getValue().toString()), unLocal.child("Barrio").getValue().toString(), Integer.parseInt(unLocal.child("Codigo Postal").getValue().toString()));
-                    } else {
+                    //if (unLocal.child("Tipo Local").equals("Departamento")) {
+                        estructuraLocal = new Departamento(unLocal.child("Calle").getValue().toString(), Integer.parseInt(unLocal.child("Numero").getValue().toString()),
+                                Integer.parseInt(unLocal.child("Piso").getValue().toString()), Integer.parseInt(unLocal.child("Departamento").getValue().toString()),
+                                unLocal.child("Barrio").getValue().toString(), Integer.parseInt(unLocal.child("Codigo Postal").getValue().toString()));
+                   // } else {
                         //----
-                    }
+                    //}
 
-                    localCadena = new CadenaPorLocal(unLocal.child("idLocal").getValue().toString(),unLocal.child("Nombre").getValue().toString(),estructuraLocal,unLocal.child("Cadena de Busqueda").getValue().toString());
+                    localCadena = new CadenaPorLocal(unLocal.child("idLocal").getValue().toString(),
+                            unLocal.child("Nombre").getValue().toString(),estructuraLocal,
+                            unLocal.child("Cadena de Busqueda").getValue().toString());
 
                     localesCadenas.add(localCadena);
                     interfaceBusquedaLocal.onCallBack(localesCadenas);
