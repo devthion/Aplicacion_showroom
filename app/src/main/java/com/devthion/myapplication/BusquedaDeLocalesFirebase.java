@@ -1,16 +1,19 @@
 package com.devthion.myapplication;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.devthion.myapplication.BuscarLocal.CadenaPorLocal;
 import com.devthion.myapplication.Interfaces.InterfaceBusquedaLocal;
+import com.devthion.myapplication.Interfaces.InterfaceObtencionListaMarkersYTitulos;
 import com.devthion.myapplication.Interfaces.InterfaceRetrieveDataFirebase;
 import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
 import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -139,6 +142,34 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError error) {
+            }
+        });
+
+    }
+
+    public void busquedaMarkersYTitulosDeLocales(final List<LatLng> arrayListMarkers , final List<String> arrayListTitulosMarkers, final InterfaceObtencionListaMarkersYTitulos interfaceObtencionListaMarkersYTitulos){
+
+        databaseLocales.addValueEventListener(new ValueEventListener() {
+            List<LatLng> listMarkers = new ArrayList<>();
+            List<String> listTitulosMarkers = new ArrayList<>();
+            List<String> listId = new ArrayList<>();
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot unLocal : dataSnapshot.getChildren()){
+                    double latitud = (double) unLocal.child("Coordenadas").child("Latitud").getValue();
+                    double longitud = (double) unLocal.child("Coordenadas").child("Longitud").getValue();
+                    String nombreUnLocal = unLocal.child("Nombre").getValue().toString();
+                    LatLng coordenadas = new LatLng(latitud, longitud);
+                    listMarkers.add(coordenadas);
+                    listTitulosMarkers.add(nombreUnLocal);
+                    listId.add(unLocal.child("idLocal").getValue().toString());
+                    interfaceObtencionListaMarkersYTitulos.onCallBack(listMarkers,listTitulosMarkers,listId);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
