@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -60,12 +61,14 @@ public class Perfil extends AppCompatActivity {
     Button btnCambiarFotoPerfil, btnGuardarFoto;
 
 
+
     private StorageReference storageRef;
     DatabaseReference databaseReference;
     private static final int PICK_IMAGE_REQUEST = 1;
     private static final int PERMISSION_REQUEST_CODE = 1;
     private Uri imageUri;
     private StorageTask storageTask;
+    private Typeface manrope;
 
 
     @Override
@@ -74,8 +77,11 @@ public class Perfil extends AppCompatActivity {
         setContentView(R.layout.layout_perfil);
 
 
+
+
         txtId =(TextView) findViewById(R.id.txtPerfilId);
         etPerfilNombre =(TextView) findViewById(R.id.etPerfilNombre);
+        etPerfilNombre.setTypeface(Typeface.createFromAsset(getAssets(),"fuentes/manrope.ttf"));
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         progressBarImagenPerfil = findViewById(R.id.progressBarImagenPerfil);
         progressBarImagenPerfil.setVisibility(View.GONE);
