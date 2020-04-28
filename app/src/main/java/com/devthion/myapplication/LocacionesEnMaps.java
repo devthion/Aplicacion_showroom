@@ -115,7 +115,7 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
     public void onMapReady(final GoogleMap googleMap) {
         //tengo que poner el codigo dentro de la funcion de devolucion de la interface para que me tome las dos listas que se llenan
         //en la clase "busquedadelocalesfirebase"
-        busquedaDeLocalesFirebase.busquedaMarkersYTitulosDeLocales(arrayListMarkers, arrayListTitulosMarkers, new InterfaceObtencionListaMarkersYTitulos() {
+        busquedaDeLocalesFirebase.busquedaMarkersYTitulosDeLocales(new InterfaceObtencionListaMarkersYTitulos() {
             @Override
             public void onCallBack(List<LatLng> listMarkers, List<String> listTitulosMarkers, final List<String> listId) {
 
@@ -128,8 +128,8 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
                     Marker marker = map.addMarker(new MarkerOptions().position(listMarkers.get(i)).title(String.valueOf(listTitulosMarkers.get(i)))
                             .snippet("Información extra...")
                             .icon(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.icono_de_local_en_mapa)));
-                    marker.setTag(listId.get(i));
-                    marker.showInfoWindow();
+                    marker.setTag(listId.get(i));//paso el id del marker
+                    marker.showInfoWindow();//muestro datos del local en el marker
 
                     /*map.addMarker(marker).showInfoWindow();*/
 
