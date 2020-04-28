@@ -131,7 +131,12 @@ public class AgregarLocalFragment extends Fragment {
         etNumero.setText("");
         etBarrio.setText("");
         etCalle.setText("");
-
+        etPiso.setText("");
+        etDepartamento.setText("");
+        etDescripcion.setText("");
+        etTelefono.setText("");
+        etLinkInsta.setText("");
+        etLinkWeb.setText("");
     }
 
     public void validarLocales(List tipos){
