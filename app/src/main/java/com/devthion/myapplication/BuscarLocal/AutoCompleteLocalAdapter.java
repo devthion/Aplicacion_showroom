@@ -39,11 +39,17 @@ public class AutoCompleteLocalAdapter extends ArrayAdapter<CadenaPorLocal> {
         }
 
         TextView etNombreLocal = convertView.findViewById(R.id.etNombreBusquedaLocal);
+        TextView etDireccion = convertView.findViewById(R.id.etDireccionLocal);
+        TextView etNumero = convertView.findViewById(R.id.etNumero);
+
 
         CadenaPorLocal localItem = getItem(position);
 
         if(localItem!=null){
             etNombreLocal.setText(localItem.getNombreLocal());
+            etDireccion.setText(localItem.getDireccion().getCalle());
+            etNumero.setText(localItem.getDireccion().getNumero());
+
         }
 
         return convertView;
