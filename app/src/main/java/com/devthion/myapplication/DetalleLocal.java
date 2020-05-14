@@ -25,8 +25,8 @@ public class DetalleLocal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_detalle_local);
 
-        textV_descripcionLocal = findViewById(R.id.textV_descripcionLocal);
-        textV_nombreLocal=findViewById(R.id.textV_nombreLocal);
+        textV_descripcionLocal = findViewById(R.id.txtNombreLocal);
+        textV_nombreLocal=findViewById(R.id.txtNombreLocal);
 
 
         Intent intent = getIntent();
