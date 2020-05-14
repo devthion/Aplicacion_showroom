@@ -54,5 +54,5 @@ public abstract class EstructuraLocal {
         this.codigoPostal = codigoPostal;
     }
 
-    public abstract Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb);
+    public abstract Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb, boolean envio);
 }

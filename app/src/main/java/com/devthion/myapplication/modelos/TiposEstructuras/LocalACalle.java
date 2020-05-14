@@ -8,8 +8,8 @@ public class LocalACalle extends EstructuraLocal {
 
     protected int numeroLocal;
 
-    public LocalACalle(int numeroLocal) {
-        this.tipoLocal = "Departamento";
+    public LocalACalle(String calle,int numeroCalle,int numeroLocal,String barrio,int codigoPostal) {
+        this.tipoLocal = "Local A Calle";
         this.calle = calle;
         this.numeroCalle = numeroCalle;
         this.numeroLocal = numeroLocal;
@@ -24,7 +24,7 @@ public class LocalACalle extends EstructuraLocal {
 
 
     @Override
-    public Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {
+    public Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb, boolean envio) {
         Map<String,Object> local =new HashMap<>();
 
         local.put("idLocal", idLocal);
@@ -38,6 +38,9 @@ public class LocalACalle extends EstructuraLocal {
         local.put("Categorias",categorias);
         local.put("Descripcion",descripcion);
         local.put("telefono",telefono);
+        local.put("Instagram",linkInstagram);
+        local.put("Sitio Web",linkPaginaWeb);
+        local.put("Hace envios",envio);
 
         return local;
     }

@@ -38,7 +38,7 @@ public class Departamento extends EstructuraLocal {
 
 
     @Override
-    public Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {
+    public Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb, boolean envio) {
 
         Map<String,Object> local =new HashMap<>();
 
@@ -56,6 +56,7 @@ public class Departamento extends EstructuraLocal {
         local.put("telefono",telefono);
         local.put("Instagram",linkInstagram);
         local.put("Sitio Web",linkPaginaWeb);
+        local.put("Hace envios",envio);
 
         return local;
     }

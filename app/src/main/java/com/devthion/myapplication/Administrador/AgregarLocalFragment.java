@@ -16,6 +16,7 @@ import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
 import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
+import com.devthion.myapplication.modelos.TiposEstructuras.LocalACalle;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -36,6 +37,7 @@ public class AgregarLocalFragment extends Fragment {
     Spinner spinnerTipoLocal;
     String idLocal;
     DatabaseReference databaseLocales;
+    int tipoDeLocal=0;
 
 
     @Override
@@ -43,8 +45,6 @@ public class AgregarLocalFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view  = inflater.inflate(R.layout.fragment_agregar_local, container, false);
-
-        instanciarAgregarLocal(view);
 
         databaseLocales= FirebaseDatabase.getInstance().getReference("Locales");
         btnGuardarLocal = (Button) view.findViewById(R.id.btnGuardarLocal);
@@ -68,6 +68,10 @@ public class AgregarLocalFragment extends Fragment {
         checkUnisex = (CheckBox) view.findViewById(R.id.checkUnisex);
         checkAccesorios = (CheckBox) view.findViewById(R.id.checkAccesorios);
         checkCalzado = (CheckBox) view.findViewById(R.id.checkCalzado);
+        checkRopaBanio = (CheckBox) view.findViewById(R.id.checkRopaBanio);
+        checkAbrigo = (CheckBox) view.findViewById(R.id.checkAbrigo);
+
+        checkEnvio = (CheckBox) view.findViewById(R.id.checkEnvio);
 
         spinnerTipoLocal = (Spinner) view.findViewById(R.id.spTipoLocal);
 
@@ -75,34 +79,33 @@ public class AgregarLocalFragment extends Fragment {
                 R.array.opcionesLocal,android.R.layout.simple_spinner_item);
 
         spinnerTipoLocal.setAdapter(adapter);
+        instanciarAgregarLocal(view);
 
-        spinnerTipoLocal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spinnerTipoLocal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 switch (i){
                     case 0:
                         etDepartamento.setVisibility(view.VISIBLE);
                         etPiso.setVisibility(view.VISIBLE);
                         etNumeroLocal.setVisibility(view.GONE);
+                        tipoDeLocal = 0;
                         break;
                     case 1:
                         etNumeroLocal.setVisibility(view.VISIBLE);
                         etDepartamento.setVisibility(view.GONE);
                         etPiso.setVisibility(view.GONE);
-                    break;
+                        tipoDeLocal = 1;
+                        break;
                 }
             }
-        });
-/*        spinnerTipoLocal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(),"Selecciono: "+adapterView.getItemAtPosition(i),Toast.LENGTH_SHORT);
-                String tipoLocal = adapterView.getItemAtPosition(i).toString();
-                etNumero.setText(""+tipoLocal);
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
-
-*/
+        
         btnGuardarLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,13 +114,12 @@ public class AgregarLocalFragment extends Fragment {
                 nuevoLocal.almacenarLocal();
                 Toast.makeText(getContext(),"LOCAL CREADO CON EXITO",Toast.LENGTH_LONG).show();
                 limpiarFragment();
-
             }
         });
-
         return view;
-
     }
+
+
 
     private Local generarLocal(List<String> categorias) {
         Local nuevoLocal;
@@ -126,8 +128,9 @@ public class AgregarLocalFragment extends Fragment {
         String nombreLocal = etNombre.getText().toString();
         String calleLocal = etCalle.getText().toString();
         int numeroCalle = Integer.parseInt(etNumero.getText().toString());
-        int pisoDepto = Integer.parseInt(etPiso.getText().toString());
+        int numeroDeLocal = Integer.parseInt(etNumeroLocal.getText().toString());
         int departamento = Integer.parseInt(etDepartamento.getText().toString());
+        int pisoDepto = Integer.parseInt(etPiso.getText().toString());
         int codigoPostal = Integer.parseInt(etCodPostal.getText().toString());
         String barrioLocal = etBarrio.getText().toString();
         String descripcionLocal = etDescripcion.getText().toString();
@@ -137,7 +140,12 @@ public class AgregarLocalFragment extends Fragment {
 
         idLocal = databaseLocales.push().getKey();
 
-        nuevaEstructura = new Departamento(calleLocal,numeroCalle,pisoDepto,departamento,barrioLocal,codigoPostal);
+        if(tipoDeLocal==0){
+            nuevaEstructura = new Departamento(calleLocal,numeroCalle,pisoDepto,departamento,barrioLocal,codigoPostal);
+        }else{
+            nuevaEstructura = new LocalACalle(calleLocal,numeroCalle,numeroDeLocal,barrioLocal,codigoPostal);
+        }
+
         nuevoLocal = new Local(idLocal,nombreLocal,nuevaEstructura,categorias,descripcionLocal,telefono,instagram,sitioWeb, envio);
 
         nuevoLocal.setContext(getContext()); // PASO EL CONTEXT PARA QUE LO USE GEOCODER
@@ -159,7 +167,7 @@ public class AgregarLocalFragment extends Fragment {
     }
 
     public void instanciarAgregarLocal(View view){
-        etNumeroLocal.setVisibility(view.GONE);
+        //etNumeroLocal.setVisibility(view.GONE);
         etDepartamento.setVisibility(view.GONE);
         etPiso.setVisibility(view.GONE);
     }
@@ -184,10 +192,10 @@ public class AgregarLocalFragment extends Fragment {
             tipos.add("Calzado");
         }
         if(checkRopaBanio.isChecked()){
-            tipos.add("Accesorios");
+            tipos.add("Ropa Baño");
         }
         if(checkAbrigo.isChecked()){
-            tipos.add("Calzado");
+            tipos.add("Abrigo");
         }
     }
 

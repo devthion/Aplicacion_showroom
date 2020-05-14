@@ -46,7 +46,7 @@ public class Local {
     }
     public void almacenarLocal(){
         Map<String,Object> local =new HashMap<>();
-        local = direccion.almacenarLocal(idLocal,nombre,categorias,descripcion,telefono,linkInstagram,linkPaginaWeb);
+        local = direccion.almacenarLocal(idLocal,nombre,categorias,descripcion,telefono,linkInstagram,linkPaginaWeb,envio );
         String cadenaBusqueda = obtenerCadena(nombre,direccion,categorias);
         LatLng coordenadas = obtenerCoordenadasDeUnaDireccion(direccion.getCodigoPostal(),direccion.getCalle(),direccion.getNumero());
 
