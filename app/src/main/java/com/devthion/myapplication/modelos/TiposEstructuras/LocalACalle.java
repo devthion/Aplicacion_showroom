@@ -22,10 +22,6 @@ public class LocalACalle extends EstructuraLocal {
         return numeroLocal;
     }
 
-    public void setNumeroLocal(int numeroLocal) {
-        this.numeroLocal = numeroLocal;
-    }
-
 
     @Override
     public Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {

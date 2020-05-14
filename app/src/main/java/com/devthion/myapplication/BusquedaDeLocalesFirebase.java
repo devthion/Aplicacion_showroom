@@ -1,7 +1,6 @@
 package com.devthion.myapplication;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -97,7 +96,7 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
                         }
                         local = new Local(unLocal.child("idLocal").getValue().toString(),unLocal.child("Nombre").getValue().toString(),
                                 estructuraLocal, categorias, unLocal.child("Descripcion").getValue().toString(), Integer.parseInt(unLocal.child("telefono").getValue().toString()),
-                                unLocal.child("Instagram").getValue().toString(), unLocal.child("Sitio Web").getValue().toString());
+                                unLocal.child("Instagram").getValue().toString(), unLocal.child("Sitio Web").getValue().toString(), );
                         locales.add(local);
                     interfaceRetrieveDataFirebase.onCallBack(locales);
                 }
@@ -135,7 +134,7 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
                                 //----
                             }
 
-                            local= new Local(unLocal.child("idLocal").getValue().toString(),unLocal.child("Nombre").getValue().toString(), estructuraLocal, categorias, unLocal.child("Descripcion").getValue().toString(), Integer.parseInt(unLocal.child("telefono").getValue().toString()), unLocal.child("Instagram").getValue().toString(), unLocal.child("Sitio Web").getValue().toString());
+                            local= new Local(unLocal.child("idLocal").getValue().toString(),unLocal.child("Nombre").getValue().toString(), estructuraLocal, categorias, unLocal.child("Descripcion").getValue().toString(), Integer.parseInt(unLocal.child("telefono").getValue().toString()), unLocal.child("Instagram").getValue().toString(), unLocal.child("Sitio Web").getValue().toString(), );
                             locals.add(local);
                             interfaceRetrieveDataFirebase.onCallBack(locals);
                         }

@@ -3,8 +3,7 @@
 
     <string-array name="opcionesLocal" >
         <item>Departamento</item>
-        <item>Local A Calle</item>
-        <item>Showroom casa</item>
+        <item>Local / Casa</item>
 
     </string-array>
 

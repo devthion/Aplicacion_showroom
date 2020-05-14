@@ -3,17 +3,11 @@ package com.devthion.myapplication.modelos;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
-import android.widget.Toast;
 
-import com.devthion.myapplication.Administrador.AdminPrincipal;
-import com.devthion.myapplication.Administrador.AgregarLocalFragment;
 import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.protobuf.Parser;
-import com.google.protobuf.StringValue;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -31,11 +25,12 @@ public class Local {
     private String linkInstagram;
     private String linkPaginaWeb;
     private Context context;
+    private boolean envio;
 
     DatabaseReference databaseLocales = FirebaseDatabase.getInstance().getReference().child("Locales");
 
 
-    public Local(String idLocal,String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb) {
+    public Local(String idLocal, String nombre, EstructuraLocal direccion, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb, boolean envio) {
         this.idLocal = idLocal;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -44,21 +39,18 @@ public class Local {
         this.telefono = telefono;
         this.linkInstagram = linkInstagram;
         this.linkPaginaWeb = linkPaginaWeb;
+        this.envio = envio;
     }
     public void setContext(Context context){
         this.context=context;
     }
     public void almacenarLocal(){
-
         Map<String,Object> local =new HashMap<>();
         local = direccion.almacenarLocal(idLocal,nombre,categorias,descripcion,telefono,linkInstagram,linkPaginaWeb);
         String cadenaBusqueda = obtenerCadena(nombre,direccion,categorias);
-
-
-
-
-
         LatLng coordenadas = obtenerCoordenadasDeUnaDireccion(direccion.getCodigoPostal(),direccion.getCalle(),direccion.getNumero());
+
+
         databaseLocales.child(String.valueOf(idLocal)).setValue(local);
         databaseLocales.child(String.valueOf(idLocal)).child("Cadena de Busqueda").setValue(cadenaBusqueda);
         databaseLocales.child(String.valueOf(idLocal)).child("Coordenadas").child("Latitud").setValue(coordenadas.latitude);
