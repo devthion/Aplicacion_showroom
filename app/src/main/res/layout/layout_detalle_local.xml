@@ -23,6 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NOMBRE LOCAL"
+                android:textAppearance="#0D47A1"
                 android:textSize="35dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -34,16 +35,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Mi Tienda"
+                android:textAppearance="#0D47A1"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtNombreLocal"
                 app:layout_constraintVertical_bias="0.19999999" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="84dp"
+                android:layout_height="61dp"
+                app:layout_constraintBottom_toTopOf="@+id/txtNombreLocal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#1E88E5"
@@ -67,6 +80,27 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <Button
+                android:id="@+id/btnInstagram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Instagram"
+                tools:layout_editor_absoluteX="162dp"
+                tools:layout_editor_absoluteY="256dp" />
+
+            <TextView
+                android:id="@+id/txtBarrio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="24dp"
+                android:text="Barrio"
+                android:textAppearance="#0D47A1"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:id="@+id/txtDireccion"
                 android:layout_width="wrap_content"
@@ -77,6 +111,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="24dp"
                 android:text="Direccion:"
+                android:textAppearance="#0D47A1"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/txtCalle"
                 app:layout_constraintHorizontal_bias="0.121"
@@ -91,21 +126,38 @@
                 android:layout_marginRight="112dp"
                 android:layout_marginTop="24dp"
                 android:text="Calle"
+                android:textAppearance="#0D47A1"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toStartOf="@+id/txtBarrio"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/txtBarrio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
-                android:layout_marginRight="60dp"
-                android:layout_marginTop="24dp"
-                android:text="Barrio"
-                android:textSize="20sp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="402dp"
+                android:layout_height="119dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/btnVerEnMapa"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnInstagram">
+
+                <ScrollView
+                    android:layout_width="400dp"
+                    android:layout_height="117dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteX="1dp">
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Descripcion" />
+                </ScrollView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
