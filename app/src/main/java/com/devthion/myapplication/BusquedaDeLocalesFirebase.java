@@ -93,6 +93,7 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
                             estructuraLocal = new Departamento(unLocal.child("Calle").getValue().toString(), Integer.parseInt(unLocal.child("Numero").getValue().toString()), Integer.parseInt(unLocal.child("Piso").getValue().toString()), Integer.parseInt(unLocal.child("Departamento").getValue().toString()), unLocal.child("Barrio").getValue().toString(), Integer.parseInt(unLocal.child("Codigo Postal").getValue().toString()));
                         } else {
                             //----
+                            
                         }
                         local = new Local(unLocal.child("idLocal").getValue().toString(),unLocal.child("Nombre").getValue().toString(),
                                 estructuraLocal, categorias, unLocal.child("Descripcion").getValue().toString(), Integer.parseInt(unLocal.child("telefono").getValue().toString()),
