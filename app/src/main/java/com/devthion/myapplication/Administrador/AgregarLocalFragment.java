@@ -1,6 +1,5 @@
 package com.devthion.myapplication.Administrador;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +16,7 @@ import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
 import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
+import com.devthion.myapplication.modelos.TiposEstructuras.LocalACalle;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,13 +30,14 @@ import androidx.fragment.app.Fragment;
 public class AgregarLocalFragment extends Fragment {
 
     Button btnGuardarLocal;
-    TextView etNombre, etCalle, etNumero, etCodPostal, etBarrio, etPiso, etDepartamento,etTelefono,etDescripcion, etLinkInsta, etLinkWeb;
-    CheckBox checkHombre, checkMujer,checkNiños,checkUnisex,checkAccesorios,checkCalzado;
+    TextView etNombre, etCalle, etNumero, etCodPostal, etBarrio, etPiso, etDepartamento,etTelefono,etDescripcion, etLinkInsta, etLinkWeb, etNumeroLocal;
+    CheckBox checkHombre, checkMujer,checkNiños,checkUnisex,checkAccesorios,checkCalzado, checkRopaBanio, checkAbrigo,checkEnvio;
     List<String> tipos = new ArrayList<>();
     Local nuevoLocal;
     Spinner spinnerTipoLocal;
     String idLocal;
     DatabaseReference databaseLocales;
+    int tipoDeLocal=0;
 
 
     @Override
@@ -59,6 +60,7 @@ public class AgregarLocalFragment extends Fragment {
         etDescripcion = (TextView) view.findViewById(R.id.etDescripcion);
         etLinkInsta = (TextView) view.findViewById(R.id.etLinkInstagram);
         etLinkWeb = (TextView) view.findViewById(R.id.etLinkSitioWeb);
+        etNumeroLocal = (TextView) view.findViewById(R.id.etNumeroLocal);
 
         checkHombre = (CheckBox) view.findViewById(R.id.checkRopaHombre);
         checkMujer = (CheckBox) view.findViewById(R.id.checkRopaMujer);
@@ -66,6 +68,10 @@ public class AgregarLocalFragment extends Fragment {
         checkUnisex = (CheckBox) view.findViewById(R.id.checkUnisex);
         checkAccesorios = (CheckBox) view.findViewById(R.id.checkAccesorios);
         checkCalzado = (CheckBox) view.findViewById(R.id.checkCalzado);
+        checkRopaBanio = (CheckBox) view.findViewById(R.id.checkRopaBanio);
+        checkAbrigo = (CheckBox) view.findViewById(R.id.checkAbrigo);
+
+        checkEnvio = (CheckBox) view.findViewById(R.id.checkEnvio);
 
         spinnerTipoLocal = (Spinner) view.findViewById(R.id.spTipoLocal);
 
@@ -73,43 +79,58 @@ public class AgregarLocalFragment extends Fragment {
                 R.array.opcionesLocal,android.R.layout.simple_spinner_item);
 
         spinnerTipoLocal.setAdapter(adapter);
-        Toast.makeText(getContext(),"Selecciono: "+spinnerTipoLocal.getSelectedItem().toString(),Toast.LENGTH_SHORT);
-        /*spinnerTipoLocal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        instanciarAgregarLocal(view);
+
+        spinnerTipoLocal.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getContext(),"Selecciono: "+adapterView.getItemAtPosition(i),Toast.LENGTH_SHORT);
-                String tipoLocal = adapterView.getItemAtPosition(i).toString();
-                etNumero.setText(""+tipoLocal);
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                switch (i){
+                    case 0:
+                        etDepartamento.setVisibility(view.VISIBLE);
+                        etPiso.setVisibility(view.VISIBLE);
+                        etNumeroLocal.setVisibility(view.GONE);
+                        tipoDeLocal = 0;
+                        break;
+                    case 1:
+                        etNumeroLocal.setVisibility(view.VISIBLE);
+                        etDepartamento.setVisibility(view.GONE);
+                        etPiso.setVisibility(view.GONE);
+                        tipoDeLocal = 1;
+                        break;
+                }
             }
-        });*/
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
+            }
+        });
+        
         btnGuardarLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 validarLocales(tipos);
                 nuevoLocal = generarLocal(tipos);
                 nuevoLocal.almacenarLocal();
                 Toast.makeText(getContext(),"LOCAL CREADO CON EXITO",Toast.LENGTH_LONG).show();
                 limpiarFragment();
-
             }
         });
-
         return view;
-
     }
+
+
 
     private Local generarLocal(List<String> categorias) {
         Local nuevoLocal;
         EstructuraLocal nuevaEstructura;
-
+        boolean envio = haceEnvio();
         String nombreLocal = etNombre.getText().toString();
         String calleLocal = etCalle.getText().toString();
         int numeroCalle = Integer.parseInt(etNumero.getText().toString());
-        int pisoDepto = Integer.parseInt(etPiso.getText().toString());
+        int numeroDeLocal = Integer.parseInt(etNumeroLocal.getText().toString());
         int departamento = Integer.parseInt(etDepartamento.getText().toString());
+        int pisoDepto = Integer.parseInt(etPiso.getText().toString());
         int codigoPostal = Integer.parseInt(etCodPostal.getText().toString());
         String barrioLocal = etBarrio.getText().toString();
         String descripcionLocal = etDescripcion.getText().toString();
@@ -119,8 +140,13 @@ public class AgregarLocalFragment extends Fragment {
 
         idLocal = databaseLocales.push().getKey();
 
-        nuevaEstructura = new Departamento(calleLocal,numeroCalle,pisoDepto,departamento,barrioLocal,codigoPostal);
-        nuevoLocal = new Local(idLocal,nombreLocal,nuevaEstructura,categorias,descripcionLocal,telefono,instagram,sitioWeb);
+        if(tipoDeLocal==0){
+            nuevaEstructura = new Departamento(calleLocal,numeroCalle,pisoDepto,departamento,barrioLocal,codigoPostal);
+        }else{
+            nuevaEstructura = new LocalACalle(calleLocal,numeroCalle,numeroDeLocal,barrioLocal,codigoPostal);
+        }
+
+        nuevoLocal = new Local(idLocal,nombreLocal,nuevaEstructura,categorias,descripcionLocal,telefono,instagram,sitioWeb, envio);
 
         nuevoLocal.setContext(getContext()); // PASO EL CONTEXT PARA QUE LO USE GEOCODER
         return nuevoLocal;
@@ -138,6 +164,12 @@ public class AgregarLocalFragment extends Fragment {
         etTelefono.setText("");
         etLinkInsta.setText("");
         etLinkWeb.setText("");
+    }
+
+    public void instanciarAgregarLocal(View view){
+        //etNumeroLocal.setVisibility(view.GONE);
+        etDepartamento.setVisibility(view.GONE);
+        etPiso.setVisibility(view.GONE);
     }
 
     public void validarLocales(List tipos){
@@ -158,6 +190,20 @@ public class AgregarLocalFragment extends Fragment {
         }
         if(checkCalzado.isChecked()){
             tipos.add("Calzado");
+        }
+        if(checkRopaBanio.isChecked()){
+            tipos.add("Ropa Baño");
+        }
+        if(checkAbrigo.isChecked()){
+            tipos.add("Abrigo");
+        }
+    }
+
+    public boolean haceEnvio(){
+        if(checkEnvio.isChecked()){
+            return true;
+        }else{
+            return false;
         }
     }
 

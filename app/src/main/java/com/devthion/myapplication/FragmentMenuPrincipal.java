@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -72,6 +73,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     List<SliderMenuPrincipal> sliderMenuPrincipals;
     BottomNavigationView bottomNavigationView;
+    AutoCompleteTextView buscadorLocal;
 
 
     private DrawerLayout drawerLayout;
@@ -98,6 +100,7 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
         layout_header_menuprincipal = view.findViewById(R.id.layout_header_menuprincipal);
 
 
+
         //SETTING MENU LATERAL
 
         drawerLayout = view.findViewById(R.id.drawer_layout);
@@ -118,21 +121,42 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
 
         //BUSCADOR GENERAL
         //------------------------
-        BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
+        buscadorLocal = view.findViewById(R.id.autoCompBusquedaGral);
         busquedaDeLocalesFirebase.busquedaPorCadena(new InterfaceBusquedaLocal() {
             @Override
-            public void onCallBack(ArrayList<CadenaPorLocal> locales) {
-                if (locales==null || locales.isEmpty()){
-                    Toast.makeText(getActivity(),"LISTA VACIA",Toast.LENGTH_LONG).show();
+            public void onCallBack(List<CadenaPorLocal> locales) {
 
-                }else {
-                    AutoCompleteTextView editText = view.findViewById(R.id.autoCompBusquedaGral);
-                    AutoCompleteLocalAdapter adapter = new AutoCompleteLocalAdapter(getActivity(),locales);
+                AutoCompleteLocalAdapter adapterLocal = new AutoCompleteLocalAdapter(getActivity(),locales);
+                buscadorLocal.setAdapter(adapterLocal);
 
-                    editText.setAdapter(adapter);
-                }
             }
         });
+
+        buscadorLocal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(),"Selecciono un showroom"+buscadorLocal.getText().toString(),Toast.LENGTH_LONG ).show();
+            }
+        });
+
+        //TE MANDA AL DETALLE DEL LOCAL SELECCIONADO
+        buscadorLocal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                CadenaPorLocal local = (CadenaPorLocal) adapterView.getAdapter().getItem(i);
+                String markerTitle = local.getNombreLocal();
+                String id = local.getIdLocal();
+
+                Intent intentDetalleLocal = new Intent(getContext(), DetalleLocal.class);
+                intentDetalleLocal.putExtra("nombreLocal", markerTitle);
+                intentDetalleLocal.putExtra("idLocal", id);
+                startActivity(intentDetalleLocal);//ABRE LA ACTIVITY CORRESPONDIENTE AL MARCADOR CLIKEADO Y LE PASA EL TITULO DEL MISMO
+
+                buscadorLocal.setText("");
+            }
+        });
+
+
         //------------------------
 
 
@@ -385,3 +409,4 @@ public class FragmentMenuPrincipal extends Fragment implements NavigationView.On
 
 
 }
+
