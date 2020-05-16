@@ -8,14 +8,13 @@ public class LocalACalle extends EstructuraLocal {
 
     protected int numeroLocal;
 
-    public LocalACalle(int numeroLocal) {
-        this.tipoLocal = "Departamento";
-        this.calle = calle;
-        this.numeroCalle = numeroCalle;
+    public LocalACalle(int numeroLocal,String calle,int numeroCalle,String barrio,int codigoPostal) {
+        this.tipoLocal="Departamento";
+        this.calle=calle;
+        this.numeroCalle=numeroCalle;
+        this.barrio=barrio;
+        this.codigoPostal=codigoPostal;
         this.numeroLocal = numeroLocal;
-        this.barrio = barrio;
-        this.codigoPostal = codigoPostal;
-
     }
 
     public int getNumeroLocal() {

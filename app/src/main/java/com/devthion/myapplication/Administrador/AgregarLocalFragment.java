@@ -73,16 +73,17 @@ public class AgregarLocalFragment extends Fragment {
                 R.array.opcionesLocal,android.R.layout.simple_spinner_item);
 
         spinnerTipoLocal.setAdapter(adapter);
-/*        spinnerTipoLocal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Toast.makeText(getContext(),"Selecciono: "+spinnerTipoLocal.getSelectedItem().toString(),Toast.LENGTH_SHORT);
+        /*spinnerTipoLocal.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getContext(),"Selecciono: "+adapterView.getItemAtPosition(i),Toast.LENGTH_SHORT);
                 String tipoLocal = adapterView.getItemAtPosition(i).toString();
                 etNumero.setText(""+tipoLocal);
             }
-        });
+        });*/
 
-*/
+
         btnGuardarLocal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

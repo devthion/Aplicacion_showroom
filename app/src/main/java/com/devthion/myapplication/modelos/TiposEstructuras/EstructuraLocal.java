@@ -1,5 +1,6 @@
 package com.devthion.myapplication.modelos.TiposEstructuras;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,5 +55,6 @@ public abstract class EstructuraLocal {
         this.codigoPostal = codigoPostal;
     }
 
+    //public abstract Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb);
     public abstract Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb);
 }

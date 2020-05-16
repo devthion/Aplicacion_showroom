@@ -17,7 +17,7 @@
             android:id="@+id/imagen_item_sorted_by"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/poster"></ImageView>
+            android:background="@drawable/brochure"></ImageView>
 
         <LinearLayout
             android:id="@+id/linearLayout_item_sorted_by"
@@ -31,70 +31,57 @@
                 android:id="@+id/textV_nombre_local"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
+                android:background="#eec824"
+                android:fontFamily="@font/bebas_regular"
                 android:text="Showroom1"
-                android:textColor="#F22F11"
-                android:textSize="24dp">
+                android:textColor="#000"
+                android:textSize="34sp">
 
             </TextView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="50px"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="15px"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:background="#f2dc99"
                         android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                            android:orientation="vertical"
+                            android:paddingLeft="10px"
+                            android:paddingTop="5px"
+                            android:paddingRight="20px"
+                            android:paddingBottom="2px">
 
                             <TextView
                                 android:id="@+id/textV_descripcion"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="Ubicacion"
+                                android:fontFamily="@font/bebas_regular"
+                                android:text="Barrio:"
                                 android:textSize="20dp"></TextView>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="Otro dato"
+                                android:fontFamily="@font/bebas_regular"
+                                android:text="calle:"
                                 android:textSize="15dp"></TextView>
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="Mas Datos"
-                                android:textSize="20dp"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="Mas mas datos"
-                                android:textSize="15dp"></TextView>
-
-                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>

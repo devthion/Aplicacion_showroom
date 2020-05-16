@@ -16,7 +16,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="#fc9885"
+            app:contentScrim="#fbc9c4"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
             app:toolbarId="@+id/toolbar">
@@ -51,9 +51,12 @@
                     android:id="@+id/textV_nombreLocal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/bebas_bold"
+                    android:gravity="center"
                     android:text="NOMBRE LOCAL"
-                    android:textColor="#121B22"
-                    android:textSize="24sp" />
+                    android:textColor="#000"
+                    android:textSize="40dp" />
+
             </LinearLayout>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -65,21 +68,53 @@
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/textV_descripcionLocal"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:lineSpacingExtra="8dp"
-                android:textSize="16dp">
+                android:orientation="vertical"
+                android:padding="15px">
 
-            </TextView>
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textV_descripcionLocal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15px"
+                    android:fontFamily="@font/bebas_light"
+                    android:gravity="center"
+                    android:lineSpacingExtra="10sp"
+                    android:textColor="#000"
+                    android:textSize="36sp">
+
+                </TextView>
+
+                <TextView
+                    android:id="@+id/textV_barrio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:fontFamily="@font/bebas_regular"
+                    android:textSize="24sp" />
+                <TextView
+                    android:id="@+id/textV_telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:fontFamily="@font/bebas_regular"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/textV_instagram"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20px"
+                    android:fontFamily="@font/bebas_regular"
+                    android:textSize="24sp" />
+            </LinearLayout>
+        </ScrollView>
     </androidx.core.widget.NestedScrollView>
 
 

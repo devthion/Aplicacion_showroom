@@ -55,20 +55,12 @@ public class LocalesSortedBy extends AppCompatActivity {
             public void onClick(View v) {
 
                 String idLocal=locales.get(recyclerView.getChildAdapterPosition(v)).getIdLocal();
-                String nombreLocal= locales.get(recyclerView.getChildAdapterPosition(v)).getNombre();
-                String descripcionLocal= locales.get(recyclerView.getChildAdapterPosition(v)).getDescripcion();
-                String sitioWebLocal= locales.get(recyclerView.getChildAdapterPosition(v)).getLinkPaginaWeb();
-                String instagramLocal= locales.get(recyclerView.getChildAdapterPosition(v)).getLinkInstagram();
-                String telefonoLocal= String.valueOf(locales.get(recyclerView.getChildAdapterPosition(v)).getTelefono());
+
 
                 Intent intent = new Intent(getApplicationContext(), DetalleLocal.class);
 
                 intent.putExtra("idLocal",idLocal);
-                intent.putExtra("nombreLocal",nombreLocal);
-                intent.putExtra("descripcionLocal",descripcionLocal);
-                intent.putExtra("sitioWebLocal",sitioWebLocal);
-                intent.putExtra("instagramLocal",instagramLocal);
-                intent.putExtra("telefonoLocal",telefonoLocal);
+
                 startActivity(intent);
             }
         });

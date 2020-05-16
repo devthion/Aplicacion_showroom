@@ -10,13 +10,13 @@ public class Departamento extends EstructuraLocal {
     protected int departamento;
 
     public Departamento(String calle,int numeroCalle,int piso, int departamento,String barrio,int codigoPostal) {
-        this.tipoLocal = "Departamento";
-        this.calle = calle;
-        this.numeroCalle = numeroCalle;
+        this.tipoLocal="Departamento";
+        this.calle=calle;
+        this.numeroCalle=numeroCalle;
+        this.barrio=barrio;
+        this.codigoPostal=codigoPostal;
         this.piso = piso;
         this.departamento = departamento;
-        this.barrio = barrio;
-        this.codigoPostal = codigoPostal;
     }
 
 

@@ -150,7 +150,7 @@ public class LocacionesEnMaps extends FragmentActivity implements OnMapReadyCall
 
 
                         Intent intentDetalleLocal = new Intent(LocacionesEnMaps.this, DetalleLocal.class);
-                        intentDetalleLocal.putExtra("nombreLocal", markerTitle);
+
                         intentDetalleLocal.putExtra("idLocal", id);
                         startActivity(intentDetalleLocal);//ABRE LA ACTIVITY CORRESPONDIENTE AL MARCADOR CLIKEADO Y LE PASA EL TITULO DEL MISMO
 
