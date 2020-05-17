@@ -25,16 +25,15 @@ public class DetalleLocal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_detalle_local);
 
-        textV_descripcionLocal = findViewById(R.id.txtNombreLocal);
-        textV_nombreLocal=findViewById(R.id.txtNombreLocal);
 
+        textV_descripcionLocal=findViewById(R.id.textV_descripcionLocal);
 
         Intent intent = getIntent();
-        String nombreLocal = intent.getStringExtra("nombreLocal");
-        String descripcionLocal = intent.getStringExtra("descripcionLocal");
+        String idLocal = intent.getStringExtra("idLocal");
 
-        textV_nombreLocal.setText(nombreLocal);
-        textV_descripcionLocal.setText(nombreLocal);
+
+        textV_descripcionLocal.setText(idLocal);
+
 
 
 

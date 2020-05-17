@@ -16,7 +16,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:contentScrim="#fc9885"
+            app:contentScrim="#fbc9c4"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
             app:toolbarId="@+id/toolbar">
@@ -47,15 +47,14 @@
                 android:padding="5dp"
                 android:paddingLeft="15dp">
 
+                <TextView
+                    android:id="@+id/textV_nombreLocal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NOMBRE LOCAL"
+                    android:textColor="#121B22"
+                    android:textSize="24sp" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/textV_nombreLocal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="NOMBRE LOCAL"
-                android:textColor="#121B22"
-                android:textSize="24sp" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
