@@ -78,7 +78,6 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
                     for(DataSnapshot unaCategoria: unLocal.child("Categorias").getChildren() ){
                         categorias.add(unaCategoria.getValue().toString());
                     }
-
                         local = new Local(unLocal.child("idLocal").getValue().toString(),
                                 unLocal.child("Nombre").getValue().toString(),
                                 generarEstructura(unLocal), categorias,
@@ -172,7 +171,7 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
         if(unLocal.child("Tipo Local").getValue().equals("Departamento")){
             estructuraLocal = new Departamento(unLocal.child("Calle").getValue().toString(),Integer.parseInt(unLocal.child("Numero").getValue().toString()),Integer.parseInt(unLocal.child("Piso").getValue().toString()),Integer.parseInt(unLocal.child("Departamento").getValue().toString()),unLocal.child("Barrio").getValue().toString(),Integer.parseInt(unLocal.child("Codigo Postal").getValue().toString()));
         }else{
-            estructuraLocal=new LocalACalle(unLocal.child("Calle").getValue().toString(),Integer.parseInt(unLocal.child("Numero").getValue().toString()),Integer.parseInt(unLocal.child("numeroLocal").getValue().toString()),unLocal.child("Barrio").getValue().toString(),Integer.parseInt(unLocal.child("Codigo Postal").getValue().toString()));
+            estructuraLocal=new LocalACalle(unLocal.child("Calle").getValue().toString(),Integer.parseInt(unLocal.child("Numero").getValue().toString()),Integer.parseInt(unLocal.child("Numero Local").getValue().toString()),unLocal.child("Barrio").getValue().toString(),Integer.parseInt(unLocal.child("Codigo Postal").getValue().toString()));
         }
         return estructuraLocal;
     }

@@ -3,7 +3,7 @@ package com.devthion.myapplication.modelos.TiposEstructuras;
 import java.util.List;
 import java.util.Map;
 
-public abstract class EstructuraLocal {
+public class EstructuraLocal {
 
 
     protected String tipoLocal;
@@ -12,6 +12,13 @@ public abstract class EstructuraLocal {
     protected String barrio;
     protected int codigoPostal;
 
+    public EstructuraLocal( String tipoLocal, String calle, int numeroCalle, String barrio, int codigoPostal){
+        this.tipoLocal=tipoLocal;
+        this.calle=calle;
+        this.numeroCalle=numeroCalle;
+        this.barrio=barrio;
+        this.codigoPostal=codigoPostal;
+    }
 
 
     public String getTipoLocal() {
@@ -54,5 +61,7 @@ public abstract class EstructuraLocal {
         this.codigoPostal = codigoPostal;
     }
 
-    public abstract Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb, boolean envio);
+    public Map<String, Object> almacenarLocal(String idLocal, String nombre, List<String> categorias, String descripcion, int telefono, String linkInstagram, String linkPaginaWeb, boolean envio) {
+        return null;
+    }
 }

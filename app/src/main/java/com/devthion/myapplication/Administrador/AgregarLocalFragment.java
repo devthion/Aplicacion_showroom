@@ -128,9 +128,6 @@ public class AgregarLocalFragment extends Fragment {
         String nombreLocal = etNombre.getText().toString();
         String calleLocal = etCalle.getText().toString();
         int numeroCalle = Integer.parseInt(etNumero.getText().toString());
-        int numeroDeLocal = Integer.parseInt(etNumeroLocal.getText().toString());
-        int departamento = Integer.parseInt(etDepartamento.getText().toString());
-        int pisoDepto = Integer.parseInt(etPiso.getText().toString());
         int codigoPostal = Integer.parseInt(etCodPostal.getText().toString());
         String barrioLocal = etBarrio.getText().toString();
         String descripcionLocal = etDescripcion.getText().toString();
@@ -141,8 +138,11 @@ public class AgregarLocalFragment extends Fragment {
         idLocal = databaseLocales.push().getKey();
 
         if(tipoDeLocal==0){
+            int departamento = Integer.parseInt(etDepartamento.getText().toString());
+            int pisoDepto = Integer.parseInt(etPiso.getText().toString());
             nuevaEstructura = new Departamento(calleLocal,numeroCalle,pisoDepto,departamento,barrioLocal,codigoPostal);
         }else{
+            int numeroDeLocal = Integer.parseInt(etNumeroLocal.getText().toString());
             nuevaEstructura = new LocalACalle(calleLocal,numeroCalle,numeroDeLocal,barrioLocal,codigoPostal);
         }
 
