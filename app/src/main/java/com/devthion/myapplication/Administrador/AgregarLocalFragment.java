@@ -15,7 +15,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.devthion.myapplication.AlmacenarFoto;
 import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
@@ -46,7 +45,6 @@ public class AgregarLocalFragment extends Fragment {
     String idLocal;
     DatabaseReference databaseLocales;
     int tipoDeLocal=0;
-    AlmacenarFoto almacenarFoto;
     StorageReference storageRef;
     DatabaseReference databaseReference;
     final int PICK_IMAGE_REQUEST = 1;
@@ -126,10 +124,8 @@ public class AgregarLocalFragment extends Fragment {
         btn_seleccionarFoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                almacenarFoto = new AlmacenarFoto(getContext());
-                Log.i("prueba", String.valueOf(almacenarFoto.context()));
                 abrirSelectorDeImagen();
-                //almacenarFoto.onActivityResult();
+
 
             }
         });
