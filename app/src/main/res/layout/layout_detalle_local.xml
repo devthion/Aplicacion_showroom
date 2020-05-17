@@ -10,158 +10,77 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
 
-        android:layout_width="match_parent"
         android:layout_height="192dp"
-        android:background="#1976D2" >
+        android:layout_width="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:contentScrim="#fc9885"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
+            app:toolbarId="@+id/toolbar">
+
+
+            <ImageView
+                android:id="@+id/app_bar_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+
+                android:src="@drawable/showroom1"
+                app:layout_collapseMode="parallax" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"></androidx.appcompat.widget.Toolbar>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/background_nombre_local"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:paddingLeft="15dp">
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/txtNombreLocal"
+                android:id="@+id/textV_nombreLocal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NOMBRE LOCAL"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="35dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:textColor="#121B22"
+                android:textSize="24sp" />
 
-            <TextView
-                android:id="@+id/txtMiTienda"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mi Tienda"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtNombreLocal"
-                app:layout_constraintVertical_bias="0.19999999" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-            <ImageView
-                android:id="@+id/imageLocal"
-                android:layout_width="84dp"
-                android:layout_height="61dp"
-                app:layout_constraintBottom_toTopOf="@+id/txtNombreLocal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#1E88E5"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <Button
-                android:id="@+id/btnVerEnMapa"
-                android:layout_width="110dp"
-                android:layout_height="55dp"
-                android:layout_marginTop="470dp"
-                android:background="#0D47A1"
-                android:text="VER EN MAPA"
-                android:textColor="@color/design_default_color_background"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.94"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btnInstagram"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="272dp"
-                android:text="Instagram"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtBarrio"
-                android:layout_width="wrap_content"
+                android:id="@+id/textV_descripcionLocal"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="60dp"
-                android:layout_marginRight="60dp"
-                android:layout_marginTop="24dp"
-                android:text="Barrio"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:lineSpacingExtra="8dp"
+                android:textSize="16dp">
 
-            <TextView
-                android:id="@+id/txtDireccion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="24dp"
-                android:text="Direccion:"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/txtCalle"
-                app:layout_constraintHorizontal_bias="0.121"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtCalle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="108dp"
-                android:layout_marginRight="108dp"
-                android:layout_marginTop="24dp"
-                android:text="Calle"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toStartOf="@+id/txtBarrio"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout2"
-                android:layout_width="402dp"
-                android:layout_height="119dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/btnVerEnMapa"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnInstagram">
-
-                <ScrollView
-                    android:layout_width="400dp"
-                    android:layout_height="117dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <TextView
-                        android:id="@+id/txtDescripcion"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Descripcion" />
-                </ScrollView>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </TextView>
+        </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
 
