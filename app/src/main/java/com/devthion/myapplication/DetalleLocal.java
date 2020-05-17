@@ -5,19 +5,24 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.devthion.myapplication.Interfaces.InterfaceBusquedaUnLocal;
+import com.devthion.myapplication.Interfaces.InterfaceRetrieveDataFirebase;
 import com.devthion.myapplication.modelos.Local;
+
+import java.util.ArrayList;
 
 
 public class DetalleLocal extends AppCompatActivity {
 
     TextView textV_nombreLocal, textV_descripcionLocal;
-
+    BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
 
 
     @Override
@@ -32,7 +37,15 @@ public class DetalleLocal extends AppCompatActivity {
         String idLocal = intent.getStringExtra("idLocal");
 
 
-        textV_descripcionLocal.setText(idLocal);
+        busquedaDeLocalesFirebase.busquedaPorId(idLocal, new InterfaceBusquedaUnLocal() {
+            @Override
+            public void onCallBack(Local unLocal) {
+                textV_descripcionLocal.setText(unLocal.getDescripcion());
+            }
+
+        });
+
+
 
 
 

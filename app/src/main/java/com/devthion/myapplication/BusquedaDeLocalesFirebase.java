@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.devthion.myapplication.BuscarLocal.CadenaPorLocal;
 import com.devthion.myapplication.Interfaces.InterfaceBusquedaLocal;
+import com.devthion.myapplication.Interfaces.InterfaceBusquedaUnLocal;
 import com.devthion.myapplication.Interfaces.InterfaceObtencionListaMarkersYTitulos;
 import com.devthion.myapplication.Interfaces.InterfaceRetrieveDataFirebase;
 import com.devthion.myapplication.modelos.Local;
@@ -95,6 +96,37 @@ public class BusquedaDeLocalesFirebase extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+    }
+
+    public void busquedaPorId(final String id, final InterfaceBusquedaUnLocal interfaceBusquedaUnLocal){
+        databaseLocales.addValueEventListener(new ValueEventListener() {
+            Local local;
+            final List<String> categorias = new ArrayList<String>();
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot unLocal : dataSnapshot.getChildren()) {
+                    if(unLocal.child("idLocal").getValue().equals(id)) {
+                        for (DataSnapshot unaCategoria : unLocal.child("Categorias").getChildren()) {
+                            categorias.add(unaCategoria.getValue().toString());
+                        }
+                        local = new Local(unLocal.child("idLocal").getValue().toString(),
+                                unLocal.child("Nombre").getValue().toString(),
+                                generarEstructura(unLocal), categorias,
+                                unLocal.child("Descripcion").getValue().toString(),
+                                Integer.parseInt(unLocal.child("telefono").getValue().toString()),
+                                unLocal.child("Instagram").getValue().toString(),
+                                unLocal.child("Sitio Web").getValue().toString(),
+                                Boolean.parseBoolean(unLocal.child("Hace envios").getValue().toString()));
+                        interfaceBusquedaUnLocal.onCallBack(local);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
             }
         });
 
