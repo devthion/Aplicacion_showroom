@@ -1,6 +1,9 @@
 package com.devthion.myapplication.Administrador;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.devthion.myapplication.AlmacenarFoto;
 import com.devthion.myapplication.R;
 import com.devthion.myapplication.modelos.Local;
 import com.devthion.myapplication.modelos.TiposEstructuras.Departamento;
@@ -19,17 +23,21 @@ import com.devthion.myapplication.modelos.TiposEstructuras.EstructuraLocal;
 import com.devthion.myapplication.modelos.TiposEstructuras.LocalACalle;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.StorageTask;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import static android.app.Activity.RESULT_OK;
 
 
 public class AgregarLocalFragment extends Fragment {
 
-    Button btnGuardarLocal;
+    Button btnGuardarLocal, btn_seleccionarFoto;
     TextView etNombre, etCalle, etNumero, etCodPostal, etBarrio, etPiso, etDepartamento,etTelefono,etDescripcion, etLinkInsta, etLinkWeb, etNumeroLocal;
     CheckBox checkHombre, checkMujer,checkNiños,checkUnisex,checkAccesorios,checkCalzado, checkRopaBanio, checkAbrigo,checkEnvio;
     List<String> tipos = new ArrayList<>();
@@ -38,6 +46,13 @@ public class AgregarLocalFragment extends Fragment {
     String idLocal;
     DatabaseReference databaseLocales;
     int tipoDeLocal=0;
+    AlmacenarFoto almacenarFoto;
+    StorageReference storageRef;
+    DatabaseReference databaseReference;
+    final int PICK_IMAGE_REQUEST = 1;
+    final int PERMISSION_REQUEST_CODE = 1;
+    Uri imageUri;
+    StorageTask storageTask;
 
 
     @Override
@@ -48,6 +63,7 @@ public class AgregarLocalFragment extends Fragment {
 
         databaseLocales= FirebaseDatabase.getInstance().getReference("Locales");
         btnGuardarLocal = (Button) view.findViewById(R.id.btnGuardarLocal);
+        btn_seleccionarFoto = view.findViewById(R.id.btn_seleccionarFoto);
 
         etNombre = (TextView) view.findViewById(R.id.etNombreLocal);
         etCalle = (TextView) view.findViewById(R.id.etCalle);
@@ -105,6 +121,18 @@ public class AgregarLocalFragment extends Fragment {
 
             }
         });
+
+        Log.i("asd", String.valueOf(getContext()));
+        btn_seleccionarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                almacenarFoto = new AlmacenarFoto(getContext());
+                Log.i("prueba", String.valueOf(almacenarFoto.context()));
+                abrirSelectorDeImagen();
+                //almacenarFoto.onActivityResult();
+
+            }
+        });
         
         btnGuardarLocal.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,6 +145,25 @@ public class AgregarLocalFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    public void abrirSelectorDeImagen(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == PICK_IMAGE_REQUEST && resultCode==RESULT_OK
+                && data!=null &&data.getData()!=null){
+            imageUri = data.getData();
+            Log.i("url", String.valueOf(imageUri));
+            //imagenPerfil.setImageURI(imageUri);
+        }
     }
 
 

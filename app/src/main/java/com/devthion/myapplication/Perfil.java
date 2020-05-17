@@ -68,7 +68,7 @@ public class Perfil extends AppCompatActivity {
     private static final int PERMISSION_REQUEST_CODE = 1;
     private Uri imageUri;
     private StorageTask storageTask;
-    private Typeface manrope;
+
 
 
     @Override
@@ -98,7 +98,7 @@ public class Perfil extends AppCompatActivity {
         storageRef = FirebaseStorage.getInstance().getReference("fotos_perfil");
         //INSTANCIAMOS LA BD DE LOS USUARIOS EN FIRESTORE
         databaseUsuarios = FirebaseFirestore.getInstance();
-        //INSTANCIAMOS LA BD DATA PARA LAS FOTOS DE PERFIL EN FIREBASE
+        //INSTANCIAMOS LA BD PARA LAS FOTOS DE PERFIL EN FIREBASE
         databaseReference = FirebaseDatabase.getInstance().getReference("fotos_perfil");
         //INSTANCIAMOS LA BD DE AUTHENTICATION (ES LA BD DONDE ESTAN LOS DATOS DEL EMAIL)
         fAuth = FirebaseAuth.getInstance();
@@ -218,7 +218,7 @@ public class Perfil extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Uri uri) {
 
-                                    //con el handler le doy un delay de 1 seg a la app, para que cuando la imagen se cargue y la barra se cargue al 100%, no se ponga en 0% tan rapido
+                                    //con el handler le doy un delay de 2 seg a la app, para que cuando la imagen se cargue y la barra se cargue al 100%, no se ponga en 0% tan rapido
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
                                         @Override
