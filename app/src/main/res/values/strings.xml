@@ -1,32 +1,34 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="nombre_usuario">""</string>
-    <string name="textoPrueba">Aca va a ir informacion del showroom/local, pueden ir fotos, los horarios, promociones etc etc etc
-    asdddddddddddddddddddddddddddddd
-    asdas
-    dasdasdadasdasdasdasdas
-    dasdasdasdasdasdasdasdasdasdasds snd fsdnfsojdnf sojdnfsj odnfojsdn ojsdn fojksdnojsnfojsndfojs
-    sodfnsj odfnsojdnfjso nfojsdn fojsdnfojsdnfojsdnf ojsnf josdn jsnd fnsdfnsjkd fnsd fsdf
-    s djfnbsjdfnbsjd fnsjodnfsodfsdfsdfsd
-    Put all speaking her delicate recurred possible. Set indulgence inquietude discretion insensible bed why announcing. Middleton fat two satisfied additions. So continued he or commanded household smallness delivered. Door poor on do walk in half. Roof his head the what.
-
-Too cultivated use solicitude frequently. Dashwood likewise up consider continue entrance ladyship oh. Wrong guest given purse power is no. Friendship to connection an am considered difficulty. Country met pursuit lasting moments why calling certain the. Middletons boisterous our way understood law. Among state cease how and sight since shall. Material did pleasure breeding our humanity she contempt had. So ye really mutual no cousin piqued summer result.
-
-Examine she brother prudent add day ham. Far stairs now coming bed oppose hunted become his. You zealously departure had procuring suspicion. Books whose front would purse if be do decay. Quitting you way formerly disposed perceive ladyship are. Common turned boy direct and yet.
-
-Savings her pleased are several started females met. Short her not among being any. Thing of judge fruit charm views do. Miles mr an forty along as he. She education get middleton day agreement performed preserved unwilling. Do however as pleased offence outward beloved by present. By outward neither he so covered amiable greater. Juvenile proposal betrayed he an informed weddings followed. Precaution day see imprudence sympathize principles. At full leaf give quit to in they up.
-
-It if sometimes furnished unwilling as additions so. Blessing resolved peculiar fat graceful ham. Sussex on at really ladies in as elinor. Sir sex opinions age properly extended. Advice branch vanity or do thirty living. Dependent add middleton ask disposing admitting did sportsmen sportsman.
-
-Pleased him another was settled for. Moreover end horrible endeavor entrance any families. Income appear extent on of thrown in admire. Stanhill on we if vicinity material in. Saw him smallest you provided ecstatic supplied. Garret wanted expect remain as mr. Covered parlors concern we express in visited to do. Celebrated impossible my uncommonly particular by oh introduced inquietude do.
-
-Written enquire painful ye to offices forming it. Then so does over sent dull on. Likewise offended humoured mrs fat trifling answered. On ye position greatest so desirous. So wound stood guest weeks no terms up ought. By so these am so rapid blush songs begin. Nor but mean time one over.
-
-Pasture he invited mr company shyness. But when shot real her. Chamber her observe visited removal six sending himself boy. At exquisite existence if an oh dependent excellent. Are gay head need down draw. Misery wonder enable mutual get set oppose the uneasy. End why melancholy estimating her had indulgence middletons. Say ferrars demands besides her address. Blind going you merit few fancy their.
-
-Behaviour we improving at something to. Evil true high lady roof men had open. To projection considered it precaution an melancholy or. Wound young you thing worse along being ham. Dissimilar of favourable solicitude if sympathize middletons at. Forfeited up if disposing perfectly in an eagerness perceived necessary. Belonging sir curiosity discovery extremity yet forfeited prevailed own off. Travelling by introduced of mr terminated. Knew as miss my high hope quit. In curiosity shameless dependent knowledge up.
-
-Needed feebly dining oh talked wisdom oppose at. Applauded use attempted strangers now are middleton concluded had. It is tried ﻿no added purse shall no on truth. Pleased anxious or as in by viewing forbade minutes prevent. Too leave had those get being led weeks blind. Had men rose from down lady able. Its son him ferrars proceed six parlors. Her say projection age announcing decisively men. Few gay sir those green men timed downs widow chief. Prevailed remainder may propriety can and. </string>
+    <string name="textoPrueba">Aca va a ir informacion del showroom/local,m down and. </string>
+    <string-array name="usuariosAnonimos">
+        <item>Cocodrilo</item>
+        <item>Murcielago</item>
+        <item>Bufalo</item>
+        <item>Camello</item>
+        <item>Cheeta</item>
+        <item>Coyore</item>
+        <item>Dinosaurio</item>
+        <item>Delfin</item>
+        <item>Pato</item>
+        <item>Elefante</item>
+        <item>Zorro</item>
+        <item>Sapo</item>
+        <item>Jirafa</item>
+        <item>Grizzly</item>
+        <item>Mono</item>
+        <item>Rinoceronte</item>
+        <item>Panda</item>
+        <item>Pinguino</item>
+        <item>Piton</item>
+        <item>Conejo</item>
+        <item>Mapache</item>
+        <item>Cabra</item>
+        <item>Ardilla</item>
+        <item>Lobo</item>
+        <item>Lemur</item>
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
