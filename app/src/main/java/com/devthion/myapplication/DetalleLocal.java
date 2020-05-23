@@ -1,37 +1,34 @@
 package com.devthion.myapplication;
 
 
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.InputType;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.devthion.myapplication.Interfaces.InterfaceBusquedaUnLocal;
-import com.devthion.myapplication.Interfaces.InterfaceRetrieveDataFirebase;
 import com.devthion.myapplication.modelos.Calificacion;
 
 import com.devthion.myapplication.modelos.Local;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 
 public class DetalleLocal extends AppCompatActivity implements View.OnClickListener {
 
     TextView textV_nombreLocal, textV_descripcionLocal;
+    RatingBar ratingBarCalificar, ratingBarLocal;
+    EditText editT_calificacion;
     Button btn_dar_calificacion;
     BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
     Calificacion calificacion;
@@ -47,10 +44,13 @@ public class DetalleLocal extends AppCompatActivity implements View.OnClickListe
 
         textV_descripcionLocal=findViewById(R.id.textV_descripcionLocal);
         btn_dar_calificacion=findViewById(R.id.btn_dar_calificacion);
+        ratingBarLocal=findViewById(R.id.ratingBarLocal);
 
         Intent intent = getIntent();
         idLocal = intent.getStringExtra("idLocal");
 
+
+        ratingBarLocal.setNumStars(2);
 
         busquedaDeLocalesFirebase.busquedaPorId(idLocal, new InterfaceBusquedaUnLocal() {
             @Override
@@ -79,10 +79,13 @@ public class DetalleLocal extends AppCompatActivity implements View.OnClickListe
     //CREAR UNA CLASE DE ALERTDIALOG CON METODO "MOSTRAR"
     public void alertDialog(){
         final EditText input = new EditText(this);
-        input.setInputType(InputType.TYPE_CLASS_TEXT);
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.layout_alert_dialog_calificacion, null);
+        editT_calificacion=dialogView.findViewById(R.id.editT_calificacion);
+        ratingBarCalificar=dialogView.findViewById(R.id.ratingBarLocal);
 
         AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setView(input)
+                .setView(dialogView)
 
                 .setIcon(android.R.drawable.ic_dialog_alert)
 
@@ -95,9 +98,9 @@ public class DetalleLocal extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String[] usuariosAnonimos = getApplication().getResources().getStringArray(R.array.usuariosAnonimos);
                         randomIndex= new Random().nextInt(usuariosAnonimos.length);
-                        calificacion = new Calificacion(usuariosAnonimos[randomIndex]+" Anonimo", input.getText().toString(),idLocal );
+                        calificacion = new Calificacion(usuariosAnonimos[randomIndex]+" Anonimo", editT_calificacion.getText().toString(),idLocal, ratingBarCalificar.getNumStars() );
                         calificacion.almacenarCalificacion();
-                        Toast.makeText(getApplicationContext(),"Calificacion enviada a revision!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),"Calificacion enviada a revision!" + editT_calificacion.getText().toString(),Toast.LENGTH_LONG).show();
                     }
                 })
 

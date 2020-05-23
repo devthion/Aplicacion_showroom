@@ -8,23 +8,26 @@ import java.util.Map;
 
 public class Calificacion {
     private String calificacion_id;
-    private String usuario_email;
+    private String usuario_id;
     private String calificacion;
     private String local_id;
+    private int estrellas;
 
     DatabaseReference databaseCalificaciones = FirebaseDatabase.getInstance().getReference().child("Calificaciones");
 
-    public Calificacion(String usuario_email, String calificacion, String local_id) {
-        this.usuario_email = usuario_email;
+    public Calificacion(String usuario_id, String calificacion, String local_id, int estrellas) {
+        this.usuario_id = usuario_id;
         this.calificacion = calificacion;
         this.local_id = local_id;
+        this.estrellas=estrellas;
     }
 
     public void almacenarCalificacion(){
         Map<String,Object> unaCalificacion =new HashMap<>();
-        unaCalificacion.put("usuario_email", usuario_email);
+        unaCalificacion.put("usuario_id", usuario_id);
         unaCalificacion.put("calificacion", calificacion);
         unaCalificacion.put("local_id", local_id);
+        unaCalificacion.put("estrellas", estrellas);
         calificacion_id=databaseCalificaciones.push().getKey();
         databaseCalificaciones.child(calificacion_id).setValue(unaCalificacion);
 
