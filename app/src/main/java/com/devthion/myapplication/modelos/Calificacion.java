@@ -11,11 +11,11 @@ public class Calificacion {
     private String usuario_id;
     private String calificacion;
     private String local_id;
-    private int estrellas;
+    private float estrellas;
 
     DatabaseReference databaseCalificaciones = FirebaseDatabase.getInstance().getReference().child("Calificaciones");
 
-    public Calificacion(String usuario_id, String calificacion, String local_id, int estrellas) {
+    public Calificacion(String usuario_id, String calificacion, String local_id, float estrellas) {
         this.usuario_id = usuario_id;
         this.calificacion = calificacion;
         this.local_id = local_id;

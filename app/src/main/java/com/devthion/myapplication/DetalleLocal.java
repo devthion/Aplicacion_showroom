@@ -17,24 +17,27 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.devthion.myapplication.Interfaces.InterfaceBusquedaUnLocal;
+import com.devthion.myapplication.Interfaces.InterfaceObtenerPromedioEstrellas;
 import com.devthion.myapplication.modelos.Calificacion;
 
 import com.devthion.myapplication.modelos.Local;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 
 public class DetalleLocal extends AppCompatActivity implements View.OnClickListener {
 
-    TextView textV_nombreLocal, textV_descripcionLocal;
+    TextView textV_nombreLocal, textV_descripcionLocal, textV_calificacion_promedio;
     RatingBar ratingBarCalificar, ratingBarLocal;
     EditText editT_calificacion;
     Button btn_dar_calificacion;
     BusquedaDeLocalesFirebase busquedaDeLocalesFirebase = new BusquedaDeLocalesFirebase();
+    CalificacionesFirebase calificacionesFirebase = new CalificacionesFirebase();
     Calificacion calificacion;
     int randomIndex;
     String idLocal;
-
+    DecimalFormat dosDecimales = new DecimalFormat("#.##");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +48,21 @@ public class DetalleLocal extends AppCompatActivity implements View.OnClickListe
         textV_descripcionLocal=findViewById(R.id.textV_descripcionLocal);
         btn_dar_calificacion=findViewById(R.id.btn_dar_calificacion);
         ratingBarLocal=findViewById(R.id.ratingBarLocal);
+        textV_calificacion_promedio=findViewById(R.id.textV_calificacion_promedio);
 
         Intent intent = getIntent();
         idLocal = intent.getStringExtra("idLocal");
 
 
-        ratingBarLocal.setNumStars(2);
+
+
+        calificacionesFirebase.obtenerPromedioEstrellas(idLocal, new InterfaceObtenerPromedioEstrellas() {
+            @Override
+            public void onCallBack(float promedioPuntuacion) {
+                ratingBarLocal.setRating(promedioPuntuacion);
+                textV_calificacion_promedio.setText(String.format("" + dosDecimales.format(promedioPuntuacion) ));
+            }
+        });
 
         busquedaDeLocalesFirebase.busquedaPorId(idLocal, new InterfaceBusquedaUnLocal() {
             @Override
@@ -98,7 +110,7 @@ public class DetalleLocal extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialogInterface, int i) {
                         String[] usuariosAnonimos = getApplication().getResources().getStringArray(R.array.usuariosAnonimos);
                         randomIndex= new Random().nextInt(usuariosAnonimos.length);
-                        calificacion = new Calificacion(usuariosAnonimos[randomIndex]+" Anonimo", editT_calificacion.getText().toString(),idLocal, ratingBarCalificar.getNumStars() );
+                        calificacion = new Calificacion(usuariosAnonimos[randomIndex]+" Anonimo", editT_calificacion.getText().toString(),idLocal, ratingBarCalificar.getRating() );
                         calificacion.almacenarCalificacion();
                         Toast.makeText(getApplicationContext(),"Calificacion enviada a revision!" + editT_calificacion.getText().toString(),Toast.LENGTH_LONG).show();
                     }
