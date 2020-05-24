@@ -15,7 +15,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.devthion.myapplication.Interfaces.InterfaceBusquedaCalificacionesDeLocal;
 import com.devthion.myapplication.Interfaces.InterfaceBusquedaUnLocal;
 import com.devthion.myapplication.Interfaces.InterfaceObtenerPromedioEstrellas;
 import com.devthion.myapplication.modelos.Calificacion;
@@ -23,6 +26,7 @@ import com.devthion.myapplication.modelos.Calificacion;
 import com.devthion.myapplication.modelos.Local;
 
 import java.text.DecimalFormat;
+import java.util.List;
 import java.util.Random;
 
 
@@ -39,21 +43,33 @@ public class DetalleLocal extends AppCompatActivity implements View.OnClickListe
     String idLocal;
     DecimalFormat dosDecimales = new DecimalFormat("#.##");
 
+    ComentariosRecyclerViewAdaptador calificacionesRecyclerViewAdaptador;
+    RecyclerView recyclerView_calificaciones;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_detalle_local);
 
 
+
         textV_descripcionLocal=findViewById(R.id.textV_descripcionLocal);
         btn_dar_calificacion=findViewById(R.id.btn_dar_calificacion);
         ratingBarLocal=findViewById(R.id.ratingBarLocal);
         textV_calificacion_promedio=findViewById(R.id.textV_calificacion_promedio);
+        recyclerView_calificaciones =findViewById(R.id.recyclerView_calificaciones);
+        recyclerView_calificaciones.setLayoutManager(new LinearLayoutManager(this));
 
         Intent intent = getIntent();
         idLocal = intent.getStringExtra("idLocal");
 
-
+        calificacionesFirebase.obtenerCalificacionesDeLocal(idLocal, new InterfaceBusquedaCalificacionesDeLocal() {
+            @Override
+            public void onCallBack(List<Calificacion> calificaciones) {
+                calificacionesRecyclerViewAdaptador = new ComentariosRecyclerViewAdaptador(calificaciones);
+                recyclerView_calificaciones.setAdapter(calificacionesRecyclerViewAdaptador);
+            }
+        });
 
 
         calificacionesFirebase.obtenerPromedioEstrellas(idLocal, new InterfaceObtenerPromedioEstrellas() {

@@ -116,8 +116,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/background_calificaciones_layout">
+                android:background="@drawable/background_calificaciones_layout"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -202,6 +202,7 @@
                 </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView_calificaciones"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>

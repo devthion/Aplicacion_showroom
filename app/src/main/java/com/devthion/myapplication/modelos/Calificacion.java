@@ -30,6 +30,25 @@ public class Calificacion {
         unaCalificacion.put("estrellas", estrellas);
         calificacion_id=databaseCalificaciones.push().getKey();
         databaseCalificaciones.child(calificacion_id).setValue(unaCalificacion);
+    }
 
+    public String getCalificacion_id() {
+        return calificacion_id;
+    }
+
+    public String getUsuario_id() {
+        return usuario_id;
+    }
+
+    public String getCalificacion() {
+        return calificacion;
+    }
+
+    public String getLocal_id() {
+        return local_id;
+    }
+
+    public float getEstrellas() {
+        return estrellas;
     }
 }

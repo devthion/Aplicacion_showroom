@@ -71,15 +71,6 @@ implements View.OnClickListener {
         holder.textV_nombre_local.setText(locals.get(position).getNombre());
 
 
-        /*holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(, DetalleLocal.class);
-                //intent.pu("unLocal", listaDeLocales.get(position));
-                startActivity(intent);
-            }
-        });*/
-
     }
 
     @Override
